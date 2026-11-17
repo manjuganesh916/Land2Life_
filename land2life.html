@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:8124/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#123f34">
+  <meta name="description" content="Land2Life — a simple AI-powered guide that helps rural families turn owned land into a safe, permanent home.">
+  <title>Land2Life · From land to home</title>
+  <link rel="stylesheet" href="./Land2Life · From land to home_files/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar -->
+    <aside class="side-nav" id="side-nav" aria-label="Main navigation">
+      <a class="brand" href="http://localhost:8124/#home" data-view="home" aria-label="Land2Life overview">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" fill="none">
+            <path d="M5 20.5 18 9l13 11.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M9 19v11h18V19" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path>
+            <path d="M15 30V22h6v8" fill="currentColor" opacity=".9"></path>
+            <path d="M3 32h30" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path>
+          </svg>
+        </span>
+        <span class="brand-copy"><strong>Land2<span>Life</span></strong><small>Land to home, guided</small></span>
+      </a>
+
+      <nav class="nav-list" aria-label="Sections">
+        <button type="button" class="nav-item active" data-view="home" aria-current="page">
+          <span class="nav-icon" aria-hidden="true">⌂</span>
+          <span class="nav-copy"><strong>Overview</strong><small>Start here</small></span>
+        </button>
+        <button type="button" class="nav-item" data-view="schemes">
+          <span class="nav-icon" aria-hidden="true">✧</span>
+          <span class="nav-copy"><strong>Scheme finder</strong><small>Matches for you</small></span>
+          <span class="nav-badge">8</span>
+        </button>
+        <button type="button" class="nav-item" data-view="documents">
+          <span class="nav-icon" aria-hidden="true">▤</span>
+          <span class="nav-copy"><strong>Document checker</strong><small>Quick pre-check</small></span>
+        </button>
+        <button type="button" class="nav-item" data-view="calculator">
+          <span class="nav-icon" aria-hidden="true">◫</span>
+          <span class="nav-copy"><strong>Cost calculator</strong><small>Plan the budget</small></span>
+        </button>
+        <button type="button" class="nav-item" data-view="assistant">
+          <span class="nav-icon" aria-hidden="true">✦</span>
+          <span class="nav-copy"><strong>AI assistant</strong><small>Ask anything</small></span>
+        </button>
+        <button type="button" class="nav-item" data-view="tracker">
+          <span class="nav-icon" aria-hidden="true">⌁</span>
+          <span class="nav-copy"><strong>Application tracker</strong><small>Know the next step</small></span>
+        </button>
+      </nav>
+
+      <div class="side-card">
+        <span class="side-card-icon" aria-hidden="true">✓</span>
+        <strong>No middlemen needed</strong>
+        <p>Every step is explained in plain language. Keep your receipts and ask for official receipts only.</p>
+        <button type="button" class="text-link" data-action="open-help">How Land2Life works <span aria-hidden="true">→</span></button>
+      </div>
+
+      <div class="side-foot">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>Prototype · sample data</span>
+        <button type="button" class="text-link" data-action="open-settings">AI settings</button>
+      </div>
+    </aside>
+
+    <div class="main-wrap">
+      <header class="topbar">
+        <button type="button" class="icon-btn menu-btn" data-action="toggle-nav" aria-label="Open navigation" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"></path></svg>
+        </button>
+        <div class="topbar-title">
+          <span id="top-kicker">Welcome to Land2Life</span>
+          <strong id="top-title">Overview</strong>
+        </div>
+        <div class="top-actions">
+          <span class="demo-pill"><span aria-hidden="true">●</span> Demo prototype</span>
+          <button type="button" class="btn btn-quiet btn-sm" data-view="assistant">Ask the assistant</button>
+          <button type="button" class="btn btn-primary btn-sm" data-view="schemes">Find my schemes</button>
+        </div>
+      </header>
+
+      <main class="content" id="content">
+        <!-- ============ HOME ============ -->
+        <section class="view is-active" id="view-home" data-view-panel="home" aria-labelledby="home-title">
+          <div class="hero">
+            <div class="hero-copy">
+              <span class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span> From land to keys</span>
+              <h1 id="home-title">Owning land is step one. <em>Building a home is the journey.</em></h1>
+              <p>Land2Life brings housing schemes, eligibility, documents, land records, cost planning and application tracking into one simple place — so a family can move forward with confidence.</p>
+              <div class="hero-actions">
+                <button type="button" class="btn btn-primary" data-view="schemes">Find schemes for me <span aria-hidden="true">→</span></button>
+                <button type="button" class="btn btn-outline" data-view="documents">Check my documents</button>
+              </div>
+              <div class="hero-trust">
+                <span>✓ Plain language</span><span>✓ No unofficial fees</span><span>✓ Works on a phone</span>
+              </div>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <svg viewBox="0 0 520 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <lineargradient id="sky" x1="260" y1="20" x2="260" y2="300" gradientUnits="userSpaceOnUse"><stop stop-color="#e9f5ee"></stop><stop offset="1" stop-color="#fbf6e9"></stop></lineargradient>
+                  <lineargradient id="plot" x1="90" y1="220" x2="430" y2="350" gradientUnits="userSpaceOnUse"><stop stop-color="#dfe9cf"></stop><stop offset="1" stop-color="#cfe0c0"></stop></lineargradient>
+                  <lineargradient id="wall" x1="170" y1="120" x2="370" y2="250" gradientUnits="userSpaceOnUse"><stop stop-color="#fffdf8"></stop><stop offset="1" stop-color="#f3ead8"></stop></lineargradient>
+                </defs>
+                <circle cx="425" cy="66" r="38" fill="#ffd38a" opacity=".85"></circle>
+                <circle cx="425" cy="66" r="54" stroke="#ffd38a" stroke-width="2" stroke-dasharray="4 8" opacity=".65"></circle>
+                <path d="M52 288c62-28 128-33 196-16 74 18 143 17 220-9v99H52z" fill="url(#sky)"></path>
+                <path d="M70 292 260 202l190 90-190 66z" fill="url(#plot)" stroke="#9fbc94" stroke-width="2"></path>
+                <path d="M70 292v66l190 32v-66m190-66v66l-190 32" fill="none" stroke="#9fbc94" stroke-width="2"></path>
+                <path d="M260 202v66m0 66v32" stroke="#9fbc94" stroke-width="2" stroke-dasharray="5 6"></path>
+                <g>
+                  <path d="M162 256V158l98-62 98 62v98z" fill="url(#wall)" stroke="#8fae9a" stroke-width="2.5"></path>
+                  <path d="M148 162 260 82l112 80" stroke="#1d6f57" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <rect x="236" y="197" width="48" height="59" rx="4" fill="#c98c4a" stroke="#8a5c31" stroke-width="2"></rect>
+                  <circle cx="275" cy="228" r="3" fill="#f8e3bd"></circle>
+                  <rect x="182" y="183" width="36" height="34" rx="4" fill="#a8d5e8" stroke="#6c9db3" stroke-width="2"></rect>
+                  <path d="M200 183v34m-18-17h36" stroke="#6c9db3" stroke-width="2"></path>
+                  <rect x="302" y="183" width="36" height="34" rx="4" fill="#a8d5e8" stroke="#6c9db3" stroke-width="2"></rect>
+                  <path d="M320 183v34m-18-17h36" stroke="#6c9db3" stroke-width="2"></path>
+                  <path d="M246 295v-39h28v39" fill="#d9e8d1" stroke="#8fae9a" stroke-width="2"></path>
+                </g>
+                <g transform="translate(78 157) rotate(-8)">
+                  <rect width="96" height="112" rx="10" fill="#fffdf7" stroke="#c9d6c6" stroke-width="2"></rect>
+                  <path d="M20 24h56M20 40h42M20 56h50M20 72h34" stroke="#b6c6b5" stroke-width="4" stroke-linecap="round"></path>
+                  <circle cx="66" cy="84" r="15" fill="#dff1e8"></circle>
+                  <path d="m59 84 5 5 10-11" stroke="#1d7a5f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                </g>
+                <g transform="translate(398 220)">
+                  <rect width="72" height="88" rx="9" fill="#fffdf7" stroke="#c9d6c6" stroke-width="2"></rect>
+                  <rect x="14" y="16" width="44" height="7" rx="3.5" fill="#f0c98d"></rect>
+                  <path d="M14 36h44M14 48h35M14 60h40" stroke="#c5d2c2" stroke-width="4" stroke-linecap="round"></path>
+                  <path d="M25 74h22" stroke="#1d7a5f" stroke-width="4" stroke-linecap="round"></path>
+                </g>
+                <path d="M316 335c26-11 48-8 68 6" stroke="#1d7a5f" stroke-width="3" stroke-dasharray="5 7" stroke-linecap="round"></path>
+                <circle cx="390" cy="343" r="7" fill="#e2953a"></circle>
+              </svg>
+            </div>
+          </div>
+
+          <form class="profile-strip card" id="profile-form">
+            <div class="profile-intro">
+              <span class="eyebrow">Start with your situation</span>
+              <strong>A few details make every answer more useful.</strong>
+            </div>
+            <div class="profile-fields">
+              <label><span>State</span><select id="profile-state" name="state"><option value="All India">All India</option><option value="Bihar">Bihar</option><option value="Uttar Pradesh">Uttar Pradesh</option><option value="Madhya Pradesh">Madhya Pradesh</option><option value="Rajasthan">Rajasthan</option><option value="Jharkhand">Jharkhand</option><option value="Chhattisgarh">Chhattisgarh</option><option value="Tamil Nadu">Tamil Nadu</option><option value="West Bengal">West Bengal</option><option value="Maharashtra">Maharashtra</option><option value="Other">Other</option></select></label>
+              <label><span>Land status</span><select id="profile-land" name="land">
+                <option value="own">In my name</option><option value="family">In family name</option><option value="none">No land yet</option>
+              </select></label>
+              <label><span>BPL / priority</span><select id="profile-bpl" name="bpl">
+                <option value="yes">Yes</option><option value="no">No</option><option value="unknown">Not sure</option>
+              </select></label>
+              <label><span>Farmer</span><select id="profile-farmer" name="farmer">
+                <option value="yes">Yes</option><option value="no">No</option>
+              </select></label>
+              <label><span>Woman-headed</span><select id="profile-woman" name="womanHead">
+                <option value="no">No</option><option value="yes">Yes</option>
+              </select></label>
+              <label><span>Yearly income (₹)</span><input id="profile-income" name="income" type="number" min="0" step="1000" value="180000" inputmode="numeric"></label>
+            </div>
+            <button type="submit" class="btn btn-primary">See my matches <span aria-hidden="true">→</span></button>
+          </form>
+
+          <div class="section-head">
+            <div><span class="eyebrow">Everything in one place</span><h2>Six tools for one journey</h2></div>
+            <p>No office-hopping for basic answers. Move from discovery to a funded, tracked build.</p>
+          </div>
+          <div class="feature-grid">
+            <button type="button" class="feature-card" data-view="schemes">
+              <span class="feature-icon mint" aria-hidden="true">✧</span>
+              <strong>Scheme finder</strong>
+              <p>See which housing, farm and support schemes fit your situation.</p>
+              <span class="feature-link">Explore schemes →</span>
+            </button>
+            <button type="button" class="feature-card" data-view="documents">
+              <span class="feature-icon sand" aria-hidden="true">▤</span>
+              <strong>Document checker</strong>
+              <p>Spot missing or mismatched papers before you stand in a queue.</p>
+              <span class="feature-link">Run a check →</span>
+            </button>
+            <button type="button" class="feature-card" data-view="calculator">
+              <span class="feature-icon sky" aria-hidden="true">◫</span>
+              <strong>Cost calculator</strong>
+              <p>Estimate build cost, grant, loan and any funding gap in minutes.</p>
+              <span class="feature-link">Plan a budget →</span>
+            </button>
+            <button type="button" class="feature-card" data-view="assistant">
+              <span class="feature-icon lilac" aria-hidden="true">✦</span>
+              <strong>AI assistant</strong>
+              <p>Ask in your own words. Get clear next steps, not jargon.</p>
+              <span class="feature-link">Ask a question →</span>
+            </button>
+            <button type="button" class="feature-card" data-view="tracker">
+              <span class="feature-icon clay" aria-hidden="true">⌁</span>
+              <strong>Application tracker</strong>
+              <p>Know the current stage, next action and office to contact.</p>
+              <span class="feature-link">View applications →</span>
+            </button>
+            <button type="button" class="feature-card" data-action="open-help">
+              <span class="feature-icon forest" aria-hidden="true">◎</span>
+              <strong>Right guidance</strong>
+              <p>Learn how to avoid middlemen and verify every official instruction.</p>
+              <span class="feature-link">Read the guide →</span>
+            </button>
+          </div>
+
+          <div class="journey card">
+            <div class="journey-head">
+              <div><span class="eyebrow">The path ahead</span><h2>From plot to permanent home</h2></div>
+              <span class="journey-note">Sample journey · actual steps vary by state</span>
+            </div>
+            <ol class="journey-steps">
+              <li><span class="journey-num">01</span><strong>Check your land</strong><p>Make sure the survey number and your name match the record.</p></li>
+              <li><span class="journey-num">02</span><strong>Find the right scheme</strong><p>Match your profile to housing, farm and support benefits.</p></li>
+              <li><span class="journey-num">03</span><strong>Prepare documents</strong><p>Use the checklist and fix obvious mismatches early.</p></li>
+              <li><span class="journey-num">04</span><strong>Plan the money</strong><p>Balance grant, savings and loan before construction starts.</p></li>
+              <li><span class="journey-num">05</span><strong>Track to completion</strong><p>Follow every sanction and instalment with a reference number.</p></li>
+            </ol>
+          </div>
+
+          <p class="page-disclaimer"><span aria-hidden="true">ⓘ</span> Land2Life is a demonstration prototype. Scheme amounts, eligibility and applications shown here are sample data. Always confirm on an official government portal or at your Gram Panchayat / block office.</p>
+        </section>
+
+        <!-- ============ SCHEMES ============ -->
+        <section class="view" id="view-schemes" data-view-panel="schemes" aria-labelledby="schemes-title">
+          <div class="section-head">
+            <div><span class="eyebrow">Scheme finder</span><h2 id="schemes-title">Benefits that fit your situation</h2></div>
+            <p>Sample scheme data with a simple match score. Open a card for documents, steps and cautions.</p>
+          </div>
+
+          <div class="filter-panel card">
+            <div class="filter-top">
+              <label class="search-field">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"></circle><path d="m16 16 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
+                <input id="scheme-search" type="search" placeholder="Search schemes, benefits or documents…" aria-label="Search schemes">
+              </label>
+              <button type="button" class="btn btn-quiet btn-sm" data-action="reset-profile">Reset profile</button>
+            </div>
+            <div class="chip-row" id="scheme-categories" aria-label="Scheme categories"><button type="button" class="chip active" data-scheme-category="all">All schemes</button><button type="button" class="chip" data-scheme-category="housing">Housing</button><button type="button" class="chip" data-scheme-category="finance">Finance</button><button type="button" class="chip" data-scheme-category="records">Land records</button><button type="button" class="chip" data-scheme-category="employment">Employment</button><button type="button" class="chip" data-scheme-category="insurance">Insurance</button></div>
+            <div class="filter-grid">
+              <label><span>Your state</span><select id="filter-state"><option value="All India">All India</option><option value="Bihar">Bihar</option><option value="Uttar Pradesh">Uttar Pradesh</option><option value="Madhya Pradesh">Madhya Pradesh</option><option value="Rajasthan">Rajasthan</option><option value="Jharkhand">Jharkhand</option><option value="Chhattisgarh">Chhattisgarh</option><option value="Tamil Nadu">Tamil Nadu</option><option value="West Bengal">West Bengal</option><option value="Maharashtra">Maharashtra</option><option value="Other">Other</option></select></label>
+              <label><span>Land status</span><select id="filter-land">
+                <option value="own">In my name</option><option value="family">In family name</option><option value="none">No land yet</option>
+              </select></label>
+              <label><span>BPL / priority</span><select id="filter-bpl">
+                <option value="yes">Yes</option><option value="no">No</option><option value="unknown">Not sure</option>
+              </select></label>
+              <label><span>Farmer</span><select id="filter-farmer"><option value="yes">Yes</option><option value="no">No</option></select></label>
+              <label><span>Woman-headed</span><select id="filter-woman"><option value="no">No</option><option value="yes">Yes</option></select></label>
+              <label><span>Yearly income (₹)</span><input id="filter-income" type="number" min="0" step="1000" value="180000" inputmode="numeric"></label>
+            </div>
+          </div>
+
+          <div class="result-bar">
+            <span id="scheme-count">8 schemes</span>
+            <span id="match-summary">6 strong matches based on your profile · sample data</span>
+          </div>
+          <div class="scheme-grid" id="scheme-grid"><article class="scheme-card" style="--accent:#1d7a5f"><div class="scheme-card-top"><span class="scheme-type">Housing</span><span class="match-pill high">100% · Good match</span></div><span class="scheme-short">PMAY-G · All India</span><h3>Pradhan Mantri Awaas Yojana – Gramin</h3><p>Housing support for rural families who do not have a pucca house. Priority is given to families identified in the social/economic census.</p><div class="scheme-benefit"><span aria-hidden="true">₹</span>Up to ₹1.30 lakh assistance</div><div class="tag-list"><span class="tag">Housing</span><span class="tag">BPL priority</span><span class="tag">Landless may apply</span></div><div class="scheme-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="view-scheme" data-id="pmay-g">View details</button><button type="button" class="btn btn-quiet btn-sm" data-action="track-scheme" data-id="pmay-g">Track</button></div></article><article class="scheme-card" style="--accent:#c48a35"><div class="scheme-card-top"><span class="scheme-type">Finance</span><span class="match-pill high">90% · Good match</span></div><span class="scheme-short">PM-KISAN · All India</span><h3>PM-KISAN income support</h3><p>Direct income support for eligible landholding farmer families, paid in three equal instalments.</p><div class="scheme-benefit"><span aria-hidden="true">₹</span>₹6,000 per year</div><div class="tag-list"><span class="tag">Farmer</span><span class="tag">Land record</span><span class="tag">Direct benefit</span></div><div class="scheme-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="view-scheme" data-id="pm-kisan">View details</button><button type="button" class="btn btn-quiet btn-sm" data-action="track-scheme" data-id="pm-kisan">Track</button></div></article><article class="scheme-card" style="--accent:#a45e36"><div class="scheme-card-top"><span class="scheme-type">Employment</span><span class="match-pill high">90% · Good match</span></div><span class="scheme-short">MGNREGA · All India</span><h3>MGNREGA wage employment</h3><p>Guaranteed rural employment that can provide local wage income and, in some convergences, support site preparation work.</p><div class="scheme-benefit"><span aria-hidden="true">₹</span>Up to 100 days of wage work</div><div class="tag-list"><span class="tag">BPL</span><span class="tag">Wage support</span><span class="tag">Job card</span></div><div class="scheme-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="view-scheme" data-id="mgnrega">View details</button><button type="button" class="btn btn-quiet btn-sm" data-action="track-scheme" data-id="mgnrega">Track</button></div></article><article class="scheme-card" style="--accent:#c48a35"><div class="scheme-card-top"><span class="scheme-type">Finance</span><span class="match-pill high">90% · Good match</span></div><span class="scheme-short">KCC · All India</span><h3>Kisan Credit Card</h3><p>A revolving credit line for seeds, fertilizer and farm costs, useful for keeping farm income steady during construction.</p><div class="scheme-benefit"><span aria-hidden="true">₹</span>Low-cost farm credit</div><div class="tag-list"><span class="tag">Farmer</span><span class="tag">Credit</span><span class="tag">Low interest</span></div><div class="scheme-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="view-scheme" data-id="kcc">View details</button><button type="button" class="btn btn-quiet btn-sm" data-action="track-scheme" data-id="kcc">Track</button></div></article><article class="scheme-card" style="--accent:#6a55a3"><div class="scheme-card-top"><span class="scheme-type">Insurance</span><span class="match-pill high">90% · Good match</span></div><span class="scheme-short">PMFBY · All India</span><h3>Pradhan Mantri Fasal Bima Yojana</h3><p>Crop insurance that protects farm income against weather-related loss, helping a housing budget stay on track.</p><div class="scheme-benefit"><span aria-hidden="true">₹</span>Crop loss cover with subsidised premium</div><div class="tag-list"><span class="tag">Farmer</span><span class="tag">Risk cover</span></div><div class="scheme-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="view-scheme" data-id="fasal-bima">View details</button><button type="button" class="btn btn-quiet btn-sm" data-action="track-scheme" data-id="fasal-bima">Track</button></div></article><article class="scheme-card" style="--accent:#39728a"><div class="scheme-card-top"><span class="scheme-type">Land records</span><span class="match-pill high">84% · Good match</span></div><span class="scheme-short">Record update · All India</span><h3>Land record mutation &amp; correction</h3><p>Guidance for getting your name entered or corrected in the land record — often the first real roadblock in a housing application.</p><div class="scheme-benefit"><span aria-hidden="true">₹</span>Correct ownership in revenue records</div><div class="tag-list"><span class="tag">Records</span><span class="tag">Everyone</span><span class="tag">First step</span></div><div class="scheme-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="view-scheme" data-id="land-mutation">View details</button><button type="button" class="btn btn-quiet btn-sm" data-action="track-scheme" data-id="land-mutation">Track</button></div></article><article class="scheme-card" style="--accent:#1d7a5f"><div class="scheme-card-top"><span class="scheme-type">Housing</span><span class="match-pill mid">46% · May qualify</span></div><span class="scheme-short">State top-up · Sample states</span><h3>State housing top-up (illustrative)</h3><p>A placeholder for the state-level housing contribution that many states add to central assistance.</p><div class="scheme-benefit"><span aria-hidden="true">₹</span>Up to ₹50,000 top-up (sample)</div><div class="tag-list"><span class="tag sample">Sample scheme</span><span class="tag">BPL</span><span class="tag">Top-up</span></div><div class="scheme-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="view-scheme" data-id="state-topup">View details</button><button type="button" class="btn btn-quiet btn-sm" data-action="track-scheme" data-id="state-topup">Track</button></div></article><article class="scheme-card" style="--accent:#1d7a5f"><div class="scheme-card-top"><span class="scheme-type">Housing</span><span class="match-pill low">10% · Check details</span></div><span class="scheme-short">Women priority · Sample states</span><h3>Women-headed household priority (illustrative)</h3><p>An example of how some programmes prioritise women-headed households in housing and asset ownership.</p><div class="scheme-benefit"><span aria-hidden="true">₹</span>Priority plus ₹25,000 sample top-up</div><div class="tag-list"><span class="tag sample">Sample scheme</span><span class="tag">Women</span><span class="tag">Priority</span></div><div class="scheme-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="view-scheme" data-id="women-topup">View details</button><button type="button" class="btn btn-quiet btn-sm" data-action="track-scheme" data-id="women-topup">Track</button></div></article></div>
+          <p class="page-disclaimer"><span aria-hidden="true">ⓘ</span> A match is a guide, not an official decision. Sample schemes are clearly marked and must not be treated as real government offers.</p>
+        </section>
+
+        <!-- ============ DOCUMENTS ============ -->
+        <section class="view" id="view-documents" data-view-panel="documents" aria-labelledby="docs-title">
+          <div class="section-head">
+            <div><span class="eyebrow">Document checker</span><h2 id="docs-title">Fix paper problems before the queue</h2></div>
+            <div class="head-actions">
+              <button type="button" class="btn btn-quiet btn-sm" data-action="fill-sample-docs">Use sample data</button>
+              <button type="button" class="btn btn-quiet btn-sm" data-action="reset-docs">Clear all</button>
+            </div>
+          </div>
+          <div class="doc-layout">
+            <div class="card doc-panel">
+              <div class="doc-intro">
+                <span class="doc-intro-icon" aria-hidden="true">▤</span>
+                <div><strong>Simulated verification</strong><p>Enter details or choose a file to see a pre-check. Nothing is uploaded, stored on a server, or actually verified.</p></div>
+              </div>
+              <div class="doc-grid" id="doc-grid"><div class="doc-card" data-doc-card="aadhaar"><div class="doc-card-head"><span class="doc-card-icon" aria-hidden="true">◉</span><span class="doc-card-title"><strong>Aadhaar card</strong><small>Confirms identity and rural address.</small></span></div><div class="doc-fields"><label><span>Aadhaar number</span><input type="text" data-doc-id="aadhaar" data-doc-field="number" id="doc-aadhaar-number" value="" placeholder="12 digits" maxlength="14"></label></div><div class="doc-status" data-doc-status="aadhaar"></div></div><div class="doc-card" data-doc-card="landRecord"><div class="doc-card-head"><span class="doc-card-icon" aria-hidden="true">▤</span><span class="doc-card-title"><strong>Land record (Khatauni / RoR)</strong><small>Proves the plot and whose name it is in.</small></span></div><div class="doc-fields"><label><span>Survey / Khatauni number</span><input type="text" data-doc-id="landRecord" data-doc-field="survey" id="doc-landRecord-survey" value="" placeholder="e.g. AB-123/45" maxlength="24"></label><label><span>Village / mouza</span><input type="text" data-doc-id="landRecord" data-doc-field="village" id="doc-landRecord-village" value="" placeholder="e.g. Rampur" maxlength="40"></label><label class="check-field"><input type="checkbox" data-doc-id="landRecord" data-doc-field="nameMatch" id="doc-landRecord-nameMatch"><span>Applicant's name matches the record</span></label></div><div class="doc-status" data-doc-status="landRecord"></div></div><div class="doc-card" data-doc-card="incomeCert"><div class="doc-card-head"><span class="doc-card-icon" aria-hidden="true">₹</span><span class="doc-card-title"><strong>Income certificate / BPL card</strong><small>Used to check priority and income limits.</small></span></div><div class="doc-fields"><label><span>Issue date</span><input type="date" data-doc-id="incomeCert" data-doc-field="issued" id="doc-incomeCert-issued" value="" placeholder=""></label></div><div class="doc-status" data-doc-status="incomeCert"></div></div><div class="doc-card" data-doc-card="bplCard"><div class="doc-card-head"><span class="doc-card-icon" aria-hidden="true">▣</span><span class="doc-card-title"><strong>BPL / priority card</strong><small>May give priority in the beneficiary list.</small></span><span class="doc-optional">Optional</span></div><div class="doc-fields"><label><span>Card number</span><input type="text" data-doc-id="bplCard" data-doc-field="number" id="doc-bplCard-number" value="" placeholder="8–16 characters" maxlength="20"></label></div><div class="doc-status" data-doc-status="bplCard"></div></div><div class="doc-card" data-doc-card="bank"><div class="doc-card-head"><span class="doc-card-icon" aria-hidden="true">◫</span><span class="doc-card-title"><strong>Bank passbook</strong><small>Used for direct benefit and wage payments.</small></span></div><div class="doc-fields"><label><span>Account number</span><input type="text" data-doc-id="bank" data-doc-field="account" id="doc-bank-account" value="" placeholder="9–18 digits" maxlength="18"></label><label><span>IFSC</span><input type="text" data-doc-id="bank" data-doc-field="ifsc" id="doc-bank-ifsc" value="" placeholder="SBIN0001234" maxlength="11"></label></div><div class="doc-status" data-doc-status="bank"></div></div><div class="doc-card" data-doc-card="jobCard"><div class="doc-card-head"><span class="doc-card-icon" aria-hidden="true">⚒</span><span class="doc-card-title"><strong>MGNREGA job card</strong><small>Needed if you plan to request wage work.</small></span><span class="doc-optional">Optional</span></div><div class="doc-fields"><label><span>Job card number</span><input type="text" data-doc-id="jobCard" data-doc-field="number" id="doc-jobCard-number" value="" placeholder="e.g. JOB202600932" maxlength="20"></label></div><div class="doc-status" data-doc-status="jobCard"></div></div><div class="doc-card" data-doc-card="categoryCert"><div class="doc-card-head"><span class="doc-card-icon" aria-hidden="true">◇</span><span class="doc-card-title"><strong>Category certificate</strong><small>Required only for some reserved-category benefits.</small></span><span class="doc-optional">Optional</span></div><div class="doc-fields"><label><span>Certificate number</span><input type="text" data-doc-id="categoryCert" data-doc-field="number" id="doc-categoryCert-number" value="" placeholder="If you have one" maxlength="20"></label></div><div class="doc-status" data-doc-status="categoryCert"></div></div><div class="doc-card" data-doc-card="photo"><div class="doc-card-head"><span class="doc-card-icon" aria-hidden="true">▧</span><span class="doc-card-title"><strong>Passport-size photo &amp; ID proof</strong><small>Attached to most application forms.</small></span></div><div class="doc-fields"><label><span>Choose a file (name only, not uploaded)</span><input type="file" data-doc-id="photo" data-doc-field="file" id="doc-photo-file"></label></div><div class="doc-status" data-doc-status="photo"></div></div></div>
+              <div class="doc-actions">
+                <button type="button" class="btn btn-primary" data-action="check-docs">Run simulated check <span aria-hidden="true">→</span></button>
+                <button type="button" class="btn btn-outline" data-action="print-checklist">Print checklist</button>
+              </div>
+            </div>
+            <aside class="card doc-result" id="doc-result" aria-live="polite"><div class="empty-result"><span aria-hidden="true">◎</span><strong>Ready when you are</strong><p>Run the check to see a readiness score and a short list of next steps.</p></div></aside>
+          </div>
+        </section>
+
+        <!-- ============ CALCULATOR ============ -->
+        <section class="view" id="view-calculator" data-view-panel="calculator" aria-labelledby="calc-title">
+          <div class="section-head">
+            <div><span class="eyebrow">Cost calculator</span><h2 id="calc-title">Know the number before you start</h2></div>
+            <p>Estimates update as you type. Change any value to explore a smaller, smarter build.</p>
+          </div>
+          <div class="calc-layout">
+            <form class="card calc-form" id="calc-form">
+              <div class="calc-group">
+                <div class="calc-group-head"><span class="group-num">01</span><div><strong>House size</strong><small>Built-up area is the covered floor area.</small></div></div>
+                <div class="dual-field">
+                  <label><span>Built-up area (sq ft)</span><input id="calc-area" name="area" type="number" min="150" max="5000" step="10" value="900" inputmode="numeric"></label>
+                  <label><span>Plot area (sq ft)</span><input id="calc-plot" name="plot" type="number" min="150" max="20000" step="50" value="1200" inputmode="numeric"></label>
+                </div>
+                <input id="calc-area-range" type="range" min="150" max="3000" step="10" value="900" aria-label="Built-up area slider">
+                <div class="range-ends"><span>150 sq ft</span><span>3,000 sq ft</span></div>
+              </div>
+
+              <div class="calc-group">
+                <div class="calc-group-head"><span class="group-num">02</span><div><strong>Construction choices</strong><small>Rates are indicative sample rates per sq ft.</small></div></div>
+                <div class="segmented" id="quality-options" role="group" aria-label="Finish quality">
+                  <button type="button" data-quality="basic">Basic</button>
+                  <button type="button" class="active" data-quality="standard">Standard</button>
+                  <button type="button" data-quality="premium">Premium</button>
+                </div>
+                <p class="segment-note" id="quality-note">Balanced finish and fittings</p>
+                <div class="two-col">
+                  <label><span>Region / access</span><select id="calc-region"><option value="plains">Rural plains</option><option value="semi">Semi-urban / nearby town</option><option value="hilly">Hilly / difficult access</option><option value="remote">Remote village</option></select></label>
+                  <label><span>Extra bathrooms</span><input id="calc-baths" type="number" min="0" max="6" step="1" value="1" inputmode="numeric"></label>
+                </div>
+              </div>
+
+              <div class="calc-group">
+                <div class="calc-group-head"><span class="group-num">03</span><div><strong>Site work &amp; extras</strong><small>Select only what you actually need.</small></div></div>
+                <label class="check-row"><input type="checkbox" id="calc-site" checked=""><span class="check-box" aria-hidden="true">✓</span><span><strong>Level, boundary &amp; drainage</strong><small>Estimated from plot area</small></span></label>
+                <label class="check-row"><input type="checkbox" id="calc-water"><span class="check-box" aria-hidden="true">✓</span><span><strong>Rainwater harvesting</strong><small>Sample cost ₹18,000</small></span></label>
+                <label class="check-row"><input type="checkbox" id="calc-solar"><span class="check-box" aria-hidden="true">✓</span><span><strong>Solar lighting</strong><small>Sample cost ₹42,000</small></span></label>
+                <label class="check-row"><input type="checkbox" id="calc-wall"><span class="check-box" aria-hidden="true">✓</span><span><strong>Compound wall</strong><small>Sample cost ₹58,000</small></span></label>
+                <div class="dual-field">
+                  <label><span>Contingency (%)</span><input id="calc-contingency" type="number" min="0" max="30" step="1" value="8" inputmode="numeric"></label>
+                  <div class="rate-chip" id="rate-chip"><span>Base rate</span><strong>₹2,150 / sq ft</strong></div>
+                </div>
+              </div>
+
+              <div class="calc-group">
+                <div class="calc-group-head"><span class="group-num">04</span><div><strong>Funding</strong><small>Subtract support and add a loan to see the gap.</small></div></div>
+                <div class="funding-grid">
+                  <label><span>Expected grant (₹)</span><input id="calc-grant" type="number" min="0" step="1000" value="130000" inputmode="numeric"></label>
+                  <label><span>Your savings (₹)</span><input id="calc-own" type="number" min="0" step="1000" value="75000" inputmode="numeric"></label>
+                  <label><span>Housing loan (₹)</span><input id="calc-loan" type="number" min="0" step="1000" value="150000" inputmode="numeric"></label>
+                  <label><span>Loan interest (%)</span><input id="calc-rate" type="number" min="0" max="24" step="0.1" value="7.5" inputmode="decimal"></label>
+                  <label><span>Loan tenure (years)</span><input id="calc-tenure" type="number" min="1" max="30" step="1" value="10" inputmode="numeric"></label>
+                </div>
+              </div>
+              <div class="calc-form-actions">
+                <button type="button" class="btn btn-outline btn-sm" data-action="reset-calc">Reset values</button>
+                <button type="button" class="btn btn-quiet btn-sm" data-action="copy-estimate">Copy estimate</button>
+                <button type="button" class="btn btn-quiet btn-sm" data-action="print-estimate">Print</button>
+              </div>
+            </form>
+
+            <aside class="calc-results" aria-live="polite">
+              <div class="total-card" id="total-card">
+                <span class="eyebrow">Estimated total cost</span>
+                <strong id="calc-total">₹21,55,248</strong>
+                <span id="calc-per-sqft">₹2,395 per sq ft</span>
+                <div class="total-meter"><span id="total-meter-fill" style="width: 16.4714%;"></span></div>
+                <p id="calc-verdict">Funding gap of ₹18,00,248. Try a smaller footprint, a state top-up or more savings.</p>
+              </div>
+              <div class="card result-card">
+                <div class="result-head"><strong>Where the money goes</strong><span id="calc-base-rate-note">Standard · Rural plains</span></div>
+                <div class="breakdown-list" id="calc-breakdown"><div class="breakdown-row"><div class="break-row-top"><span>Construction (900 sq ft)</span><strong>₹19,35,000</strong></div><div class="bar construction"><span style="width:100%"></span></div></div><div class="breakdown-row"><div class="break-row-top"><span>Site level, boundary &amp; drainage</span><strong>₹46,600</strong></div><div class="bar site"><span style="width:2.408268733850129%"></span></div></div><div class="breakdown-row"><div class="break-row-top"><span>Bathrooms &amp; add-ons</span><strong>₹14,000</strong></div><div class="bar extras"><span style="width:2%"></span></div></div><div class="breakdown-row"><div class="break-row-top"><span>Contingency (8%)</span><strong>₹1,59,648</strong></div><div class="bar contingency"><span style="width:8.250542635658915%"></span></div></div></div>
+              </div>
+              <div class="card result-card">
+                <div class="result-head"><strong>How it is funded</strong><span id="gap-label">Gap: ₹18,00,248</span></div>
+                <div class="funding-list" id="calc-funding"><div class="breakdown-row"><div class="break-row-top"><span>Expected grant</span><strong>₹1,30,000</strong></div><div class="bar "><span style="width:7.221227297572335%"></span></div></div><div class="breakdown-row"><div class="break-row-top"><span>Your savings</span><strong>₹75,000</strong></div><div class="bar "><span style="width:4.166092671676347%"></span></div></div><div class="breakdown-row"><div class="break-row-top"><span>Housing loan</span><strong>₹1,50,000</strong></div><div class="bar "><span style="width:8.332185343352695%"></span></div></div><div class="funding-row gap"><div class="breakdown-row"><div class="break-row-top"><span>Funding gap</span><strong>₹18,00,248</strong></div><div class="bar "><span style="width:100%"></span></div></div></div></div>
+                <div class="emi-box" id="calc-emi"><span>Estimated EMI · ₹1,50,000 at 7.5% for 10 years</span><strong>₹1,781 / mo</strong></div>
+              </div>
+              <p class="result-note"><span aria-hidden="true">ⓘ</span> Rates are illustrative and vary with local prices, labour, soil, design and scheme rules. Get at least two local quotes before starting.</p>
+            </aside>
+          </div>
+        </section>
+
+        <!-- ============ ASSISTANT ============ -->
+        <section class="view" id="view-assistant" data-view-panel="assistant" aria-labelledby="chat-title">
+          <div class="section-head">
+            <div><span class="eyebrow">AI assistant</span><h2 id="chat-title">Ask in your own words</h2></div>
+            <p>Predefined answers work offline. You can optionally connect Gemini in settings.</p>
+          </div>
+          <div class="assistant-layout">
+            <div class="card chat-card">
+              <div class="chat-head">
+                <span class="chat-avatar" aria-hidden="true">✦</span>
+                <div><strong>Land2Life Helper</strong><span id="chat-mode-label">Offline guidance · predefined answers</span></div>
+                <button type="button" class="icon-btn" data-action="clear-chat" aria-label="Clear chat" title="Clear chat">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M9 7V5h6v2M7 7l1 13h8l1-13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                </button>
+              </div>
+              <div class="chat-log" id="chat-log" aria-live="polite"><div class="msg"><span class="msg-avatar" aria-hidden="true">✦</span><div class="msg-bubble">Namaste! I can help you find a scheme, prepare documents, understand a land record, estimate cost or track an application. Tell me your state and whether the land is in your name for a better answer.<span class="msg-meta">Land2Life Helper · ready</span><div style="margin-top:9px"><button type="button" class="btn btn-quiet btn-sm" data-view="schemes">Find schemes →</button></div></div></div></div>
+              <div class="chat-quick" id="chat-quick" aria-label="Suggested questions"><button type="button" data-chat-prompt="Which schemes match me?">Which schemes match me?</button><button type="button" data-chat-prompt="What documents do I need?">What documents do I need?</button><button type="button" data-chat-prompt="My land record has a mistake">My land record has a mistake</button><button type="button" data-chat-prompt="How much will my house cost?">How much will my house cost?</button><button type="button" data-chat-prompt="How do I track my application?">How do I track my application?</button></div>
+              <form class="chat-form" id="chat-form">
+                <label class="sr-only" for="chat-input">Your question</label>
+                <input id="chat-input" type="text" placeholder="Ask about schemes, documents, costs or tracking…" autocomplete="off" maxlength="500">
+                <button type="submit" class="btn btn-primary" aria-label="Send message">Send <span aria-hidden="true">→</span></button>
+              </form>
+              <p class="chat-foot">Guidance is illustrative, not legal or financial advice. Confirm decisions with official sources.</p>
+            </div>
+            <aside class="assistant-side">
+              <div class="card help-list">
+                <span class="eyebrow">I can help with</span>
+                <button type="button" data-chat-prompt="Which schemes match me?"><span aria-hidden="true">✧</span> Finding the right scheme</button>
+                <button type="button" data-chat-prompt="What documents do I need?"><span aria-hidden="true">▤</span> Preparing documents</button>
+                <button type="button" data-chat-prompt="My land record has a mistake"><span aria-hidden="true">▤</span> Land record mistakes</button>
+                <button type="button" data-chat-prompt="How much will my house cost?"><span aria-hidden="true">◫</span> Cost and EMI basics</button>
+                <button type="button" data-chat-prompt="How do I track my application?"><span aria-hidden="true">⌁</span> Application status</button>
+              </div>
+              <div class="card gemini-card">
+                <span class="gemini-icon" aria-hidden="true">✦</span>
+                <strong>Optional Gemini connection</strong>
+                <p>Add an API key to answer in more detail. The key stays in this browser and is never sent to a Land2Life server — there is none.</p>
+                <button type="button" class="btn btn-outline btn-sm" data-action="open-settings">Open AI settings</button>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <!-- ============ TRACKER ============ -->
+        <section class="view" id="view-tracker" data-view-panel="tracker" aria-labelledby="tracker-title">
+          <div class="section-head">
+            <div><span class="eyebrow">Application tracker</span><h2 id="tracker-title">Always know the next step</h2></div>
+            <div class="head-actions">
+              <button type="button" class="btn btn-quiet btn-sm" data-action="reset-tracker">Restore samples</button>
+              <button type="button" class="btn btn-outline btn-sm" data-action="add-demo-app">Add sample application</button>
+            </div>
+          </div>
+          <div class="card tracker-toolbar">
+            <label class="search-field">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"></circle><path d="m16 16 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
+              <input id="tracker-search" type="search" placeholder="Search by scheme or reference number…" aria-label="Search applications">
+            </label>
+            <div class="chip-row" id="tracker-filters" aria-label="Filter applications"><button type="button" class="chip active" data-tracker-filter="all">All</button><button type="button" class="chip" data-tracker-filter="action">Needs action</button><button type="button" class="chip" data-tracker-filter="progress">In progress</button><button type="button" class="chip" data-tracker-filter="done">Completed</button></div>
+          </div>
+          <div class="tracker-grid" id="tracker-grid" aria-live="polite"><article class="tracker-card"><div class="tracker-card-top"><div><h3>PMAY-G · Rural house</h3><span class="tracker-ref">L2L-PM-24819</span></div><span class="status-pill action">Needs action</span></div><div class="tracker-meta"><span>Submitted · 12 Aug 2026</span><span>Updated · 2 days ago</span><span>Gram Panchayat, Rampur</span></div><div class="tracker-progress"><div class="bar"><span style="width:40%"></span></div><strong>40%</strong></div><div class="timeline"><div class="timeline-step done"><span class="timeline-dot">✓</span><span class="timeline-line"></span><span class="timeline-label">Submitted</span></div><div class="timeline-step done"><span class="timeline-dot">✓</span><span class="timeline-line"></span><span class="timeline-label">Acknowledged</span></div><div class="timeline-step current"><span class="timeline-dot">•</span><span class="timeline-line"></span><span class="timeline-label">Document check</span></div><div class="timeline-step "><span class="timeline-dot">•</span><span class="timeline-line"></span><span class="timeline-label">Field verification</span></div><div class="timeline-step "><span class="timeline-dot">•</span><span class="timeline-line"></span><span class="timeline-label">Sanction</span></div><div class="timeline-step "><span class="timeline-dot">•</span><span class="timeline-line"></span><span class="timeline-label">Instalment released</span></div></div><div class="next-action"><strong>Next action</strong>Submit the updated Khatauni copy and keep the receipt.</div><p class="tracker-note">Field verification is expected after the document check.</p><div class="tracker-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="advance-app" data-id="app-pmay">Advance demo stage →</button><button type="button" class="btn btn-outline btn-sm" data-action="view-app-scheme" data-id="pmay-g">Scheme details</button></div></article><article class="tracker-card"><div class="tracker-card-top"><div><h3>Land mutation · Survey AB-123/45</h3><span class="tracker-ref">L2L-LR-10472</span></div><span class="status-pill action">Needs action</span></div><div class="tracker-meta"><span>Submitted · 28 Jul 2026</span><span>Updated · 5 days ago</span><span>Tehsil office, Sadar</span></div><div class="tracker-progress"><div class="bar"><span style="width:50%"></span></div><strong>50%</strong></div><div class="timeline"><div class="timeline-step done"><span class="timeline-dot">✓</span><span class="timeline-line"></span><span class="timeline-label">Submitted</span></div><div class="timeline-step done"><span class="timeline-dot">✓</span><span class="timeline-line"></span><span class="timeline-label">Acknowledged</span></div><div class="timeline-step current"><span class="timeline-dot">•</span><span class="timeline-line"></span><span class="timeline-label">Patwari report</span></div><div class="timeline-step "><span class="timeline-dot">•</span><span class="timeline-line"></span><span class="timeline-label">Mutation order</span></div><div class="timeline-step "><span class="timeline-dot">•</span><span class="timeline-line"></span><span class="timeline-label">Record updated</span></div></div><div class="next-action"><strong>Next action</strong>Ask the patwari whether the boundary verification report is ready.</div><p class="tracker-note">Deed and current RoR have a spelling mismatch in the applicant's name.</p><div class="tracker-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="advance-app" data-id="app-land">Advance demo stage →</button><button type="button" class="btn btn-outline btn-sm" data-action="view-app-scheme" data-id="land-mutation">Scheme details</button></div></article><article class="tracker-card"><div class="tracker-card-top"><div><h3>PM-KISAN enrolment</h3><span class="tracker-ref">L2L-PK-77120</span></div><span class="status-pill done">Completed</span></div><div class="tracker-meta"><span>Submitted · 03 Jun 2026</span><span>Updated · 12 days ago</span><span>CSC, Rampur</span></div><div class="tracker-progress"><div class="bar"><span style="width:100%"></span></div><strong>100%</strong></div><div class="timeline"><div class="timeline-step done"><span class="timeline-dot">✓</span><span class="timeline-line"></span><span class="timeline-label">Submitted</span></div><div class="timeline-step done"><span class="timeline-dot">✓</span><span class="timeline-line"></span><span class="timeline-label">Acknowledged</span></div><div class="timeline-step done"><span class="timeline-dot">✓</span><span class="timeline-line"></span><span class="timeline-label">Land validation</span></div><div class="timeline-step done"><span class="timeline-dot">✓</span><span class="timeline-line"></span><span class="timeline-label">Approved</span></div><div class="timeline-step done"><span class="timeline-dot">✓</span><span class="timeline-line"></span><span class="timeline-label">Payment released</span></div></div><div class="next-action"><strong>Next action</strong>No action needed. Check the next instalment in the payment history.</div><p class="tracker-note">Beneficiary status shows approved in this sample record.</p><div class="tracker-card-actions"><button type="button" class="btn btn-quiet btn-sm" disabled="">Completed</button><button type="button" class="btn btn-outline btn-sm" data-action="view-app-scheme" data-id="pm-kisan">Scheme details</button></div></article></div>
+          <p class="page-disclaimer"><span aria-hidden="true">ⓘ</span> These are example records for demonstration. Advancing a stage is a simulation and does not contact any government system.</p>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <button type="button" class="chat-fab" data-view="assistant" aria-label="Open AI assistant">
+    <span aria-hidden="true">✦</span><span class="chat-fab-label">Ask</span>
+  </button>
+  <div class="nav-scrim" id="nav-scrim" hidden=""></div>
+
+  <!-- Scheme detail modal -->
+  <div class="modal" id="scheme-modal" role="dialog" aria-modal="true" aria-labelledby="scheme-modal-title" hidden="">
+    <div class="modal-card scheme-modal-card">
+      <button type="button" class="icon-btn modal-close" data-action="close-modal" data-modal="scheme-modal" aria-label="Close">×</button>
+      <div id="scheme-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Settings modal -->
+  <div class="modal" id="settings-modal" role="dialog" aria-modal="true" aria-labelledby="settings-title" hidden="">
+    <div class="modal-card settings-card">
+      <div class="modal-head">
+        <div><span class="eyebrow">Optional AI assistance</span><h2 id="settings-title">Gemini connection</h2></div>
+        <button type="button" class="icon-btn modal-close" data-action="close-modal" data-modal="settings-modal" aria-label="Close">×</button>
+      </div>
+      <p class="modal-intro">The built-in answers work without any setup. If you have a Gemini API key, you can enable richer replies for this browser only.</p>
+      <form id="gemini-form">
+        <label class="form-field"><span>Gemini API key</span><input id="gemini-key" type="password" placeholder="Paste your key" autocomplete="off"></label>
+        <label class="form-field"><span>Model</span><input id="gemini-model" type="text" value="gemini-2.0-flash" autocomplete="off"></label>
+        <label class="switch-row"><input type="checkbox" id="gemini-enabled"><span class="switch" aria-hidden="true"></span><span><strong>Use Gemini for new messages</strong><small>Falls back to predefined answers if the request fails.</small></span></label>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-quiet" data-action="clear-gemini">Remove key</button>
+          <button type="submit" class="btn btn-primary">Save settings</button>
+        </div>
+      </form>
+      <p class="settings-note">Prototype note: a client-side key is visible in the browser and is not safe for a public deployment. Use a small server proxy in production.</p>
+    </div>
+  </div>
+
+  <!-- Help modal -->
+  <div class="modal" id="help-modal" role="dialog" aria-modal="true" aria-labelledby="help-title" hidden="">
+    <div class="modal-card help-card">
+      <div class="modal-head">
+        <div><span class="eyebrow">How it works</span><h2 id="help-title">A calm guide for a complicated process</h2></div>
+        <button type="button" class="icon-btn modal-close" data-action="close-modal" data-modal="help-modal" aria-label="Close">×</button>
+      </div>
+      <div class="help-grid">
+        <div class="help-step"><span>01</span><strong>Set your situation</strong><p>State, land status and income help the scheme finder rank useful options.</p></div>
+        <div class="help-step"><span>02</span><strong>Check documents</strong><p>The pre-check catches obvious mistakes. Nothing you type is uploaded.</p></div>
+        <div class="help-step"><span>03</span><strong>Plan the money</strong><p>Balance grant, savings and loan. Look closely at the funding gap.</p></div>
+        <div class="help-step"><span>04</span><strong>Track every stage</strong><p>Keep acknowledgment receipts and note the office and official you meet.</p></div>
+      </div>
+      <div class="help-warning"><strong>Watch out for middlemen</strong><p>Ask for the official form, a written list of documents and a receipt for any payment. Unofficial “fast-track” fees are a red flag. Verify instructions at the Gram Panchayat or block office.</p></div>
+      <button type="button" class="btn btn-primary full-width modal-close" data-action="close-modal" data-modal="help-modal">Got it</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden="">
+    <span class="toast-icon" id="toast-icon" aria-hidden="true">✓</span><span id="toast-text"></span>
+  </div>
+
+  <script src="./Land2Life · From land to home_files/data.js.download"></script>
+  <script src="./Land2Life · From land to home_files/app.js.download"></script>
+
+
+</body></html>
