@@ -1,499 +1,2066 @@
 <!DOCTYPE html>
-<!-- saved from url=(0022)http://localhost:8124/ -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#123f34">
-  <meta name="description" content="Land2Life — a simple AI-powered guide that helps rural families turn owned land into a safe, permanent home.">
-  <title>Land2Life · From land to home</title>
-  <link rel="stylesheet" href="./aaaaa_files/styles.css">
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Land2Life — Bridging Rural Land Ownership & Home Construction</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            clay: {
+              50: '#fdf6f0',
+              100: '#fbeae0',
+              500: '#c85a32',
+              600: '#b04622',
+              700: '#8f3518',
+            },
+            forest: {
+              50: '#f0f7f3',
+              100: '#dceee3',
+              600: '#236343',
+              700: '#1b4f35',
+              800: '#143c29',
+              900: '#0e291c',
+            },
+            ochre: {
+              100: '#fef3c7',
+              500: '#d97706',
+              600: '#b45309',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #faf7f2;
+      color: #1c2921;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #f1ede6;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #c5bba8;
+      border-radius: 9999px;
+    }
+    .tab-active {
+      background-color: #1b4f35;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(27, 79, 53, 0.22);
+    }
+    .step-pulse {
+      animation: pulseRing 2s infinite;
+    }
+    @keyframes pulseRing {
+      0% { box-shadow: 0 0 0 0 rgba(200, 90, 50, 0.45); }
+      70% { box-shadow: 0 0 0 8px rgba(200, 90, 50, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(200, 90, 50, 0); }
+    }
+  </style>
 </head>
-<body>
-  <div class="app-shell">
-    <!-- Sidebar -->
-    <aside class="side-nav" id="side-nav" aria-label="Main navigation">
-      <a class="brand" href="http://localhost:8124/#home" data-view="home" aria-label="Land2Life overview">
-        <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 36 36" fill="none">
-            <path d="M5 20.5 18 9l13 11.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
-            <path d="M9 19v11h18V19" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path>
-            <path d="M15 30V22h6v8" fill="currentColor" opacity=".9"></path>
-            <path d="M3 32h30" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path>
-          </svg>
-        </span>
-        <span class="brand-copy"><strong>Land2<span>Life</span></strong><small>Land to home, guided</small></span>
-      </a>
+<body class="min-h-screen flex flex-col selection:bg-clay-500 selection:text-white">
 
-      <nav class="nav-list" aria-label="Sections">
-        <button type="button" class="nav-item active" data-view="home" aria-current="page" fdprocessedid="6eoxcgs">
-          <span class="nav-icon" aria-hidden="true">⌂</span>
-          <span class="nav-copy"><strong>Overview</strong><small>Start here</small></span>
+  <!-- Top Anti-Middleman & Accessibility Strip -->
+  <div class="bg-forest-900 text-amber-100 text-xs py-2 px-4 border-b border-forest-800">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center px-2 py-0.5 rounded bg-clay-500 text-white font-semibold uppercase tracking-wider text-[10px]" id="topBadgeText">Zero Middlemen Initiative</span>
+        <span id="topBannerMsg">Direct DBT transfers via AwaasSoft &amp; RGRHCL. Never pay bribes for Geo-tagging or sanction letters.</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span class="hidden sm:inline text-emerald-200">RGRHCL Helpline: <strong>080-23118888</strong> | PMAY-G: <strong>1800-11-6446</strong></span>
+        <button id="langToggleBtn" type="button" class="px-2.5 py-1 rounded bg-forest-700 hover:bg-forest-600 text-white font-medium transition flex items-center gap-1.5 border border-emerald-600/40">
+          <span>🌐</span>
+          <span id="langToggleLabel">ಕನ್ನಡ / English</span>
         </button>
-        <button type="button" class="nav-item" data-view="schemes" fdprocessedid="vxkfxo">
-          <span class="nav-icon" aria-hidden="true">✧</span>
-          <span class="nav-copy"><strong>Scheme finder</strong><small>Matches for you</small></span>
-          <span class="nav-badge">8</span>
+        <button id="openAiConfigBtn" type="button" class="px-2.5 py-1 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 font-medium transition border border-amber-400/30">
+          ⚙️ Gemini API
         </button>
-        <button type="button" class="nav-item" data-view="documents" fdprocessedid="oh9okf">
-          <span class="nav-icon" aria-hidden="true">▤</span>
-          <span class="nav-copy"><strong>Document checker</strong><small>Quick pre-check</small></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="sticky top-0 z-30 bg-[#faf7f2]/95 backdrop-blur border-b border-stone-200/80 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      <!-- Brand -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-forest-700 to-clay-500 flex items-center justify-center text-white shadow-md">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-forest-900">Land2Life</h1>
+            <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-100 text-forest-700 border border-emerald-200">Rural Housing Companion</span>
+          </div>
+          <p class="text-xs text-stone-600" id="brandSubtitle">From Land Ownership (Bhoomi / SVAMITVA) to a Complete Pucca Home</p>
+        </div>
+      </div>
+
+      <!-- Primary Navigation Tabs -->
+      <nav class="flex items-center gap-1.5 overflow-x-auto max-w-full py-1" aria-label="Main modules">
+        <button type="button" data-tab="overview" class="nav-tab tab-active px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition whitespace-nowrap flex items-center gap-1.5">
+          <span>🏡</span> <span data-i18n="nav_overview">Journey Overview</span>
         </button>
-        <button type="button" class="nav-item" data-view="calculator" fdprocessedid="dauhv6">
-          <span class="nav-icon" aria-hidden="true">◫</span>
-          <span class="nav-copy"><strong>Cost calculator</strong><small>Plan the budget</small></span>
+        <button type="button" data-tab="schemes" class="nav-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-stone-700 hover:bg-stone-200/70 transition whitespace-nowrap flex items-center gap-1.5">
+          <span>🔍</span> <span data-i18n="nav_schemes">Scheme Finder</span>
         </button>
-        <button type="button" class="nav-item" data-view="assistant" fdprocessedid="uq57yk">
-          <span class="nav-icon" aria-hidden="true">✦</span>
-          <span class="nav-copy"><strong>AI assistant</strong><small>Ask anything</small></span>
+        <button type="button" data-tab="documents" class="nav-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-stone-700 hover:bg-stone-200/70 transition whitespace-nowrap flex items-center gap-1.5">
+          <span>📑</span> <span data-i18n="nav_docs">Doc &amp; Land Checker</span>
+          <span id="navDocBadge" class="ml-1 px-1.5 py-0.5 text-[10px] rounded-full bg-amber-100 text-amber-800 font-bold">4/6</span>
         </button>
-        <button type="button" class="nav-item" data-view="tracker" fdprocessedid="jn6hv8">
-          <span class="nav-icon" aria-hidden="true">⌁</span>
-          <span class="nav-copy"><strong>Application tracker</strong><small>Know the next step</small></span>
+        <button type="button" data-tab="calculator" class="nav-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-stone-700 hover:bg-stone-200/70 transition whitespace-nowrap flex items-center gap-1.5">
+          <span>🧮</span> <span data-i18n="nav_calc">Cost &amp; Gap Calculator</span>
+        </button>
+        <button type="button" data-tab="tracker" class="nav-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-stone-700 hover:bg-stone-200/70 transition whitespace-nowrap flex items-center gap-1.5">
+          <span>📍</span> <span data-i18n="nav_tracker">Application Tracker</span>
+        </button>
+        <button type="button" data-tab="assistant" class="nav-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-stone-700 hover:bg-stone-200/70 transition whitespace-nowrap flex items-center gap-1.5">
+          <span>🤖</span> <span data-i18n="nav_ai">AI Sahayak</span>
         </button>
       </nav>
+    </div>
+  </header>
 
-      <div class="side-card">
-        <span class="side-card-icon" aria-hidden="true">✓</span>
-        <strong>No middlemen needed</strong>
-        <p>Every step is explained in plain language. Keep your receipts and ask for official receipts only.</p>
-        <button type="button" class="text-link" data-action="open-help" fdprocessedid="0p5fk8">How Land2Life works <span aria-hidden="true">→</span></button>
+  <!-- Active Family Profile Summary Bar -->
+  <section class="bg-white border-b border-stone-200 shadow-2xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="font-semibold text-stone-500 uppercase tracking-wider">Active Beneficiary Plan:</span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-stone-100 text-stone-800 font-medium">
+          👤 <strong id="barBeneficiaryName">Ramesh Gowda (Avalahalli, Karnataka)</strong>
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 text-forest-700 font-medium border border-emerald-200">
+          🏛️ Selected Scheme: <strong id="barSelectedScheme">PMAY-G (Plain Area) — ₹1,20,000</strong>
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-50 text-amber-900 font-medium border border-amber-200">
+          🧱 Est. Net Gap: <strong id="barFundingGap">₹59,860</strong>
+        </span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-stone-500">Readiness Score:</span>
+        <div class="w-24 h-2 bg-stone-200 rounded-full overflow-hidden">
+          <div id="barReadinessProgress" class="h-full bg-forest-600 transition-all duration-300" style="width: 67%"></div>
+        </div>
+        <strong id="barReadinessPct" class="text-forest-700">67%</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Workspace Content -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6">
+
+    <!-- ==================== TAB 1: OVERVIEW & LAND-TO-HOME ROADMAP ==================== -->
+    <section id="view-overview" class="tab-view space-y-6">
+      <!-- Hero Banner -->
+      <div class="rounded-2xl bg-gradient-to-r from-forest-900 via-forest-800 to-clay-700 text-white p-6 sm:p-8 shadow-lg relative overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center relative z-10">
+          <div class="lg:col-span-7 space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-amber-200 text-xs font-semibold backdrop-blur-xs">
+              <span>✨ AI-Powered Rural Housing &amp; Land Record Companion</span>
+            </div>
+            <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight" id="heroHeading">
+              Turn Your Rural Land Plot Into a Safe, Permanent Pucca Home
+            </h2>
+            <p class="text-sm sm:text-base text-emerald-100 leading-relaxed max-w-2xl" id="heroSubheading">
+              Many rural families own land but face outdated RTC/Pahani records, confusing scheme rules, middlemen commissions, and mid-construction funding gaps. <strong>Land2Life</strong> unites scheme eligibility, Bhoomi &amp; SVAMITVA verification, stage-wise cost planning, and AwaasSoft FTO tracking in one transparent platform.
+            </p>
+            <div class="flex flex-wrap gap-3 pt-2">
+              <button type="button" data-goto="schemes" class="px-5 py-2.5 rounded-xl bg-clay-500 hover:bg-clay-600 text-white font-semibold text-sm shadow-md transition flex items-center gap-2">
+                <span>1. Find Eligible Schemes</span> <span>→</span>
+              </button>
+              <button type="button" data-goto="documents" class="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white font-semibold text-sm backdrop-blur-xs transition">
+                2. Verify Land &amp; Docs
+              </button>
+              <button type="button" data-goto="calculator" class="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white font-semibold text-sm backdrop-blur-xs transition">
+                3. Calculate Construction Cost
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Interactive Quick Diagnostic Card -->
+          <div class="lg:col-span-5 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 space-y-4">
+            <div class="flex items-center justify-between border-b border-white/15 pb-3">
+              <div>
+                <h3 class="text-sm font-bold text-white">5-Step Land-to-Home Readiness</h3>
+                <p class="text-xs text-emerald-200">Click any step to jump to the interactive tool</p>
+              </div>
+              <span class="px-2.5 py-1 rounded-full bg-emerald-400/20 text-emerald-200 text-xs font-bold border border-emerald-300/30">Live Prototype</span>
+            </div>
+            <div class="space-y-2.5 text-xs">
+              <button type="button" data-goto="documents" class="w-full text-left p-2.5 rounded-xl bg-white/10 hover:bg-white/20 transition flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-6 h-6 rounded-full bg-amber-400 text-forest-900 font-bold flex items-center justify-center">1</span>
+                  <div>
+                    <div class="font-semibold text-white">Land Title &amp; Mutation Check</div>
+                    <div class="text-emerald-200 text-[11px]">Bhoomi RTC (Pahani), Form 9/11A &amp; SVAMITVA Card</div>
+                  </div>
+                </div>
+                <span class="text-amber-300 font-semibold">Verify →</span>
+              </button>
+
+              <button type="button" data-goto="schemes" class="w-full text-left p-2.5 rounded-xl bg-white/10 hover:bg-white/20 transition flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-6 h-6 rounded-full bg-emerald-400 text-forest-900 font-bold flex items-center justify-center">2</span>
+                  <div>
+                    <div class="font-semibold text-white">Scheme &amp; Convergence Discovery</div>
+                    <div class="text-emerald-200 text-[11px]">PMAY-G (₹1.2L–₹1.3L), Basava Vasati (₹1.5L) + SBM-G</div>
+                  </div>
+                </div>
+                <span class="text-emerald-300 font-semibold">Match →</span>
+              </button>
+
+              <button type="button" data-goto="calculator" class="w-full text-left p-2.5 rounded-xl bg-white/10 hover:bg-white/20 transition flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-6 h-6 rounded-full bg-emerald-400 text-forest-900 font-bold flex items-center justify-center">3</span>
+                  <div>
+                    <div class="font-semibold text-white">Construction Budget &amp; Funding Gap</div>
+                    <div class="text-emerald-200 text-[11px]">Stage-wise cost + MGNREGA 95 days + 3% subvention loan</div>
+                  </div>
+                </div>
+                <span class="text-emerald-300 font-semibold">Plan →</span>
+              </button>
+
+              <button type="button" data-goto="tracker" class="w-full text-left p-2.5 rounded-xl bg-white/10 hover:bg-white/20 transition flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-6 h-6 rounded-full bg-emerald-400 text-forest-900 font-bold flex items-center justify-center">4</span>
+                  <div>
+                    <div class="font-semibold text-white">AwaasApp Geo-Tag &amp; FTO Tracking</div>
+                    <div class="text-emerald-200 text-[11px]">Track Plinth, Lintel &amp; Roof DBT installments</div>
+                  </div>
+                </div>
+                <span class="text-emerald-300 font-semibold">Track →</span>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="side-foot">
-        <span class="status-dot" aria-hidden="true"></span>
-        <span>Prototype · sample data</span>
-        <button type="button" class="text-link" data-action="open-settings" fdprocessedid="rjeqm">AI settings</button>
+      <!-- Problem vs Land2Life Solution Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bg-white rounded-2xl p-5 border border-stone-200 shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="w-10 h-10 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold text-lg">⚠️</span>
+            <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-red-50 text-red-700">Barrier #1: Land &amp; Doc Hurdles</span>
+          </div>
+          <h3 class="font-bold text-base text-stone-900">Outdated Land Records &amp; Middlemen</h3>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            Families inherit village plots where the <strong>RTC / Pahani</strong> or <strong>Abadi property record</strong> still carries a deceased ancestor's name, or Aadhaar spelling mismatches block PFMS Direct Benefit Transfers.
+          </p>
+          <div class="pt-2 border-t border-stone-100 flex items-center justify-between text-xs">
+            <span class="text-forest-700 font-semibold">Solved via Bhoomi &amp; SVAMITVA Checker</span>
+            <button type="button" data-goto="documents" class="text-clay-600 font-bold hover:underline">Open Tool →</button>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 border border-stone-200 shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold text-lg">🏛️</span>
+            <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-800">Barrier #2: Unclaimed Convergence</span>
+          </div>
+          <h3 class="font-bold text-base text-stone-900">Fragmented Welfare Schemes</h3>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            Beneficiaries apply for a base housing grant (`₹1.20L–₹1.50L`) without realizing they are entitled to stack <strong>MGNREGA 95-day labor wages</strong>, <strong>₹12,000 SBM-G toilet support</strong>, and a <strong>₹70,000 loan at 3% interest subvention</strong>.
+          </p>
+          <div class="pt-2 border-t border-stone-100 flex items-center justify-between text-xs">
+            <span class="text-forest-700 font-semibold">Solved via Convergence Finder</span>
+            <button type="button" data-goto="schemes" class="text-clay-600 font-bold hover:underline">Explore Schemes →</button>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 border border-stone-200 shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="w-10 h-10 rounded-xl bg-emerald-50 text-forest-700 flex items-center justify-center font-bold text-lg">🧱</span>
+            <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-50 text-forest-700">Barrier #3: Mid-Build Stalls</span>
+          </div>
+          <h3 class="font-bold text-base text-stone-900">Cost Overruns &amp; Unplanned Stages</h3>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            Spending the entire first FTO installment on oversized foundations leaves no capital to reach lintel height—stalling the **AwaasApp** geo-tagged inspection needed to unlock the second government installment.
+          </p>
+          <div class="pt-2 border-t border-stone-100 flex items-center justify-between text-xs">
+            <span class="text-forest-700 font-semibold">Solved via Stage-Linked Cost Planner</span>
+            <button type="button" data-goto="calculator" class="text-clay-600 font-bold hover:underline">Plan Budget →</button>
+          </div>
+        </div>
       </div>
-    </aside>
 
-    <div class="main-wrap">
-      <header class="topbar">
-        <button type="button" class="icon-btn menu-btn" data-action="toggle-nav" aria-label="Open navigation" aria-expanded="false">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"></path></svg>
-        </button>
-        <div class="topbar-title">
-          <span id="top-kicker">Welcome to Land2Life</span>
-          <strong id="top-title">Overview</strong>
+      <!-- Grounded Official Portal Reference Strip -->
+      <div class="bg-white rounded-2xl p-5 border border-stone-200 shadow-xs">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+          <div>
+            <h3 class="text-sm font-bold text-stone-900">Verified Official Government Portals &amp; Guidelines Linked in Land2Life</h3>
+            <p class="text-xs text-stone-500">Direct reference links so families and Gram Panchayat facilitators can cross-verify rules without intermediaries.</p>
+          </div>
+          <span class="text-xs font-medium text-forest-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">100% Grounded Public Data</span>
         </div>
-        <div class="top-actions">
-          <span class="demo-pill"><span aria-hidden="true">●</span> Demo prototype</span>
-          <button type="button" class="btn btn-quiet btn-sm" data-view="assistant" fdprocessedid="mgaytj">Ask the assistant</button>
-          <button type="button" class="btn btn-primary btn-sm" data-view="schemes" fdprocessedid="eg4x7">Find my schemes</button>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+          <a href="https://www.myscheme.gov.in/schemes/pmay-g" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl border border-stone-200 hover:border-forest-600 hover:bg-emerald-50/40 transition flex flex-col justify-between">
+            <div>
+              <div class="font-bold text-forest-800">PMAY-Gramin (myScheme) ↗</div>
+              <p class="text-stone-600 mt-1">₹1.20L Plain / ₹1.30L Hilly grant, 25 sq.m min area, 95-day MGNREGA &amp; ₹12,000 SBM-G toilet convergence.</p>
+            </div>
+            <span class="text-[11px] text-clay-600 font-semibold mt-2">myscheme.gov.in</span>
+          </a>
+
+          <a href="https://www.kotak.bank.in/en/stories-in-focus/loans/home-loan/basava-vasati-yojana-2024.html" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl border border-stone-200 hover:border-forest-600 hover:bg-emerald-50/40 transition flex flex-col justify-between">
+            <div>
+              <div class="font-bold text-forest-800">Basava Vasati Yojana (RGRHCL) ↗</div>
+              <p class="text-stone-600 mt-1">Karnataka state housing grant of ₹1.20L–₹1.50L &amp; up to 85% raw material support for BPL families (income ≤ ₹32,000/yr).</p>
+            </div>
+            <span class="text-[11px] text-clay-600 font-semibold mt-2">RGRHCL Karnataka Guide</span>
+          </a>
+
+          <a href="https://www.ujjivansfb.bank.in/banking-blogs/personal-finance/bhoomi-rtc-karnataka-land-records-online" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl border border-stone-200 hover:border-forest-600 hover:bg-emerald-50/40 transition flex flex-col justify-between">
+            <div>
+              <div class="font-bold text-forest-800">Bhoomi RTC / Pahani &amp; Mutation ↗</div>
+              <p class="text-stone-600 mt-1">Verify Karnataka Record of Rights (Pahani), Survey No., Hissa No., and Mutation Status online before applying.</p>
+            </div>
+            <span class="text-[11px] text-clay-600 font-semibold mt-2">Bhoomi Land Records Guide</span>
+          </a>
+
+          <a href="https://web.umang.gov.in/landing/scheme/detail/pm-swamitva-yojana_pmsy.html" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl border border-stone-200 hover:border-forest-600 hover:bg-emerald-50/40 transition flex flex-col justify-between">
+            <div>
+              <div class="font-bold text-forest-800">SVAMITVA Property Card ↗</div>
+              <p class="text-stone-600 mt-1">Drone-mapped Abadi village residential property cards on DigiLocker for legal ownership &amp; institutional bank credit.</p>
+            </div>
+            <span class="text-[11px] text-clay-600 font-semibold mt-2">UMANG / Ministry of Panchayati Raj</span>
+          </a>
         </div>
-      </header>
+      </div>
+    </section>
 
-      <main class="content" id="content">
-        <!-- ============ HOME ============ -->
-        <section class="view is-active" id="view-home" data-view-panel="home" aria-labelledby="home-title">
-          <div class="hero">
-            <div class="hero-copy">
-              <span class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span> From land to keys</span>
-              <h1 id="home-title">Owning land is step one. <em>Building a home is the journey.</em></h1>
-              <p>Land2Life brings housing schemes, eligibility, documents, land records, cost planning and application tracking into one simple place — so a family can move forward with confidence.</p>
-              <div class="hero-actions">
-                <button type="button" class="btn btn-primary" data-view="schemes" fdprocessedid="b59ol6">Find schemes for me <span aria-hidden="true">→</span></button>
-                <button type="button" class="btn btn-outline" data-view="documents" fdprocessedid="p20y7">Check my documents</button>
-              </div>
-              <div class="hero-trust">
-                <span>✓ Plain language</span><span>✓ No unofficial fees</span><span>✓ Works on a phone</span>
-              </div>
+    <!-- ==================== TAB 2: SCHEME FINDER & ELIGIBILITY MATCHER ==================== -->
+    <section id="view-schemes" class="tab-view hidden space-y-6">
+      <div class="bg-white rounded-2xl p-5 sm:p-6 border border-stone-200 shadow-xs">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-stone-200 pb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-clay-600">Module 1 · Scheme Discovery &amp; Convergence</span>
+            <h2 class="text-xl font-extrabold text-stone-900 mt-0.5">Rural Housing Scheme Finder &amp; Eligibility Checker</h2>
+            <p class="text-xs text-stone-600 mt-1">Enter your household details to match central and state housing grants, labor subsidies, and low-interest institutional credit.</p>
+          </div>
+          <div class="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-2.5 text-right">
+            <div class="text-[11px] text-forest-700 font-semibold">Max Combined Benefit Matched</div>
+            <div class="text-xl font-extrabold text-forest-800" id="schemeTotalMatchedVal">₹2,18,640</div>
+            <div class="text-[10px] text-stone-500">Base Grant + MGNREGA + SBM-G + Solar</div>
+          </div>
+        </div>
+
+        <!-- Eligibility Filter Controls -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-5">
+          <div>
+            <label for="filterRegion" class="block text-xs font-semibold text-stone-700 mb-1">Region &amp; Terrain Type</label>
+            <select id="filterRegion" class="w-full rounded-xl border border-stone-300 bg-stone-50 px-3 py-2 text-xs font-medium text-stone-800 focus:outline-none focus:ring-2 focus:ring-forest-600">
+              <option value="all">All Regions (India + State Schemes)</option>
+              <option value="karnataka" selected>Karnataka State (Plain / Rural)</option>
+              <option value="plain">Plain Area (National PMAY-G)</option>
+              <option value="hilly">Hilly / Difficult / IAP District</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="filterCategory" class="block text-xs font-semibold text-stone-700 mb-1">Social Category / Priority</label>
+            <select id="filterCategory" class="w-full rounded-xl border border-stone-300 bg-stone-50 px-3 py-2 text-xs font-medium text-stone-800 focus:outline-none focus:ring-2 focus:ring-forest-600">
+              <option value="all">All Categories (BPL / EWS)</option>
+              <option value="sc_st">SC / ST Household</option>
+              <option value="obc_min">OBC / Minority / General BPL</option>
+              <option value="vulnerable">Widow / PwD / Landless allotted plot</option>
+            </select>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-semibold text-stone-700 mb-1">
+              <label for="filterIncome">Annual Family Income</label>
+              <span id="filterIncomeDisplay" class="text-forest-700 font-bold">₹28,000 / yr</span>
             </div>
-            <div class="hero-art" aria-hidden="true">
-              <svg viewBox="0 0 520 380" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <lineargradient id="sky" x1="260" y1="20" x2="260" y2="300" gradientUnits="userSpaceOnUse"><stop stop-color="#e9f5ee"></stop><stop offset="1" stop-color="#fbf6e9"></stop></lineargradient>
-                  <lineargradient id="plot" x1="90" y1="220" x2="430" y2="350" gradientUnits="userSpaceOnUse"><stop stop-color="#dfe9cf"></stop><stop offset="1" stop-color="#cfe0c0"></stop></lineargradient>
-                  <lineargradient id="wall" x1="170" y1="120" x2="370" y2="250" gradientUnits="userSpaceOnUse"><stop stop-color="#fffdf8"></stop><stop offset="1" stop-color="#f3ead8"></stop></lineargradient>
-                </defs>
-                <circle cx="425" cy="66" r="38" fill="#ffd38a" opacity=".85"></circle>
-                <circle cx="425" cy="66" r="54" stroke="#ffd38a" stroke-width="2" stroke-dasharray="4 8" opacity=".65"></circle>
-                <path d="M52 288c62-28 128-33 196-16 74 18 143 17 220-9v99H52z" fill="url(#sky)"></path>
-                <path d="M70 292 260 202l190 90-190 66z" fill="url(#plot)" stroke="#9fbc94" stroke-width="2"></path>
-                <path d="M70 292v66l190 32v-66m190-66v66l-190 32" fill="none" stroke="#9fbc94" stroke-width="2"></path>
-                <path d="M260 202v66m0 66v32" stroke="#9fbc94" stroke-width="2" stroke-dasharray="5 6"></path>
-                <g>
-                  <path d="M162 256V158l98-62 98 62v98z" fill="url(#wall)" stroke="#8fae9a" stroke-width="2.5"></path>
-                  <path d="M148 162 260 82l112 80" stroke="#1d6f57" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <rect x="236" y="197" width="48" height="59" rx="4" fill="#c98c4a" stroke="#8a5c31" stroke-width="2"></rect>
-                  <circle cx="275" cy="228" r="3" fill="#f8e3bd"></circle>
-                  <rect x="182" y="183" width="36" height="34" rx="4" fill="#a8d5e8" stroke="#6c9db3" stroke-width="2"></rect>
-                  <path d="M200 183v34m-18-17h36" stroke="#6c9db3" stroke-width="2"></path>
-                  <rect x="302" y="183" width="36" height="34" rx="4" fill="#a8d5e8" stroke="#6c9db3" stroke-width="2"></rect>
-                  <path d="M320 183v34m-18-17h36" stroke="#6c9db3" stroke-width="2"></path>
-                  <path d="M246 295v-39h28v39" fill="#d9e8d1" stroke="#8fae9a" stroke-width="2"></path>
-                </g>
-                <g transform="translate(78 157) rotate(-8)">
-                  <rect width="96" height="112" rx="10" fill="#fffdf7" stroke="#c9d6c6" stroke-width="2"></rect>
-                  <path d="M20 24h56M20 40h42M20 56h50M20 72h34" stroke="#b6c6b5" stroke-width="4" stroke-linecap="round"></path>
-                  <circle cx="66" cy="84" r="15" fill="#dff1e8"></circle>
-                  <path d="m59 84 5 5 10-11" stroke="#1d7a5f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                </g>
-                <g transform="translate(398 220)">
-                  <rect width="72" height="88" rx="9" fill="#fffdf7" stroke="#c9d6c6" stroke-width="2"></rect>
-                  <rect x="14" y="16" width="44" height="7" rx="3.5" fill="#f0c98d"></rect>
-                  <path d="M14 36h44M14 48h35M14 60h40" stroke="#c5d2c2" stroke-width="4" stroke-linecap="round"></path>
-                  <path d="M25 74h22" stroke="#1d7a5f" stroke-width="4" stroke-linecap="round"></path>
-                </g>
-                <path d="M316 335c26-11 48-8 68 6" stroke="#1d7a5f" stroke-width="3" stroke-dasharray="5 7" stroke-linecap="round"></path>
-                <circle cx="390" cy="343" r="7" fill="#e2953a"></circle>
-              </svg>
+            <input id="filterIncome" type="range" min="10000" max="250000" step="2000" value="28000" class="w-full accent-forest-700 cursor-pointer" />
+            <div class="flex justify-between text-[10px] text-stone-500 mt-0.5">
+              <span>₹10k</span>
+              <span class="text-amber-700 font-medium">₹32k (Basava Vasati Cut-off)</span>
+              <span>₹2.5L</span>
             </div>
           </div>
 
-          <form class="profile-strip card" id="profile-form">
-            <div class="profile-intro">
-              <span class="eyebrow">Start with your situation</span>
-              <strong>A few details make every answer more useful.</strong>
-            </div>
-            <div class="profile-fields">
-              <label><span>State</span><select id="profile-state" name="state" fdprocessedid="frnltl"><option value="All India">All India</option><option value="Bihar">Bihar</option><option value="Uttar Pradesh">Uttar Pradesh</option><option value="Madhya Pradesh">Madhya Pradesh</option><option value="Rajasthan">Rajasthan</option><option value="Jharkhand">Jharkhand</option><option value="Chhattisgarh">Chhattisgarh</option><option value="Tamil Nadu">Tamil Nadu</option><option value="West Bengal">West Bengal</option><option value="Maharashtra">Maharashtra</option><option value="Other">Other</option></select></label>
-              <label><span>Land status</span><select id="profile-land" name="land" fdprocessedid="l3e6rl">
-                <option value="own">In my name</option><option value="family">In family name</option><option value="none">No land yet</option>
-              </select></label>
-              <label><span>BPL / priority</span><select id="profile-bpl" name="bpl" fdprocessedid="uvg3da">
-                <option value="yes">Yes</option><option value="no">No</option><option value="unknown">Not sure</option>
-              </select></label>
-              <label><span>Farmer</span><select id="profile-farmer" name="farmer" fdprocessedid="5al4hn">
-                <option value="yes">Yes</option><option value="no">No</option>
-              </select></label>
-              <label><span>Woman-headed</span><select id="profile-woman" name="womanHead" fdprocessedid="odxxy">
-                <option value="no">No</option><option value="yes">Yes</option>
-              </select></label>
-              <label><span>Yearly income (₹)</span><input id="profile-income" name="income" type="number" min="0" step="1000" value="180000" inputmode="numeric" fdprocessedid="wejpmj"></label>
-            </div>
-            <button type="submit" class="btn btn-primary" fdprocessedid="9rtlq">See my matches <span aria-hidden="true">→</span></button>
-          </form>
-
-          <div class="section-head">
-            <div><span class="eyebrow">Everything in one place</span><h2>Six tools for one journey</h2></div>
-            <p>No office-hopping for basic answers. Move from discovery to a funded, tracked build.</p>
+          <div>
+            <label for="filterLandStatus" class="block text-xs font-semibold text-stone-700 mb-1">Land &amp; Existing Shelter Status</label>
+            <select id="filterLandStatus" class="w-full rounded-xl border border-stone-300 bg-stone-50 px-3 py-2 text-xs font-medium text-stone-800 focus:outline-none focus:ring-2 focus:ring-forest-600">
+              <option value="kutcha_land" selected>Owns Vacant Plot / Kutcha House (No Pucca Home)</option>
+              <option value="abadi_svamitva">Inhabited Abadi Village Plot (SVAMITVA / Gramathana)</option>
+              <option value="pucca_owned">Already Owns a Pucca House (Ineligible for Grant)</option>
+            </select>
           </div>
-          <div class="feature-grid">
-            <button type="button" class="feature-card" data-view="schemes" fdprocessedid="mka8bd">
-              <span class="feature-icon mint" aria-hidden="true">✧</span>
-              <strong>Scheme finder</strong>
-              <p>See which housing, farm and support schemes fit your situation.</p>
-              <span class="feature-link">Explore schemes →</span>
-            </button>
-            <button type="button" class="feature-card" data-view="documents" fdprocessedid="7q17x">
-              <span class="feature-icon sand" aria-hidden="true">▤</span>
-              <strong>Document checker</strong>
-              <p>Spot missing or mismatched papers before you stand in a queue.</p>
-              <span class="feature-link">Run a check →</span>
-            </button>
-            <button type="button" class="feature-card" data-view="calculator" fdprocessedid="mzwb5d">
-              <span class="feature-icon sky" aria-hidden="true">◫</span>
-              <strong>Cost calculator</strong>
-              <p>Estimate build cost, grant, loan and any funding gap in minutes.</p>
-              <span class="feature-link">Plan a budget →</span>
-            </button>
-            <button type="button" class="feature-card" data-view="assistant" fdprocessedid="9c52z">
-              <span class="feature-icon lilac" aria-hidden="true">✦</span>
-              <strong>AI assistant</strong>
-              <p>Ask in your own words. Get clear next steps, not jargon.</p>
-              <span class="feature-link">Ask a question →</span>
-            </button>
-            <button type="button" class="feature-card" data-view="tracker" fdprocessedid="ny9t8i">
-              <span class="feature-icon clay" aria-hidden="true">⌁</span>
-              <strong>Application tracker</strong>
-              <p>Know the current stage, next action and office to contact.</p>
-              <span class="feature-link">View applications →</span>
-            </button>
-            <button type="button" class="feature-card" data-action="open-help" fdprocessedid="0khaxq">
-              <span class="feature-icon forest" aria-hidden="true">◎</span>
-              <strong>Right guidance</strong>
-              <p>Learn how to avoid middlemen and verify every official instruction.</p>
-              <span class="feature-link">Read the guide →</span>
+        </div>
+
+        <!-- Eligibility Notice Banner -->
+        <div id="schemeEligibilityBanner" class="mt-4 p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 flex flex-wrap items-center justify-between gap-2 text-xs">
+          <div class="flex items-center gap-2.5">
+            <span class="text-base">✅</span>
+            <p id="schemeEligibilityText" class="text-forest-900 font-medium">
+              <strong>High Eligibility Match:</strong> With annual income of ₹28,000 and no existing pucca house, your family qualifies for both <strong>PMAY-Gramin</strong> and <strong>Basava Vasati Yojana (Karnataka)</strong> plus convergence benefits.
+            </p>
+          </div>
+          <button id="resetSchemeFiltersBtn" type="button" class="text-xs font-semibold text-forest-700 hover:underline">Reset Filters</button>
+        </div>
+      </div>
+
+      <!-- Scheme Cards Grid -->
+      <div id="schemeCardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Populated dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: DOCUMENT & LAND RECORD CHECKER ==================== -->
+    <section id="view-documents" class="tab-view hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Left 7 cols: Interactive Simulated Document Checker -->
+        <div class="lg:col-span-7 bg-white rounded-2xl p-5 sm:p-6 border border-stone-200 shadow-xs space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-stone-200 pb-4">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-clay-600">Module 2 · Pre-Application Verification</span>
+              <h2 class="text-xl font-extrabold text-stone-900 mt-0.5">Document &amp; Land Record Diagnostic Checker</h2>
+              <p class="text-xs text-stone-600 mt-1">Simulate verification of your land and identity records to catch name mismatches or pending mutations before visiting the Gram Panchayat.</p>
+            </div>
+            <button id="runBatchVerifyBtn" type="button" class="px-4 py-2 rounded-xl bg-forest-700 hover:bg-forest-800 text-white text-xs font-semibold shadow-xs transition flex items-center gap-1.5">
+              <span>⚡</span> <span>Run AI Pre-Check on All 6 Docs</span>
             </button>
           </div>
 
-          <div class="journey card">
-            <div class="journey-head">
-              <div><span class="eyebrow">The path ahead</span><h2>From plot to permanent home</h2></div>
-              <span class="journey-note">Sample journey · actual steps vary by state</span>
+          <!-- Simulated Input Bar for Survey / Aadhaar / Name Check -->
+          <div class="p-4 rounded-xl bg-stone-50 border border-stone-200 space-y-3">
+            <div class="text-xs font-bold text-stone-800 flex items-center justify-between">
+              <span>🔍 Cross-Record Name &amp; Survey Number Consistency Test</span>
+              <span id="nameMatchBadge" class="px-2 py-0.5 rounded-full text-[11px] bg-amber-100 text-amber-800 font-semibold">1 Discrepancy Detected</span>
             </div>
-            <ol class="journey-steps">
-              <li><span class="journey-num">01</span><strong>Check your land</strong><p>Make sure the survey number and your name match the record.</p></li>
-              <li><span class="journey-num">02</span><strong>Find the right scheme</strong><p>Match your profile to housing, farm and support benefits.</p></li>
-              <li><span class="journey-num">03</span><strong>Prepare documents</strong><p>Use the checklist and fix obvious mismatches early.</p></li>
-              <li><span class="journey-num">04</span><strong>Plan the money</strong><p>Balance grant, savings and loan before construction starts.</p></li>
-              <li><span class="journey-num">05</span><strong>Track to completion</strong><p>Follow every sanction and instalment with a reference number.</p></li>
-            </ol>
-          </div>
-
-          <p class="page-disclaimer"><span aria-hidden="true">ⓘ</span> Land2Life is a demonstration prototype. Scheme amounts, eligibility and applications shown here are sample data. Always confirm on an official government portal or at your Gram Panchayat / block office.</p>
-        </section>
-
-        <!-- ============ SCHEMES ============ -->
-        <section class="view" id="view-schemes" data-view-panel="schemes" aria-labelledby="schemes-title">
-          <div class="section-head">
-            <div><span class="eyebrow">Scheme finder</span><h2 id="schemes-title">Benefits that fit your situation</h2></div>
-            <p>Sample scheme data with a simple match score. Open a card for documents, steps and cautions.</p>
-          </div>
-
-          <div class="filter-panel card">
-            <div class="filter-top">
-              <label class="search-field">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"></circle><path d="m16 16 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
-                <input id="scheme-search" type="search" placeholder="Search schemes, benefits or documents…" aria-label="Search schemes">
-              </label>
-              <button type="button" class="btn btn-quiet btn-sm" data-action="reset-profile">Reset profile</button>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+              <div>
+                <label class="block text-[11px] font-medium text-stone-500 mb-1">Name on Aadhaar Card</label>
+                <input id="inputAadhaarName" type="text" value="Ramesh H. Gowda" class="w-full rounded-lg border border-stone-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-stone-800" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-medium text-stone-500 mb-1">Name on Bhoomi RTC / Pahani</label>
+                <input id="inputRtcName" type="text" value="Late Hanumanthaiah (Father)" class="w-full rounded-lg border border-amber-400 bg-amber-50/40 px-2.5 py-1.5 text-xs font-semibold text-stone-800" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-medium text-stone-500 mb-1">Village Survey / Hissa No.</label>
+                <input id="inputSurveyNo" type="text" value="Sy No. 48/2B, Avalahalli" class="w-full rounded-lg border border-stone-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-stone-800" />
+              </div>
             </div>
-            <div class="chip-row" id="scheme-categories" aria-label="Scheme categories"><button type="button" class="chip active" data-scheme-category="all">All schemes</button><button type="button" class="chip" data-scheme-category="housing">Housing</button><button type="button" class="chip" data-scheme-category="finance">Finance</button><button type="button" class="chip" data-scheme-category="records">Land records</button><button type="button" class="chip" data-scheme-category="employment">Employment</button><button type="button" class="chip" data-scheme-category="insurance">Insurance</button></div>
-            <div class="filter-grid">
-              <label><span>Your state</span><select id="filter-state"><option value="All India">All India</option><option value="Bihar">Bihar</option><option value="Uttar Pradesh">Uttar Pradesh</option><option value="Madhya Pradesh">Madhya Pradesh</option><option value="Rajasthan">Rajasthan</option><option value="Jharkhand">Jharkhand</option><option value="Chhattisgarh">Chhattisgarh</option><option value="Tamil Nadu">Tamil Nadu</option><option value="West Bengal">West Bengal</option><option value="Maharashtra">Maharashtra</option><option value="Other">Other</option></select></label>
-              <label><span>Land status</span><select id="filter-land">
-                <option value="own">In my name</option><option value="family">In family name</option><option value="none">No land yet</option>
-              </select></label>
-              <label><span>BPL / priority</span><select id="filter-bpl">
-                <option value="yes">Yes</option><option value="no">No</option><option value="unknown">Not sure</option>
-              </select></label>
-              <label><span>Farmer</span><select id="filter-farmer"><option value="yes">Yes</option><option value="no">No</option></select></label>
-              <label><span>Woman-headed</span><select id="filter-woman"><option value="no">No</option><option value="yes">Yes</option></select></label>
-              <label><span>Yearly income (₹)</span><input id="filter-income" type="number" min="0" step="1000" value="180000" inputmode="numeric"></label>
+            <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
+              <p id="nameCheckDiagnosticText" class="text-[11px] text-amber-800">
+                ⚠️ <strong>Action Needed:</strong> RTC/Pahani is still in father's name ("Late Hanumanthaiah"). Apply for <strong>Pouthi Khata (Inheritance Mutation)</strong> on Bhoomi or obtain a Family Tree (Vamshavruksha) + NOC before housing sanction.
+              </p>
+              <button id="simulateFixMutationBtn" type="button" class="px-3 py-1 rounded-lg bg-amber-600 hover:bg-amber-700 text-white text-[11px] font-semibold whitespace-nowrap transition">
+                Simulate Mutation Fix ✓
+              </button>
             </div>
           </div>
 
-          <div class="result-bar">
-            <span id="scheme-count">8 schemes</span>
-            <span id="match-summary">6 strong matches based on your profile · sample data</span>
+          <!-- 6 Document Checklist Items -->
+          <div id="docChecklistContainer" class="space-y-3">
+            <!-- Populated by JS -->
           </div>
-          <div class="scheme-grid" id="scheme-grid"><article class="scheme-card" style="--accent:#1d7a5f"><div class="scheme-card-top"><span class="scheme-type">Housing</span><span class="match-pill high">100% · Good match</span></div><span class="scheme-short">PMAY-G · All India</span><h3>Pradhan Mantri Awaas Yojana – Gramin</h3><p>Housing support for rural families who do not have a pucca house. Priority is given to families identified in the social/economic census.</p><div class="scheme-benefit"><span aria-hidden="true">₹</span>Up to ₹1.30 lakh assistance</div><div class="tag-list"><span class="tag">Housing</span><span class="tag">BPL priority</span><span class="tag">Landless may apply</span></div><div class="scheme-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="view-scheme" data-id="pmay-g">View details</button><button type="button" class="btn btn-quiet btn-sm" data-action="track-scheme" data-id="pmay-g">Track</button></div></article><article class="scheme-card" style="--accent:#c48a35"><div class="scheme-card-top"><span class="scheme-type">Finance</span><span class="match-pill high">90% · Good match</span></div><span class="scheme-short">PM-KISAN · All India</span><h3>PM-KISAN income support</h3><p>Direct income support for eligible landholding farmer families, paid in three equal instalments.</p><div class="scheme-benefit"><span aria-hidden="true">₹</span>₹6,000 per year</div><div class="tag-list"><span class="tag">Farmer</span><span class="tag">Land record</span><span class="tag">Direct benefit</span></div><div class="scheme-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="view-scheme" data-id="pm-kisan">View details</button><button type="button" class="btn btn-quiet btn-sm" data-action="track-scheme" data-id="pm-kisan">Track</button></div></article><article class="scheme-card" style="--accent:#a45e36"><div class="scheme-card-top"><span class="scheme-type">Employment</span><span class="match-pill high">90% · Good match</span></div><span class="scheme-short">MGNREGA · All India</span><h3>MGNREGA wage employment</h3><p>Guaranteed rural employment that can provide local wage income and, in some convergences, support site preparation work.</p><div class="scheme-benefit"><span aria-hidden="true">₹</span>Up to 100 days of wage work</div><div class="tag-list"><span class="tag">BPL</span><span class="tag">Wage support</span><span class="tag">Job card</span></div><div class="scheme-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="view-scheme" data-id="mgnrega">View details</button><button type="button" class="btn btn-quiet btn-sm" data-action="track-scheme" data-id="mgnrega">Track</button></div></article><article class="scheme-card" style="--accent:#c48a35"><div class="scheme-card-top"><span class="scheme-type">Finance</span><span class="match-pill high">90% · Good match</span></div><span class="scheme-short">KCC · All India</span><h3>Kisan Credit Card</h3><p>A revolving credit line for seeds, fertilizer and farm costs, useful for keeping farm income steady during construction.</p><div class="scheme-benefit"><span aria-hidden="true">₹</span>Low-cost farm credit</div><div class="tag-list"><span class="tag">Farmer</span><span class="tag">Credit</span><span class="tag">Low interest</span></div><div class="scheme-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="view-scheme" data-id="kcc">View details</button><button type="button" class="btn btn-quiet btn-sm" data-action="track-scheme" data-id="kcc">Track</button></div></article><article class="scheme-card" style="--accent:#6a55a3"><div class="scheme-card-top"><span class="scheme-type">Insurance</span><span class="match-pill high">90% · Good match</span></div><span class="scheme-short">PMFBY · All India</span><h3>Pradhan Mantri Fasal Bima Yojana</h3><p>Crop insurance that protects farm income against weather-related loss, helping a housing budget stay on track.</p><div class="scheme-benefit"><span aria-hidden="true">₹</span>Crop loss cover with subsidised premium</div><div class="tag-list"><span class="tag">Farmer</span><span class="tag">Risk cover</span></div><div class="scheme-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="view-scheme" data-id="fasal-bima">View details</button><button type="button" class="btn btn-quiet btn-sm" data-action="track-scheme" data-id="fasal-bima">Track</button></div></article><article class="scheme-card" style="--accent:#39728a"><div class="scheme-card-top"><span class="scheme-type">Land records</span><span class="match-pill high">84% · Good match</span></div><span class="scheme-short">Record update · All India</span><h3>Land record mutation &amp; correction</h3><p>Guidance for getting your name entered or corrected in the land record — often the first real roadblock in a housing application.</p><div class="scheme-benefit"><span aria-hidden="true">₹</span>Correct ownership in revenue records</div><div class="tag-list"><span class="tag">Records</span><span class="tag">Everyone</span><span class="tag">First step</span></div><div class="scheme-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="view-scheme" data-id="land-mutation">View details</button><button type="button" class="btn btn-quiet btn-sm" data-action="track-scheme" data-id="land-mutation">Track</button></div></article><article class="scheme-card" style="--accent:#1d7a5f"><div class="scheme-card-top"><span class="scheme-type">Housing</span><span class="match-pill mid">46% · May qualify</span></div><span class="scheme-short">State top-up · Sample states</span><h3>State housing top-up (illustrative)</h3><p>A placeholder for the state-level housing contribution that many states add to central assistance.</p><div class="scheme-benefit"><span aria-hidden="true">₹</span>Up to ₹50,000 top-up (sample)</div><div class="tag-list"><span class="tag sample">Sample scheme</span><span class="tag">BPL</span><span class="tag">Top-up</span></div><div class="scheme-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="view-scheme" data-id="state-topup">View details</button><button type="button" class="btn btn-quiet btn-sm" data-action="track-scheme" data-id="state-topup">Track</button></div></article><article class="scheme-card" style="--accent:#1d7a5f"><div class="scheme-card-top"><span class="scheme-type">Housing</span><span class="match-pill low">10% · Check details</span></div><span class="scheme-short">Women priority · Sample states</span><h3>Women-headed household priority (illustrative)</h3><p>An example of how some programmes prioritise women-headed households in housing and asset ownership.</p><div class="scheme-benefit"><span aria-hidden="true">₹</span>Priority plus ₹25,000 sample top-up</div><div class="tag-list"><span class="tag sample">Sample scheme</span><span class="tag">Women</span><span class="tag">Priority</span></div><div class="scheme-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="view-scheme" data-id="women-topup">View details</button><button type="button" class="btn btn-quiet btn-sm" data-action="track-scheme" data-id="women-topup">Track</button></div></article></div>
-          <p class="page-disclaimer"><span aria-hidden="true">ⓘ</span> A match is a guide, not an official decision. Sample schemes are clearly marked and must not be treated as real government offers.</p>
-        </section>
+        </div>
 
-        <!-- ============ DOCUMENTS ============ -->
-        <section class="view" id="view-documents" data-view-panel="documents" aria-labelledby="docs-title">
-          <div class="section-head">
-            <div><span class="eyebrow">Document checker</span><h2 id="docs-title">Fix paper problems before the queue</h2></div>
-            <div class="head-actions">
-              <button type="button" class="btn btn-quiet btn-sm" data-action="fill-sample-docs">Use sample data</button>
-              <button type="button" class="btn btn-quiet btn-sm" data-action="reset-docs">Clear all</button>
+        <!-- Right 5 cols: Step-by-Step Bhoomi RTC & SVAMITVA Land Guide -->
+        <div class="lg:col-span-5 space-y-5">
+          <div class="bg-white rounded-2xl p-5 border border-stone-200 shadow-xs space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-forest-700">Interactive Land Record Guide</span>
+              <a href="https://www.ujjivansfb.bank.in/banking-blogs/personal-finance/bhoomi-rtc-karnataka-land-records-online" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-clay-600 hover:underline">Bhoomi Guide ↗</a>
+            </div>
+            <h3 class="text-base font-extrabold text-stone-900">How to Verify Your Land Record Without a Middleman</h3>
+            <p class="text-xs text-stone-600">Select your rural land type below to view the exact verification steps and required government forms:</p>
+
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <button type="button" id="guideBtnBhoomi" class="p-2.5 rounded-xl border-2 border-forest-700 bg-emerald-50/70 text-forest-900 font-bold text-left transition">
+                🌾 Agricultural / Revenue Plot (Bhoomi RTC)
+              </button>
+              <button type="button" id="guideBtnSvamitva" class="p-2.5 rounded-xl border border-stone-200 bg-stone-50 text-stone-700 font-semibold text-left hover:bg-stone-100 transition">
+                🏘️ Village Abadi / Gramathana (SVAMITVA / E-Swathu)
+              </button>
+            </div>
+
+            <div id="landGuideStepsBox" class="space-y-2.5 text-xs pt-1">
+              <!-- Populated dynamically by JS -->
             </div>
           </div>
-          <div class="doc-layout">
-            <div class="card doc-panel">
-              <div class="doc-intro">
-                <span class="doc-intro-icon" aria-hidden="true">▤</span>
-                <div><strong>Simulated verification</strong><p>Enter details or choose a file to see a pre-check. Nothing is uploaded, stored on a server, or actually verified.</p></div>
-              </div>
-              <div class="doc-grid" id="doc-grid"><div class="doc-card" data-doc-card="aadhaar"><div class="doc-card-head"><span class="doc-card-icon" aria-hidden="true">◉</span><span class="doc-card-title"><strong>Aadhaar card</strong><small>Confirms identity and rural address.</small></span></div><div class="doc-fields"><label><span>Aadhaar number</span><input type="text" data-doc-id="aadhaar" data-doc-field="number" id="doc-aadhaar-number" value="" placeholder="12 digits" maxlength="14"></label></div><div class="doc-status" data-doc-status="aadhaar"></div></div><div class="doc-card" data-doc-card="landRecord"><div class="doc-card-head"><span class="doc-card-icon" aria-hidden="true">▤</span><span class="doc-card-title"><strong>Land record (Khatauni / RoR)</strong><small>Proves the plot and whose name it is in.</small></span></div><div class="doc-fields"><label><span>Survey / Khatauni number</span><input type="text" data-doc-id="landRecord" data-doc-field="survey" id="doc-landRecord-survey" value="" placeholder="e.g. AB-123/45" maxlength="24"></label><label><span>Village / mouza</span><input type="text" data-doc-id="landRecord" data-doc-field="village" id="doc-landRecord-village" value="" placeholder="e.g. Rampur" maxlength="40"></label><label class="check-field"><input type="checkbox" data-doc-id="landRecord" data-doc-field="nameMatch" id="doc-landRecord-nameMatch"><span>Applicant's name matches the record</span></label></div><div class="doc-status" data-doc-status="landRecord"></div></div><div class="doc-card" data-doc-card="incomeCert"><div class="doc-card-head"><span class="doc-card-icon" aria-hidden="true">₹</span><span class="doc-card-title"><strong>Income certificate / BPL card</strong><small>Used to check priority and income limits.</small></span></div><div class="doc-fields"><label><span>Issue date</span><input type="date" data-doc-id="incomeCert" data-doc-field="issued" id="doc-incomeCert-issued" value="" placeholder=""></label></div><div class="doc-status" data-doc-status="incomeCert"></div></div><div class="doc-card" data-doc-card="bplCard"><div class="doc-card-head"><span class="doc-card-icon" aria-hidden="true">▣</span><span class="doc-card-title"><strong>BPL / priority card</strong><small>May give priority in the beneficiary list.</small></span><span class="doc-optional">Optional</span></div><div class="doc-fields"><label><span>Card number</span><input type="text" data-doc-id="bplCard" data-doc-field="number" id="doc-bplCard-number" value="" placeholder="8–16 characters" maxlength="20"></label></div><div class="doc-status" data-doc-status="bplCard"></div></div><div class="doc-card" data-doc-card="bank"><div class="doc-card-head"><span class="doc-card-icon" aria-hidden="true">◫</span><span class="doc-card-title"><strong>Bank passbook</strong><small>Used for direct benefit and wage payments.</small></span></div><div class="doc-fields"><label><span>Account number</span><input type="text" data-doc-id="bank" data-doc-field="account" id="doc-bank-account" value="" placeholder="9–18 digits" maxlength="18"></label><label><span>IFSC</span><input type="text" data-doc-id="bank" data-doc-field="ifsc" id="doc-bank-ifsc" value="" placeholder="SBIN0001234" maxlength="11"></label></div><div class="doc-status" data-doc-status="bank"></div></div><div class="doc-card" data-doc-card="jobCard"><div class="doc-card-head"><span class="doc-card-icon" aria-hidden="true">⚒</span><span class="doc-card-title"><strong>MGNREGA job card</strong><small>Needed if you plan to request wage work.</small></span><span class="doc-optional">Optional</span></div><div class="doc-fields"><label><span>Job card number</span><input type="text" data-doc-id="jobCard" data-doc-field="number" id="doc-jobCard-number" value="" placeholder="e.g. JOB202600932" maxlength="20"></label></div><div class="doc-status" data-doc-status="jobCard"></div></div><div class="doc-card" data-doc-card="categoryCert"><div class="doc-card-head"><span class="doc-card-icon" aria-hidden="true">◇</span><span class="doc-card-title"><strong>Category certificate</strong><small>Required only for some reserved-category benefits.</small></span><span class="doc-optional">Optional</span></div><div class="doc-fields"><label><span>Certificate number</span><input type="text" data-doc-id="categoryCert" data-doc-field="number" id="doc-categoryCert-number" value="" placeholder="If you have one" maxlength="20"></label></div><div class="doc-status" data-doc-status="categoryCert"></div></div><div class="doc-card" data-doc-card="photo"><div class="doc-card-head"><span class="doc-card-icon" aria-hidden="true">▧</span><span class="doc-card-title"><strong>Passport-size photo &amp; ID proof</strong><small>Attached to most application forms.</small></span></div><div class="doc-fields"><label><span>Choose a file (name only, not uploaded)</span><input type="file" data-doc-id="photo" data-doc-field="file" id="doc-photo-file"></label></div><div class="doc-status" data-doc-status="photo"></div></div></div>
-              <div class="doc-actions">
-                <button type="button" class="btn btn-primary" data-action="check-docs">Run simulated check <span aria-hidden="true">→</span></button>
-                <button type="button" class="btn btn-outline" data-action="print-checklist">Print checklist</button>
-              </div>
+
+          <!-- Common Rejection Reasons Card -->
+          <div class="bg-amber-50/90 rounded-2xl p-5 border border-amber-200 space-y-3">
+            <h3 class="text-sm font-extrabold text-amber-950 flex items-center gap-2">
+              <span>🛡️</span> <span>Top 3 Reasons Rural Housing Payments Get Blocked</span>
+            </h3>
+            <ul class="space-y-2 text-xs text-amber-900">
+              <li class="flex items-start gap-2">
+                <span class="font-bold text-clay-600">1.</span>
+                <span><strong>Inactive Aadhaar NPCI Bank Seeding:</strong> Even with an open bank account, PFMS Fund Transfer Orders (FTOs) fail if Aadhaar is not mapped to the NPCI mapper at your bank branch or India Post Payments Bank.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="font-bold text-clay-600">2.</span>
+                <span><strong>Geo-Duplicate Site Conflict:</strong> Under <a href="https://www.squareyards.com/blog/basava-vasati-yojana-a-housing-scheme-for-the-poor-in-karnataka" target="_blank" rel="noopener noreferrer" class="underline font-semibold">RGRHCL / Basava Vasati rules</a>, if an old foundation or previous beneficiary photo was captured at the same GPS coordinates, the system flags a "Geo Duplicate".</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="font-bold text-clay-600">3.</span>
+                <span><strong>Building Above Plinth Before 1st Geo-Tag:</strong> Always ask the Gram Rozgar Sahayak / PDO to capture the <strong>AwaasApp</strong> photo at each exact stage (Vacant Site → Plinth → Lintel → Roof).</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 4: CONSTRUCTION COST & FUNDING GAP CALCULATOR ==================== -->
+    <section id="view-calculator" class="tab-view hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Left 5 Cols: Calculator Controls -->
+        <div class="lg:col-span-5 bg-white rounded-2xl p-5 sm:p-6 border border-stone-200 shadow-xs space-y-4">
+          <div class="border-b border-stone-200 pb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-clay-600">Module 3 · Financial &amp; Material Planning</span>
+            <h2 class="text-xl font-extrabold text-stone-900 mt-0.5">Construction Cost &amp; Funding Gap Calculator</h2>
+            <p class="text-xs text-stone-600 mt-1">Plan your house dimensions, material budget, and scheme convergence so your house never stalls midway.</p>
+          </div>
+
+          <!-- Area Slider -->
+          <div>
+            <div class="flex justify-between items-center text-xs font-semibold text-stone-700 mb-1">
+              <label for="calcAreaInput">Planned Carpet / Plinth Area</label>
+              <span id="calcAreaDisplay" class="text-sm font-extrabold text-forest-700">300 sq.ft (27.9 sq.m)</span>
             </div>
-            <aside class="card doc-result" id="doc-result" aria-live="polite"><div class="empty-result"><span aria-hidden="true">◎</span><strong>Ready when you are</strong><p>Run the check to see a readiness score and a short list of next steps.</p></div></aside>
-          </div>
-        </section>
-
-        <!-- ============ CALCULATOR ============ -->
-        <section class="view" id="view-calculator" data-view-panel="calculator" aria-labelledby="calc-title">
-          <div class="section-head">
-            <div><span class="eyebrow">Cost calculator</span><h2 id="calc-title">Know the number before you start</h2></div>
-            <p>Estimates update as you type. Change any value to explore a smaller, smarter build.</p>
-          </div>
-          <div class="calc-layout">
-            <form class="card calc-form" id="calc-form">
-              <div class="calc-group">
-                <div class="calc-group-head"><span class="group-num">01</span><div><strong>House size</strong><small>Built-up area is the covered floor area.</small></div></div>
-                <div class="dual-field">
-                  <label><span>Built-up area (sq ft)</span><input id="calc-area" name="area" type="number" min="150" max="5000" step="10" value="900" inputmode="numeric"></label>
-                  <label><span>Plot area (sq ft)</span><input id="calc-plot" name="plot" type="number" min="150" max="20000" step="50" value="1200" inputmode="numeric"></label>
-                </div>
-                <input id="calc-area-range" type="range" min="150" max="3000" step="10" value="900" aria-label="Built-up area slider">
-                <div class="range-ends"><span>150 sq ft</span><span>3,000 sq ft</span></div>
-              </div>
-
-              <div class="calc-group">
-                <div class="calc-group-head"><span class="group-num">02</span><div><strong>Construction choices</strong><small>Rates are indicative sample rates per sq ft.</small></div></div>
-                <div class="segmented" id="quality-options" role="group" aria-label="Finish quality">
-                  <button type="button" data-quality="basic">Basic</button>
-                  <button type="button" class="active" data-quality="standard">Standard</button>
-                  <button type="button" data-quality="premium">Premium</button>
-                </div>
-                <p class="segment-note" id="quality-note">Balanced finish and fittings</p>
-                <div class="two-col">
-                  <label><span>Region / access</span><select id="calc-region"><option value="plains">Rural plains</option><option value="semi">Semi-urban / nearby town</option><option value="hilly">Hilly / difficult access</option><option value="remote">Remote village</option></select></label>
-                  <label><span>Extra bathrooms</span><input id="calc-baths" type="number" min="0" max="6" step="1" value="1" inputmode="numeric"></label>
-                </div>
-              </div>
-
-              <div class="calc-group">
-                <div class="calc-group-head"><span class="group-num">03</span><div><strong>Site work &amp; extras</strong><small>Select only what you actually need.</small></div></div>
-                <label class="check-row"><input type="checkbox" id="calc-site" checked=""><span class="check-box" aria-hidden="true">✓</span><span><strong>Level, boundary &amp; drainage</strong><small>Estimated from plot area</small></span></label>
-                <label class="check-row"><input type="checkbox" id="calc-water"><span class="check-box" aria-hidden="true">✓</span><span><strong>Rainwater harvesting</strong><small>Sample cost ₹18,000</small></span></label>
-                <label class="check-row"><input type="checkbox" id="calc-solar"><span class="check-box" aria-hidden="true">✓</span><span><strong>Solar lighting</strong><small>Sample cost ₹42,000</small></span></label>
-                <label class="check-row"><input type="checkbox" id="calc-wall"><span class="check-box" aria-hidden="true">✓</span><span><strong>Compound wall</strong><small>Sample cost ₹58,000</small></span></label>
-                <div class="dual-field">
-                  <label><span>Contingency (%)</span><input id="calc-contingency" type="number" min="0" max="30" step="1" value="8" inputmode="numeric"></label>
-                  <div class="rate-chip" id="rate-chip"><span>Base rate</span><strong>₹2,150 / sq ft</strong></div>
-                </div>
-              </div>
-
-              <div class="calc-group">
-                <div class="calc-group-head"><span class="group-num">04</span><div><strong>Funding</strong><small>Subtract support and add a loan to see the gap.</small></div></div>
-                <div class="funding-grid">
-                  <label><span>Expected grant (₹)</span><input id="calc-grant" type="number" min="0" step="1000" value="130000" inputmode="numeric"></label>
-                  <label><span>Your savings (₹)</span><input id="calc-own" type="number" min="0" step="1000" value="75000" inputmode="numeric"></label>
-                  <label><span>Housing loan (₹)</span><input id="calc-loan" type="number" min="0" step="1000" value="150000" inputmode="numeric"></label>
-                  <label><span>Loan interest (%)</span><input id="calc-rate" type="number" min="0" max="24" step="0.1" value="7.5" inputmode="decimal"></label>
-                  <label><span>Loan tenure (years)</span><input id="calc-tenure" type="number" min="1" max="30" step="1" value="10" inputmode="numeric"></label>
-                </div>
-              </div>
-              <div class="calc-form-actions">
-                <button type="button" class="btn btn-outline btn-sm" data-action="reset-calc">Reset values</button>
-                <button type="button" class="btn btn-quiet btn-sm" data-action="copy-estimate">Copy estimate</button>
-                <button type="button" class="btn btn-quiet btn-sm" data-action="print-estimate">Print</button>
-              </div>
-            </form>
-
-            <aside class="calc-results" aria-live="polite">
-              <div class="total-card" id="total-card">
-                <span class="eyebrow">Estimated total cost</span>
-                <strong id="calc-total">₹21,55,248</strong>
-                <span id="calc-per-sqft">₹2,395 per sq ft</span>
-                <div class="total-meter"><span id="total-meter-fill" style="width: 16.4714%;"></span></div>
-                <p id="calc-verdict">Funding gap of ₹18,00,248. Try a smaller footprint, a state top-up or more savings.</p>
-              </div>
-              <div class="card result-card">
-                <div class="result-head"><strong>Where the money goes</strong><span id="calc-base-rate-note">Standard · Rural plains</span></div>
-                <div class="breakdown-list" id="calc-breakdown"><div class="breakdown-row"><div class="break-row-top"><span>Construction (900 sq ft)</span><strong>₹19,35,000</strong></div><div class="bar construction"><span style="width:100%"></span></div></div><div class="breakdown-row"><div class="break-row-top"><span>Site level, boundary &amp; drainage</span><strong>₹46,600</strong></div><div class="bar site"><span style="width:2.408268733850129%"></span></div></div><div class="breakdown-row"><div class="break-row-top"><span>Bathrooms &amp; add-ons</span><strong>₹14,000</strong></div><div class="bar extras"><span style="width:2%"></span></div></div><div class="breakdown-row"><div class="break-row-top"><span>Contingency (8%)</span><strong>₹1,59,648</strong></div><div class="bar contingency"><span style="width:8.250542635658915%"></span></div></div></div>
-              </div>
-              <div class="card result-card">
-                <div class="result-head"><strong>How it is funded</strong><span id="gap-label">Gap: ₹18,00,248</span></div>
-                <div class="funding-list" id="calc-funding"><div class="breakdown-row"><div class="break-row-top"><span>Expected grant</span><strong>₹1,30,000</strong></div><div class="bar "><span style="width:7.221227297572335%"></span></div></div><div class="breakdown-row"><div class="break-row-top"><span>Your savings</span><strong>₹75,000</strong></div><div class="bar "><span style="width:4.166092671676347%"></span></div></div><div class="breakdown-row"><div class="break-row-top"><span>Housing loan</span><strong>₹1,50,000</strong></div><div class="bar "><span style="width:8.332185343352695%"></span></div></div><div class="funding-row gap"><div class="breakdown-row"><div class="break-row-top"><span>Funding gap</span><strong>₹18,00,248</strong></div><div class="bar "><span style="width:100%"></span></div></div></div></div>
-                <div class="emi-box" id="calc-emi"><span>Estimated EMI · ₹1,50,000 at 7.5% for 10 years</span><strong>₹1,781 / mo</strong></div>
-              </div>
-              <p class="result-note"><span aria-hidden="true">ⓘ</span> Rates are illustrative and vary with local prices, labour, soil, design and scheme rules. Get at least two local quotes before starting.</p>
-            </aside>
-          </div>
-        </section>
-
-        <!-- ============ ASSISTANT ============ -->
-        <section class="view" id="view-assistant" data-view-panel="assistant" aria-labelledby="chat-title">
-          <div class="section-head">
-            <div><span class="eyebrow">AI assistant</span><h2 id="chat-title">Ask in your own words</h2></div>
-            <p>Predefined answers work offline. You can optionally connect Gemini in settings.</p>
-          </div>
-          <div class="assistant-layout">
-            <div class="card chat-card">
-              <div class="chat-head">
-                <span class="chat-avatar" aria-hidden="true">✦</span>
-                <div><strong>Land2Life Helper</strong><span id="chat-mode-label">Offline guidance · predefined answers</span></div>
-                <button type="button" class="icon-btn" data-action="clear-chat" aria-label="Clear chat" title="Clear chat">
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M9 7V5h6v2M7 7l1 13h8l1-13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                </button>
-              </div>
-              <div class="chat-log" id="chat-log" aria-live="polite"><div class="msg"><span class="msg-avatar" aria-hidden="true">✦</span><div class="msg-bubble">Namaste! I can help you find a scheme, prepare documents, understand a land record, estimate cost or track an application. Tell me your state and whether the land is in your name for a better answer.<span class="msg-meta">Land2Life Helper · ready</span><div style="margin-top:9px"><button type="button" class="btn btn-quiet btn-sm" data-view="schemes">Find schemes →</button></div></div></div></div>
-              <div class="chat-quick" id="chat-quick" aria-label="Suggested questions"><button type="button" data-chat-prompt="Which schemes match me?">Which schemes match me?</button><button type="button" data-chat-prompt="What documents do I need?">What documents do I need?</button><button type="button" data-chat-prompt="My land record has a mistake">My land record has a mistake</button><button type="button" data-chat-prompt="How much will my house cost?">How much will my house cost?</button><button type="button" data-chat-prompt="How do I track my application?">How do I track my application?</button></div>
-              <form class="chat-form" id="chat-form">
-                <label class="sr-only" for="chat-input">Your question</label>
-                <input id="chat-input" type="text" placeholder="Ask about schemes, documents, costs or tracking…" autocomplete="off" maxlength="500">
-                <button type="submit" class="btn btn-primary" aria-label="Send message">Send <span aria-hidden="true">→</span></button>
-              </form>
-              <p class="chat-foot">Guidance is illustrative, not legal or financial advice. Confirm decisions with official sources.</p>
-            </div>
-            <aside class="assistant-side">
-              <div class="card help-list">
-                <span class="eyebrow">I can help with</span>
-                <button type="button" data-chat-prompt="Which schemes match me?"><span aria-hidden="true">✧</span> Finding the right scheme</button>
-                <button type="button" data-chat-prompt="What documents do I need?"><span aria-hidden="true">▤</span> Preparing documents</button>
-                <button type="button" data-chat-prompt="My land record has a mistake"><span aria-hidden="true">▤</span> Land record mistakes</button>
-                <button type="button" data-chat-prompt="How much will my house cost?"><span aria-hidden="true">◫</span> Cost and EMI basics</button>
-                <button type="button" data-chat-prompt="How do I track my application?"><span aria-hidden="true">⌁</span> Application status</button>
-              </div>
-              <div class="card gemini-card">
-                <span class="gemini-icon" aria-hidden="true">✦</span>
-                <strong>Optional Gemini connection</strong>
-                <p>Add an API key to answer in more detail. The key stays in this browser and is never sent to a Land2Life server — there is none.</p>
-                <button type="button" class="btn btn-outline btn-sm" data-action="open-settings">Open AI settings</button>
-              </div>
-            </aside>
-          </div>
-        </section>
-
-        <!-- ============ TRACKER ============ -->
-        <section class="view" id="view-tracker" data-view-panel="tracker" aria-labelledby="tracker-title">
-          <div class="section-head">
-            <div><span class="eyebrow">Application tracker</span><h2 id="tracker-title">Always know the next step</h2></div>
-            <div class="head-actions">
-              <button type="button" class="btn btn-quiet btn-sm" data-action="reset-tracker">Restore samples</button>
-              <button type="button" class="btn btn-outline btn-sm" data-action="add-demo-app">Add sample application</button>
+            <input id="calcAreaInput" type="range" min="270" max="750" step="10" value="300" class="w-full accent-forest-700 cursor-pointer" />
+            <div class="flex justify-between text-[10px] text-stone-500 mt-0.5">
+              <span>270 sq.ft (PMAY-G 25 sq.m Min)</span>
+              <span>450 sq.ft (1BHK)</span>
+              <span>750 sq.ft (2BHK)</span>
             </div>
           </div>
-          <div class="card tracker-toolbar">
-            <label class="search-field">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"></circle><path d="m16 16 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
-              <input id="tracker-search" type="search" placeholder="Search by scheme or reference number…" aria-label="Search applications">
+
+          <!-- Construction Specification -->
+          <div>
+            <label for="calcSpecSelect" class="block text-xs font-semibold text-stone-700 mb-1">Construction Method &amp; Roof Type</label>
+            <select id="calcSpecSelect" class="w-full rounded-xl border border-stone-300 bg-stone-50 px-3 py-2 text-xs font-medium text-stone-800 focus:outline-none focus:ring-2 focus:ring-forest-600">
+              <option value="1150">Cost-Effective Stabilized Mud Block + Filler Slab (₹1,150 / sq.ft)</option>
+              <option value="1350" selected>Standard Red Brick / Solid Block + RCC Pucca Roof (₹1,350 / sq.ft)</option>
+              <option value="1550">Hilly / High-Rainfall Reinforced RCC Structure (₹1,550 / sq.ft)</option>
+            </select>
+          </div>
+
+          <!-- Primary Scheme Subsidy -->
+          <div>
+            <label for="calcSchemeSelect" class="block text-xs font-semibold text-stone-700 mb-1">Primary Housing Scheme Grant</label>
+            <select id="calcSchemeSelect" class="w-full rounded-xl border border-stone-300 bg-stone-50 px-3 py-2 text-xs font-medium text-stone-800 focus:outline-none focus:ring-2 focus:ring-forest-600">
+              <option value="120000" selected>PMAY-Gramin (Plain Area Unit Grant) — ₹1,20,000</option>
+              <option value="130000">PMAY-Gramin (Hilly / Difficult Area Grant) — ₹1,30,000</option>
+              <option value="150000">Basava Vasati Yojana (Karnataka RGRHCL) — ₹1,50,000</option>
+            </select>
+          </div>
+
+          <!-- Convergence Checkboxes -->
+          <div class="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-200 space-y-2.5 text-xs">
+            <div class="font-bold text-forest-900">Stackable Government Convergence Support:</div>
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="flex items-center gap-2 text-stone-800">
+                <input id="chkMgnrega" type="checkbox" checked class="rounded text-forest-700 focus:ring-forest-600" />
+                <span>MGNREGA 95-Day Unskilled Labor Convergence</span>
+              </span>
+              <span class="font-bold text-forest-700">+₹28,500</span>
             </label>
-            <div class="chip-row" id="tracker-filters" aria-label="Filter applications"><button type="button" class="chip active" data-tracker-filter="all">All</button><button type="button" class="chip" data-tracker-filter="action">Needs action</button><button type="button" class="chip" data-tracker-filter="progress">In progress</button><button type="button" class="chip" data-tracker-filter="done">Completed</button></div>
+            <p class="text-[10px] text-stone-500 pl-6">Statutory 95 person-days convergence (₹8,640 national base @ ₹90.95/day; ~₹28,500 at Karnataka rural wage norms).</p>
+
+            <label class="flex items-center justify-between cursor-pointer">
+              <span class="flex items-center gap-2 text-stone-800">
+                <input id="chkSbmg" type="checkbox" checked class="rounded text-forest-700 focus:ring-forest-600" />
+                <span>Swachh Bharat Mission (SBM-G) Toilet (IHHL)</span>
+              </span>
+              <span class="font-bold text-forest-700">+₹12,000</span>
+            </label>
           </div>
-          <div class="tracker-grid" id="tracker-grid" aria-live="polite"><article class="tracker-card"><div class="tracker-card-top"><div><h3>PMAY-G · Rural house</h3><span class="tracker-ref">L2L-PM-24819</span></div><span class="status-pill action">Needs action</span></div><div class="tracker-meta"><span>Submitted · 12 Aug 2026</span><span>Updated · 2 days ago</span><span>Gram Panchayat, Rampur</span></div><div class="tracker-progress"><div class="bar"><span style="width:40%"></span></div><strong>40%</strong></div><div class="timeline"><div class="timeline-step done"><span class="timeline-dot">✓</span><span class="timeline-line"></span><span class="timeline-label">Submitted</span></div><div class="timeline-step done"><span class="timeline-dot">✓</span><span class="timeline-line"></span><span class="timeline-label">Acknowledged</span></div><div class="timeline-step current"><span class="timeline-dot">•</span><span class="timeline-line"></span><span class="timeline-label">Document check</span></div><div class="timeline-step "><span class="timeline-dot">•</span><span class="timeline-line"></span><span class="timeline-label">Field verification</span></div><div class="timeline-step "><span class="timeline-dot">•</span><span class="timeline-line"></span><span class="timeline-label">Sanction</span></div><div class="timeline-step "><span class="timeline-dot">•</span><span class="timeline-line"></span><span class="timeline-label">Instalment released</span></div></div><div class="next-action"><strong>Next action</strong>Submit the updated Khatauni copy and keep the receipt.</div><p class="tracker-note">Field verification is expected after the document check.</p><div class="tracker-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="advance-app" data-id="app-pmay">Advance demo stage →</button><button type="button" class="btn btn-outline btn-sm" data-action="view-app-scheme" data-id="pmay-g">Scheme details</button></div></article><article class="tracker-card"><div class="tracker-card-top"><div><h3>Land mutation · Survey AB-123/45</h3><span class="tracker-ref">L2L-LR-10472</span></div><span class="status-pill action">Needs action</span></div><div class="tracker-meta"><span>Submitted · 28 Jul 2026</span><span>Updated · 5 days ago</span><span>Tehsil office, Sadar</span></div><div class="tracker-progress"><div class="bar"><span style="width:50%"></span></div><strong>50%</strong></div><div class="timeline"><div class="timeline-step done"><span class="timeline-dot">✓</span><span class="timeline-line"></span><span class="timeline-label">Submitted</span></div><div class="timeline-step done"><span class="timeline-dot">✓</span><span class="timeline-line"></span><span class="timeline-label">Acknowledged</span></div><div class="timeline-step current"><span class="timeline-dot">•</span><span class="timeline-line"></span><span class="timeline-label">Patwari report</span></div><div class="timeline-step "><span class="timeline-dot">•</span><span class="timeline-line"></span><span class="timeline-label">Mutation order</span></div><div class="timeline-step "><span class="timeline-dot">•</span><span class="timeline-line"></span><span class="timeline-label">Record updated</span></div></div><div class="next-action"><strong>Next action</strong>Ask the patwari whether the boundary verification report is ready.</div><p class="tracker-note">Deed and current RoR have a spelling mismatch in the applicant's name.</p><div class="tracker-card-actions"><button type="button" class="btn btn-primary btn-sm" data-action="advance-app" data-id="app-land">Advance demo stage →</button><button type="button" class="btn btn-outline btn-sm" data-action="view-app-scheme" data-id="land-mutation">Scheme details</button></div></article><article class="tracker-card"><div class="tracker-card-top"><div><h3>PM-KISAN enrolment</h3><span class="tracker-ref">L2L-PK-77120</span></div><span class="status-pill done">Completed</span></div><div class="tracker-meta"><span>Submitted · 03 Jun 2026</span><span>Updated · 12 days ago</span><span>CSC, Rampur</span></div><div class="tracker-progress"><div class="bar"><span style="width:100%"></span></div><strong>100%</strong></div><div class="timeline"><div class="timeline-step done"><span class="timeline-dot">✓</span><span class="timeline-line"></span><span class="timeline-label">Submitted</span></div><div class="timeline-step done"><span class="timeline-dot">✓</span><span class="timeline-line"></span><span class="timeline-label">Acknowledged</span></div><div class="timeline-step done"><span class="timeline-dot">✓</span><span class="timeline-line"></span><span class="timeline-label">Land validation</span></div><div class="timeline-step done"><span class="timeline-dot">✓</span><span class="timeline-line"></span><span class="timeline-label">Approved</span></div><div class="timeline-step done"><span class="timeline-dot">✓</span><span class="timeline-line"></span><span class="timeline-label">Payment released</span></div></div><div class="next-action"><strong>Next action</strong>No action needed. Check the next instalment in the payment history.</div><p class="tracker-note">Beneficiary status shows approved in this sample record.</p><div class="tracker-card-actions"><button type="button" class="btn btn-quiet btn-sm" disabled="">Completed</button><button type="button" class="btn btn-outline btn-sm" data-action="view-app-scheme" data-id="pm-kisan">Scheme details</button></div></article></div>
-          <p class="page-disclaimer"><span aria-hidden="true">ⓘ</span> These are example records for demonstration. Advancing a stage is a simulation and does not contact any government system.</p>
-        </section>
-      </main>
-    </div>
-  </div>
 
-  <button type="button" class="chat-fab" data-view="assistant" aria-label="Open AI assistant" fdprocessedid="wzjhc">
-    <span aria-hidden="true">✦</span><span class="chat-fab-label">Ask</span>
-  </button>
-  <div class="nav-scrim" id="nav-scrim" hidden=""></div>
+          <!-- Personal Savings & Institutional Loan Sliders -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+            <div>
+              <div class="flex justify-between text-xs font-semibold text-stone-700 mb-1">
+                <label for="calcSavingsInput">Family Savings</label>
+                <span id="calcSavingsDisplay" class="text-forest-700 font-bold">₹45,000</span>
+              </div>
+              <input id="calcSavingsInput" type="range" min="0" max="150000" step="5000" value="45000" class="w-full accent-forest-700 cursor-pointer" />
+            </div>
 
-  <!-- Scheme detail modal -->
-  <div class="modal" id="scheme-modal" role="dialog" aria-modal="true" aria-labelledby="scheme-modal-title" hidden="">
-    <div class="modal-card scheme-modal-card">
-      <button type="button" class="icon-btn modal-close" data-action="close-modal" data-modal="scheme-modal" aria-label="Close">×</button>
-      <div id="scheme-modal-body"></div>
-    </div>
-  </div>
-
-  <!-- Settings modal -->
-  <div class="modal" id="settings-modal" role="dialog" aria-modal="true" aria-labelledby="settings-title" hidden="">
-    <div class="modal-card settings-card">
-      <div class="modal-head">
-        <div><span class="eyebrow">Optional AI assistance</span><h2 id="settings-title">Gemini connection</h2></div>
-        <button type="button" class="icon-btn modal-close" data-action="close-modal" data-modal="settings-modal" aria-label="Close">×</button>
-      </div>
-      <p class="modal-intro">The built-in answers work without any setup. If you have a Gemini API key, you can enable richer replies for this browser only.</p>
-      <form id="gemini-form">
-        <label class="form-field"><span>Gemini API key</span><input id="gemini-key" type="password" placeholder="Paste your key" autocomplete="off"></label>
-        <label class="form-field"><span>Model</span><input id="gemini-model" type="text" value="gemini-2.0-flash" autocomplete="off"></label>
-        <label class="switch-row"><input type="checkbox" id="gemini-enabled"><span class="switch" aria-hidden="true"></span><span><strong>Use Gemini for new messages</strong><small>Falls back to predefined answers if the request fails.</small></span></label>
-        <div class="modal-actions">
-          <button type="button" class="btn btn-quiet" data-action="clear-gemini">Remove key</button>
-          <button type="submit" class="btn btn-primary">Save settings</button>
+            <div>
+              <div class="flex justify-between text-xs font-semibold text-stone-700 mb-1">
+                <label for="calcLoanInput">3% Subvention Bank Loan</label>
+                <span id="calcLoanDisplay" class="text-clay-600 font-bold">₹70,000</span>
+              </div>
+              <input id="calcLoanInput" type="range" min="0" max="70000" step="5000" value="70000" class="w-full accent-clay-500 cursor-pointer" />
+              <div class="text-[10px] text-stone-500 mt-0.5">Max ₹70,000 under PMAY-G @ 3% interest subvention</div>
+            </div>
+          </div>
         </div>
-      </form>
-      <p class="settings-note">Prototype note: a client-side key is visible in the browser and is not safe for a public deployment. Use a small server proxy in production.</p>
+
+        <!-- Right 7 Cols: Live Financial & Material Outputs + Charts -->
+        <div class="lg:col-span-7 space-y-5">
+          <!-- KPI Summary Strip -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-xs">
+              <div class="text-[11px] text-stone-500 font-medium">Total Construction Cost</div>
+              <div id="kpiTotalCost" class="text-lg sm:text-xl font-extrabold text-stone-900 mt-1">₹4,05,000</div>
+              <div id="kpiCostPerSqft" class="text-[10px] text-stone-500 mt-0.5">300 sq.ft @ ₹1,350/sq.ft</div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl border border-emerald-200 shadow-xs">
+              <div class="text-[11px] text-forest-700 font-medium">Total Govt Grants + Labor</div>
+              <div id="kpiTotalGrants" class="text-lg sm:text-xl font-extrabold text-forest-700 mt-1">₹1,60,500</div>
+              <div class="text-[10px] text-stone-500 mt-0.5">Non-repayable subsidy</div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-xs">
+              <div class="text-[11px] text-stone-500 font-medium">Savings + Bank Credit</div>
+              <div id="kpiPrivateFunds" class="text-lg sm:text-xl font-extrabold text-stone-800 mt-1">₹1,15,000</div>
+              <div id="kpiEmiReadout" class="text-[10px] text-clay-600 font-semibold mt-0.5">Loan EMI: ~₹1,353/mo (5 yrs)</div>
+            </div>
+
+            <div id="kpiGapCard" class="bg-amber-50 p-4 rounded-2xl border border-amber-300 shadow-xs">
+              <div class="text-[11px] text-amber-900 font-semibold" id="kpiGapLabel">Unfunded Shortfall Gap</div>
+              <div id="kpiFundingGap" class="text-lg sm:text-xl font-extrabold text-clay-600 mt-1">₹1,29,500</div>
+              <div id="kpiGapAdvice" class="text-[10px] text-amber-800 mt-0.5">Reduce area or use Eco-Block</div>
+            </div>
+          </div>
+
+          <!-- Charts Row -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-xs">
+              <h3 class="text-xs font-bold text-stone-800 mb-2">Stage-Wise Construction Budget vs. FTO Releases</h3>
+              <div class="relative h-60">
+                <canvas id="stageCostChart"></canvas>
+              </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-xs">
+              <h3 class="text-xs font-bold text-stone-800 mb-2">Funding Stack Breakdown (₹)</h3>
+              <div class="relative h-60">
+                <canvas id="fundingMixChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Material Quantity Estimator & Stage Cashflow Table -->
+          <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-xs space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="text-sm font-extrabold text-stone-900">Estimated Raw Material Requirement (Anti-Overcharging Guide)</h3>
+              <span class="text-[11px] text-stone-500">Under <a href="https://www.kotak.bank.in/en/stories-in-focus/loans/home-loan/basava-vasati-yojana-2024.html" target="_blank" rel="noopener noreferrer" class="underline text-forest-700">Basava Vasati Yojana</a>, up to 85% raw material support is provisioned.</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+              <div class="p-3 rounded-xl bg-stone-50 border border-stone-200">
+                <div class="text-stone-500">Cement (50kg Bags)</div>
+                <div id="matCementBags" class="text-base font-extrabold text-stone-900 mt-0.5">126 Bags</div>
+                <div class="text-[10px] text-stone-500">~0.42 bags / sq.ft</div>
+              </div>
+              <div class="p-3 rounded-xl bg-stone-50 border border-stone-200">
+                <div class="text-stone-500">TMT Steel Rods (kg)</div>
+                <div id="matSteelKg" class="text-base font-extrabold text-stone-900 mt-0.5">750 kg</div>
+                <div class="text-[10px] text-stone-500">~2.5 kg / sq.ft</div>
+              </div>
+              <div class="p-3 rounded-xl bg-stone-50 border border-stone-200">
+                <div class="text-stone-500">Bricks / Solid Blocks</div>
+                <div id="matBricksCount" class="text-base font-extrabold text-stone-900 mt-0.5">5,400 Nos</div>
+                <div class="text-[10px] text-stone-500">Standard masonry norm</div>
+              </div>
+              <div class="p-3 rounded-xl bg-stone-50 border border-stone-200">
+                <div class="text-stone-500">M-Sand / Aggregates</div>
+                <div id="matSandCft" class="text-base font-extrabold text-stone-900 mt-0.5">540 cu.ft</div>
+                <div class="text-[10px] text-stone-500">Concreting + Plastering</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 5: APPLICATION & GEO-TAGGED INSTALLMENT TRACKER ==================== -->
+    <section id="view-tracker" class="tab-view hidden space-y-6">
+      <div class="bg-white rounded-2xl p-5 sm:p-6 border border-stone-200 shadow-xs space-y-5">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-stone-200 pb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-clay-600">Module 4 · AwaasSoft &amp; RGRHCL FTO Transparency</span>
+            <h2 class="text-xl font-extrabold text-stone-900 mt-0.5">Application &amp; Geo-Tagged Installment Tracker</h2>
+            <p class="text-xs text-stone-600 mt-1">Track stage-by-stage construction inspections on <strong>AwaasApp</strong> and verify Direct Benefit Transfer (DBT) Fund Transfer Orders (FTOs).</p>
+          </div>
+
+          <!-- Sample Beneficiary Selector -->
+          <div class="flex flex-wrap items-center gap-2">
+            <label for="trackerBeneficiarySelect" class="text-xs font-semibold text-stone-600">Select Sample Case:</label>
+            <select id="trackerBeneficiarySelect" class="rounded-xl border border-stone-300 bg-stone-50 px-3 py-2 text-xs font-bold text-stone-900 focus:outline-none focus:ring-2 focus:ring-forest-600">
+              <option value="KA-BLR-2026-84920">KA-BLR-2026-84920 — Ramesh Gowda (Avalahalli · Stage 3 Lintel)</option>
+              <option value="KA-MYS-2026-31044">KA-MYS-2026-31044 — Lakshmi Devi (Hunsur · Stage 2 Plinth)</option>
+              <option value="KA-CKM-2026-59210">KA-CKM-2026-59210 — Shankar Naik (Mudigere · Stage 5 Completed)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Beneficiary Metadata Summary Card -->
+        <div id="trackerHeaderSummary" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+          <!-- Populated dynamically by JS -->
+        </div>
+
+        <!-- Interactive 5-Stage Visual Stepper -->
+        <div class="pt-2">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-sm font-extrabold text-stone-900">Construction Geo-Tagging &amp; FTO Release Milestones</h3>
+            <div class="flex items-center gap-2">
+              <button id="simulateGeoTagBtn" type="button" class="px-3.5 py-1.5 rounded-xl bg-clay-500 hover:bg-clay-600 text-white text-xs font-semibold shadow-xs transition flex items-center gap-1.5">
+                <span>📸</span> <span id="simulateGeoTagBtnText">Simulate AwaasApp Geo-Tag Upload (Next Stage)</span>
+              </button>
+              <button id="resetTrackerCaseBtn" type="button" class="px-3 py-1.5 rounded-xl border border-stone-300 hover:bg-stone-100 text-stone-700 text-xs font-medium transition">
+                Reset Stage
+              </button>
+            </div>
+          </div>
+
+          <div id="trackerTimelineGrid" class="grid grid-cols-1 md:grid-cols-5 gap-3">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- FTO Payment Ledger Table -->
+        <div class="pt-3">
+          <h3 class="text-sm font-extrabold text-stone-900 mb-2">PFMS / DBT Fund Transfer Order (FTO) Ledger</h3>
+          <div class="overflow-x-auto rounded-xl border border-stone-200">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="bg-stone-100 text-stone-700 border-b border-stone-200">
+                  <th class="py-2.5 px-3 font-bold">Installment / Tranche</th>
+                  <th class="py-2.5 px-3 font-bold">AwaasApp Inspection Stage</th>
+                  <th class="py-2.5 px-3 font-bold">FTO Reference No.</th>
+                  <th class="py-2.5 px-3 font-bold">Geo-Coordinates &amp; Timestamp</th>
+                  <th class="py-2.5 px-3 font-bold">Amount (₹)</th>
+                  <th class="py-2.5 px-3 font-bold">DBT Status</th>
+                </tr>
+              </thead>
+              <tbody id="trackerFtoTableBody" class="divide-y divide-stone-200">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 6: AI SAHAYAK ASSISTANT ==================== -->
+    <section id="view-assistant" class="tab-view hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Left 8 Cols: Chat Window -->
+        <div class="lg:col-span-8 bg-white rounded-2xl border border-stone-200 shadow-xs flex flex-col h-[560px]">
+          <!-- Chat Header -->
+          <div class="p-4 border-b border-stone-200 flex items-center justify-between bg-forest-900 text-white rounded-t-2xl">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-lg">🤖</div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h2 class="text-sm font-extrabold">Land2Life AI Sahayak (ಗ್ರಾಮೀಣ ವಸತಿ ಸಹಾಯಕ)</h2>
+                  <span id="aiModeBadge" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/30 text-emerald-100 font-semibold">Built-in Grounded Engine Active</span>
+                </div>
+                <p class="text-[11px] text-emerald-200">Ask about PMAY-G, Basava Vasati Yojana, Bhoomi RTC mutation, SVAMITVA cards, or FTO delays.</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button id="toggleVoiceReadoutBtn" type="button" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-medium transition" title="Toggle voice read-aloud">
+                🔊 Read Aloud: <span id="voiceStatusLabel">Off</span>
+              </button>
+              <button id="clearChatBtn" type="button" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-medium transition">
+                Clear
+              </button>
+            </div>
+          </div>
+
+          <!-- Messages Container -->
+          <div id="chatMessagesBox" class="flex-1 p-4 overflow-y-auto custom-scroll space-y-3 bg-stone-50/60">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- Quick Prompts Strip -->
+          <div class="px-4 py-2 bg-stone-100 border-t border-stone-200 flex items-center gap-2 overflow-x-auto custom-scroll">
+            <span class="text-[11px] font-semibold text-stone-500 whitespace-nowrap">Ask Sahayak:</span>
+            <button type="button" data-prompt="How do I fix my father's name on Bhoomi RTC Pahani for a housing grant?" class="chat-chip px-2.5 py-1 rounded-full bg-white hover:bg-emerald-50 border border-stone-300 text-[11px] font-medium text-stone-700 whitespace-nowrap transition">
+              🌾 Fix Father's Name on RTC
+            </button>
+            <button type="button" data-prompt="What are the 3 installment amounts under PMAY-G and how does AwaasApp geo-tagging work?" class="chat-chip px-2.5 py-1 rounded-full bg-white hover:bg-emerald-50 border border-stone-300 text-[11px] font-medium text-stone-700 whitespace-nowrap transition">
+              📸 PMAY-G Installments &amp; Geo-Tagging
+            </button>
+            <button type="button" data-prompt="Who qualifies for Karnataka Basava Vasati Yojana and how much subsidy is given?" class="chat-chip px-2.5 py-1 rounded-full bg-white hover:bg-emerald-50 border border-stone-300 text-[11px] font-medium text-stone-700 whitespace-nowrap transition">
+              🏛️ Basava Vasati Eligibility
+            </button>
+            <button type="button" data-prompt="Someone asked for ₹5,000 bribe to approve my housing sanction or geo-tag photo. What should I do?" class="chat-chip px-2.5 py-1 rounded-full bg-white hover:bg-emerald-50 border border-stone-300 text-[11px] font-medium text-stone-700 whitespace-nowrap transition">
+              🛡️ Report Middleman / Bribe
+            </button>
+            <button type="button" data-prompt="ನನ್ನ ಭೂಮಿ ಪಹಣಿ (RTC) ಮತ್ತು ವಸತಿ ಯೋಜನೆಗೆ ಏನು ದಾಖಲೆ ಬೇಕು?" class="chat-chip px-2.5 py-1 rounded-full bg-white hover:bg-emerald-50 border border-stone-300 text-[11px] font-medium text-stone-700 whitespace-nowrap transition">
+              🇮🇳 ಕನ್ನಡದಲ್ಲಿ ಮಾಹಿತಿ (Kannada)
+            </button>
+          </div>
+
+          <!-- Input Bar -->
+          <form id="chatForm" class="p-3 bg-white border-t border-stone-200 rounded-b-2xl flex items-center gap-2">
+            <input id="chatInput" type="text" placeholder="Type your question in English or ಕನ್ನಡ (e.g., How to get ₹70,000 bank loan under PMAY-G?)..." class="flex-1 rounded-xl border border-stone-300 px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-forest-600" />
+            <button type="submit" class="px-4 py-2.5 rounded-xl bg-forest-700 hover:bg-forest-800 text-white text-xs sm:text-sm font-semibold shadow-xs transition">
+              Send →
+            </button>
+          </form>
+        </div>
+
+        <!-- Right 4 Cols: Context-Aware Action Cards & Helplines -->
+        <div class="lg:col-span-4 space-y-4">
+          <div class="bg-white rounded-2xl p-5 border border-stone-200 shadow-xs space-y-3">
+            <h3 class="text-sm font-extrabold text-stone-900">Your Personalized Case Context</h3>
+            <p class="text-xs text-stone-600">AI Sahayak automatically reads your active Cost Plan &amp; Document Checklist to give tailored advice:</p>
+            <div class="p-3 rounded-xl bg-stone-50 border border-stone-200 space-y-1.5 text-xs">
+              <div class="flex justify-between">
+                <span class="text-stone-500">Selected Scheme:</span>
+                <strong id="aiCtxScheme" class="text-stone-900">PMAY-G Plain (₹1.20L)</strong>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-stone-500">Planned Plinth Area:</span>
+                <strong id="aiCtxArea" class="text-stone-900">300 sq.ft</strong>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-stone-500">Verified Documents:</span>
+                <strong id="aiCtxDocs" class="text-forest-700">4 / 6 Ready</strong>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-stone-500">Estimated Funding Gap:</span>
+                <strong id="aiCtxGap" class="text-clay-600">₹1,29,500</strong>
+              </div>
+            </div>
+            <button id="askAiDiagnosePlanBtn" type="button" class="w-full py-2.5 px-3 rounded-xl bg-clay-500 hover:bg-clay-600 text-white text-xs font-semibold transition">
+              ✨ Ask AI to Diagnose My Funding Gap &amp; Pending Docs
+            </button>
+          </div>
+
+          <div class="bg-white rounded-2xl p-5 border border-stone-200 shadow-xs space-y-3">
+            <h3 class="text-sm font-extrabold text-stone-900">Official Grievance &amp; Verification Contacts</h3>
+            <div class="space-y-2 text-xs">
+              <div class="p-2.5 rounded-xl bg-stone-50 border border-stone-200">
+                <div class="font-bold text-forest-800">Rajiv Gandhi Housing Corp Ltd (RGRHCL)</div>
+                <div class="text-stone-600">Kaveri Bhavan, 9th Floor, C &amp; F Block, KG Road, Bengaluru 560009</div>
+                <div class="text-clay-600 font-semibold mt-0.5">Tel: 080-23118888</div>
+              </div>
+              <div class="p-2.5 rounded-xl bg-stone-50 border border-stone-200">
+                <div class="font-bold text-forest-800">PMAY-Gramin National Helpline</div>
+                <div class="text-stone-600">Ministry of Rural Development (AwaasSoft / PFMS FTO Support)</div>
+                <div class="text-clay-600 font-semibold mt-0.5">Toll-Free: 1800-11-6446 | CPGRAMS: pgportal.gov.in</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Optional Gemini API Key Modal -->
+  <div id="aiConfigModal" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 border border-stone-200 shadow-xl space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-extrabold text-stone-900">Configure Optional Live Gemini API</h3>
+        <button id="closeAiConfigBtn" type="button" class="text-stone-400 hover:text-stone-700 text-lg font-bold">&times;</button>
+      </div>
+      <p class="text-xs text-stone-600 leading-relaxed">
+        Land2Life includes a rich built-in offline rural housing response engine out of the box. Optionally paste a Google Gemini API key below to route AI Sahayak questions to <code>gemini-2.5-flash</code> with automatic fallback.
+      </p>
+      <div>
+        <label for="geminiApiKeyInput" class="block text-xs font-semibold text-stone-700 mb-1">Gemini API Key (Optional)</label>
+        <input id="geminiApiKeyInput" type="password" placeholder="AIzaSy..." class="w-full rounded-xl border border-stone-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-forest-600" />
+      </div>
+      <div class="flex items-center justify-end gap-2 pt-2">
+        <button id="clearApiKeyBtn" type="button" class="px-3.5 py-2 rounded-xl border border-stone-300 text-xs font-semibold text-stone-700 hover:bg-stone-100">Use Built-In Offline AI</button>
+        <button id="saveApiKeyBtn" type="button" class="px-4 py-2 rounded-xl bg-forest-700 hover:bg-forest-800 text-white text-xs font-semibold">Save Key</button>
+      </div>
     </div>
   </div>
 
-  <!-- Help modal -->
-  <div class="modal" id="help-modal" role="dialog" aria-modal="true" aria-labelledby="help-title" hidden="">
-    <div class="modal-card help-card">
-      <div class="modal-head">
-        <div><span class="eyebrow">How it works</span><h2 id="help-title">A calm guide for a complicated process</h2></div>
-        <button type="button" class="icon-btn modal-close" data-action="close-modal" data-modal="help-modal" aria-label="Close">×</button>
+  <!-- Toast Notification -->
+  <div id="appToast" class="fixed bottom-5 right-5 z-50 hidden max-w-sm bg-forest-900 text-white px-4 py-3 rounded-xl shadow-lg border border-emerald-500/40 text-xs font-medium flex items-center gap-2.5">
+    <span id="appToastIcon">✅</span>
+    <span id="appToastText">Updated successfully</span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-stone-200 mt-10 py-5 px-4 text-xs text-stone-500">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div>
+        <strong class="text-stone-800">Land2Life Prototype</strong> — Bridging the Gap Between Rural Land Ownership and Home Construction.
       </div>
-      <div class="help-grid">
-        <div class="help-step"><span>01</span><strong>Set your situation</strong><p>State, land status and income help the scheme finder rank useful options.</p></div>
-        <div class="help-step"><span>02</span><strong>Check documents</strong><p>The pre-check catches obvious mistakes. Nothing you type is uploaded.</p></div>
-        <div class="help-step"><span>03</span><strong>Plan the money</strong><p>Balance grant, savings and loan. Look closely at the funding gap.</p></div>
-        <div class="help-step"><span>04</span><strong>Track every stage</strong><p>Keep acknowledgment receipts and note the office and official you meet.</p></div>
+      <div class="flex flex-wrap gap-4">
+        <a href="https://www.myscheme.gov.in/schemes/pmay-g" target="_blank" rel="noopener noreferrer" class="hover:text-forest-700 underline">PMAY-G Guidelines</a>
+        <a href="https://www.kotak.bank.in/en/stories-in-focus/loans/home-loan/basava-vasati-yojana-2024.html" target="_blank" rel="noopener noreferrer" class="hover:text-forest-700 underline">Basava Vasati Yojana</a>
+        <a href="https://www.ujjivansfb.bank.in/banking-blogs/personal-finance/bhoomi-rtc-karnataka-land-records-online" target="_blank" rel="noopener noreferrer" class="hover:text-forest-700 underline">Bhoomi RTC Portal Guide</a>
+        <a href="https://web.umang.gov.in/landing/scheme/detail/pm-swamitva-yojana_pmsy.html" target="_blank" rel="noopener noreferrer" class="hover:text-forest-700 underline">SVAMITVA Yojana</a>
       </div>
-      <div class="help-warning"><strong>Watch out for middlemen</strong><p>Ask for the official form, a written list of documents and a receipt for any payment. Unofficial “fast-track” fees are a red flag. Verify instructions at the Gram Panchayat or block office.</p></div>
-      <button type="button" class="btn btn-primary full-width modal-close" data-action="close-modal" data-modal="help-modal">Got it</button>
     </div>
-  </div>
+  </footer>
 
-  <div class="toast" id="toast" role="status" aria-live="polite" hidden="">
-    <span class="toast-icon" id="toast-icon" aria-hidden="true">✓</span><span id="toast-text"></span>
-  </div>
+  <!-- Application Logic -->
+  <script>
+    (function () {
+      // ==================== STATE & GROUNDED DATASETS ====================
+      const state = {
+        lang: 'en',
+        activeTab: 'overview',
+        voiceReadout: false,
+        geminiApiKey: '',
+        selectedSchemeId: 'pmayg_plain',
+        schemes: [
+          {
+            id: 'pmayg_plain',
+            name: 'Pradhan Mantri Awaas Yojana - Gramin (Plain Areas)',
+            authority: 'Ministry of Rural Development (GoI)',
+            regionTag: 'plain',
+            grantAmount: 120000,
+            grantDisplay: '₹1,20,000',
+            sharingRatio: '60:40 (Centre : State)',
+            minArea: '25 sq.m (~270 sq.ft) incl. hygienic kitchen',
+            incomeLimit: 250000,
+            categoryFit: ['all', 'sc_st', 'obc_min', 'vulnerable'],
+            highlights: [
+              '₹1,20,000 direct DBT grant in 3 geo-tagged stages (Sanction ₹40k, Plinth/Lintel ₹50k, Roof ₹30k).',
+              'Mandatory convergence: 95 days unskilled labor under MGNREGA + ₹12,000 SBM-G toilet assistance.',
+              'Optional institutional loan up to ₹70,000 at 3% lower interest rate subvention.'
+            ],
+            sourceUrl: 'https://www.myscheme.gov.in/schemes/pmay-g',
+            sourceLabel: 'myScheme Official PMAY-G Page'
+          },
+          {
+            id: 'basava_vasati',
+            name: 'Basava Vasati Yojana (RGRHCL Karnataka)',
+            authority: 'Rajiv Gandhi Housing Corporation Ltd (Govt. of Karnataka)',
+            regionTag: 'karnataka',
+            grantAmount: 150000,
+            grantDisplay: '₹1,50,000',
+            sharingRatio: 'State Sponsored (RGRHCL Ashraya)',
+            minArea: '25 sq.m (~270 sq.ft)',
+            incomeLimit: 32000,
+            categoryFit: ['all', 'sc_st', 'obc_min', 'vulnerable'],
+            highlights: [
+              'Financial assistance of ₹1.20 lakh to ₹1.50 lakh (up to 85% raw material support provision).',
+              'For permanent Karnataka residents in BPL / EWS category (annual household income ≤ ₹32,000) owning a plot or kutcha house.',
+              'Direct DBT release tracked weekly on RGRHCL portal after GPS photo verification.'
+            ],
+            sourceUrl: 'https://www.kotak.bank.in/en/stories-in-focus/loans/home-loan/basava-vasati-yojana-2024.html',
+            sourceLabel: 'Basava Vasati Yojana 2026 Guide'
+          },
+          {
+            id: 'pmayg_hilly',
+            name: 'PMAY-Gramin (Hilly, Difficult & IAP Areas)',
+            authority: 'Ministry of Rural Development (GoI)',
+            regionTag: 'hilly',
+            grantAmount: 130000,
+            grantDisplay: '₹1,30,000',
+            sharingRatio: '90:10 (Centre : State)',
+            minArea: '25 sq.m (~270 sq.ft)',
+            incomeLimit: 250000,
+            categoryFit: ['all', 'sc_st', 'obc_min', 'vulnerable'],
+            highlights: [
+              'Enhanced ₹1,30,000 unit assistance to cover higher material transport & slope foundation costs.',
+              'Includes ₹12,000 SBM-G toilet grant, 95 days MGNREGA wage employment, and 1 free Ujjwala LPG connection.',
+              'Monitored via AwaasApp time-stamped geo-referenced inspection photos.'
+            ],
+            sourceUrl: 'https://socialwelfare.vikaspedia.in/viewcontent/social-welfare/rural-poverty-alleviation-1/schemes/pradhan-mantri-awaas-yojana-(gramin)?lgn=en',
+            sourceLabel: 'Vikaspedia PMAY-G Guidelines'
+          },
+          {
+            id: 'sbmg_ihhl',
+            name: 'Swachh Bharat Mission - Gramin (IHHL Toilet Grant)',
+            authority: 'Dept. of Drinking Water & Sanitation + State RDPR',
+            regionTag: 'all',
+            grantAmount: 12000,
+            grantDisplay: '₹12,000 (Add-On)',
+            sharingRatio: 'Convergence Grant',
+            minArea: 'Twin-pit / Septic Household Toilet',
+            incomeLimit: 250000,
+            categoryFit: ['all', 'sc_st', 'obc_min', 'vulnerable'],
+            highlights: [
+              '₹12,000 incentive for constructing an Individual Household Latrine (IHHL) alongside your PMAY-G home.',
+              'Credited directly via DBT upon completion and geo-tagged verification of toilet structure.'
+            ],
+            sourceUrl: 'https://www.myscheme.gov.in/schemes/pmay-g',
+            sourceLabel: 'PMAY-G & SBM-G Convergence'
+          },
+          {
+            id: 'mgnrega_housing',
+            name: 'MGNREGA 95-Day Housing Labor Convergence',
+            authority: 'Ministry of Rural Development & Gram Panchayat',
+            regionTag: 'all',
+            grantAmount: 28500,
+            grantDisplay: '₹8,640 – ₹28,500 (95 Days Wage)',
+            sharingRatio: '100% Unskilled Wage Credit',
+            minArea: 'Self/Family Labor on Own House',
+            incomeLimit: 250000,
+            categoryFit: ['all', 'sc_st', 'obc_min', 'vulnerable'],
+            highlights: [
+              '90 to 95 person-days of unskilled wage employment paid to the beneficiary family for building their own house.',
+              'Statutory baseline ₹90.95/day (₹8,640) or state-notified MGNREGA wage rate credited via muster roll.'
+            ],
+            sourceUrl: 'https://www.myscheme.gov.in/schemes/pmay-g',
+            sourceLabel: 'myScheme MGNREGA Convergence'
+          },
+          {
+            id: 'pm_surya_ghar',
+            name: 'PM Surya Ghar: Muft Bijli Yojana (Rooftop Solar)',
+            authority: 'Ministry of New & Renewable Energy (MNRE)',
+            regionTag: 'all',
+            grantAmount: 78000,
+            grantDisplay: 'Up to ₹78,000 Solar Subsidy',
+            sharingRatio: 'Central Direct Bank Subsidy',
+            minArea: 'Completed Pucca Roof (1kW–3kW)',
+            incomeLimit: 250000,
+            categoryFit: ['all', 'sc_st', 'obc_min', 'vulnerable'],
+            highlights: [
+              'Once your pucca RCC roof is complete, avail ₹30,000 (1kW) to ₹78,000 (3kW) direct subsidy + up to 300 units free electricity.',
+              'Low-interest 7% collateral-free bank financing available for remaining system cost.'
+            ],
+            sourceUrl: 'https://www.cschelp.in/',
+            sourceLabel: 'PM Surya Ghar Portal Info'
+          }
+        ],
+        documents: [
+          {
+            id: 'doc_rtc',
+            title: 'Bhoomi RTC / Pahani (Record of Rights, Tenancy & Crops)',
+            portal: 'Bhoomi Portal (Revenue Dept, Karnataka)',
+            portalUrl: 'https://www.ujjivansfb.bank.in/banking-blogs/personal-finance/bhoomi-rtc-karnataka-land-records-online',
+            refCode: 'Sy No. 48/2B · Hissa 2B · Avalahalli',
+            status: 'action_needed',
+            issueNote: 'Column 9 Owner Name shows "Late Hanumanthaiah". Requires Pouthi Khata mutation or Family Tree NOC.',
+            verifiedNote: 'Bhoomi i-RTC Column 9 & 12 verified in beneficiary name (Ramesh H. Gowda). No encumbrance.'
+          },
+          {
+            id: 'doc_mutation',
+            title: 'Mutation Register Extract (MR) & E-Swathu Form 9 / 11A',
+            portal: 'Gram Panchayat / Bhoomi View RTC & MR',
+            portalUrl: 'https://www.talkinglands.com/blogs/bhoomi-karnataka-land-records-portal-guide',
+            refCode: 'MR No. H14/2025-26',
+            status: 'action_needed',
+            issueNote: 'Pending Gram Panchayat PDO digital signature on Form 11A demand register extract.',
+            verifiedNote: 'MR Extract & E-Swathu Property ID verified and linked with RGRHCL Ashraya portal.'
+          },
+          {
+            id: 'doc_svamitva',
+            title: 'SVAMITVA Property Card (Abadi Village Title Deed)',
+            portal: 'UMANG / DigiLocker / Survey of India',
+            portalUrl: 'https://web.umang.gov.in/landing/scheme/detail/pm-swamitva-yojana_pmsy.html',
+            refCode: 'SVAM-KA-BLR-09412',
+            status: 'verified',
+            issueNote: 'Parcel boundary verification pending.',
+            verifiedNote: 'Drone-surveyed CORS Property Card active in DigiLocker. Eligible for ₹70,000 bank loan.'
+          },
+          {
+            id: 'doc_aadhaar_dbt',
+            title: 'Aadhaar Card & NPCI / PFMS Bank Account Seeding',
+            portal: 'UIDAI & Lead Bank NPCI Mapper',
+            portalUrl: 'https://www.bajajfinserv.in/pradhan-mantri-awaas-yojana-pmay-fto-tracking',
+            refCode: 'XXXX-XXXX-8419 · Canara Bank DBT Active',
+            status: 'verified',
+            issueNote: 'NPCI mapper inactive.',
+            verifiedNote: 'Aadhaar e-KYC & NPCI Direct Benefit Transfer mapping active for PFMS FTO credit.'
+          },
+          {
+            id: 'doc_income',
+            title: 'Income & Caste Certificate (Nadakacheri / Atalji Janasnehi)',
+            portal: 'Nadakacheri Karnataka (RD Number)',
+            portalUrl: 'https://www.squareyards.com/blog/basava-vasati-yojana-a-housing-scheme-for-the-poor-in-karnataka',
+            refCode: 'RD0038492014228 · Annual Income ₹28,000',
+            status: 'verified',
+            issueNote: 'Certificate expired.',
+            verifiedNote: 'Verified annual income ₹28,000 (within ≤ ₹32,000 Basava Vasati & PMAY-G BPL threshold).'
+          },
+          {
+            id: 'doc_mgnrega',
+            title: 'MGNREGA Active Job Card (95-Day Housing Labor Convergence)',
+            portal: 'NREGA MIS Portal (Gram Panchayat)',
+            portalUrl: 'https://amieligible.in/blog/pmay-g-amount-kitna-milta-hai-installments-2026',
+            refCode: 'KA-04-001-009-001/24',
+            status: 'verified',
+            issueNote: 'Job card not linked to AwaasSoft registration.',
+            verifiedNote: 'Linked to AwaasSoft ID for 95 person-days unskilled construction wage convergence.'
+          }
+        ],
+        landGuideMode: 'bhoomi',
+        beneficiaries: {
+          'KA-BLR-2026-84920': {
+            id: 'KA-BLR-2026-84920',
+            name: 'Ramesh H. Gowda',
+            village: 'Avalahalli, Yelahanka Taluk, Bengaluru Urban',
+            scheme: 'PMAY-Gramin (Plain) + SBM-G + MGNREGA',
+            totalGrant: 132000,
+            bankAccount: 'Canara Bank · A/c ****4821 (NPCI Seeded)',
+            gps: '13.0358° N, 77.5970° E',
+            currentStage: 3, // 1..5
+            initialStage: 3,
+            stages: [
+              { step: 1, name: 'Gram Sabha & Sanction', desc: 'AwaasSoft Reg & Geo-Tag of Vacant Plot', amount: 0, fto: 'SAN-KA-2026-00912', date: '12 Aug 2026, 10:40 AM' },
+              { step: 2, name: '1st Installment (Sanction/Basement)', desc: 'DBT released to start trench & foundation', amount: 40000, fto: 'FTO-KA-260819-4410', date: '19 Aug 2026, 02:15 PM' },
+              { step: 3, name: '2nd Installment (Plinth & Lintel)', desc: 'AwaasApp Geo-Tag of Plinth & Door-Lintel height', amount: 50000, fto: 'FTO-KA-261004-8821', date: '04 Oct 2026, 11:20 AM' },
+              { step: 4, name: '3rd Installment (Roof Cast)', desc: 'AwaasApp Geo-Tag of RCC / Filler Slab Roof', amount: 30000, fto: 'PENDING-GEO-TAG', date: 'Awaiting Roof Inspection' },
+              { step: 5, name: 'Final Completion + SBM-G Toilet', desc: 'Painted CIB Board + ₹12,000 IHHL Toilet Grant', amount: 12000, fto: 'PENDING-COMPLETION', date: 'Awaiting Final Inspection' }
+            ]
+          },
+          'KA-MYS-2026-31044': {
+            id: 'KA-MYS-2026-31044',
+            name: 'Lakshmi Devi',
+            village: 'Hunsur Rural, Mysuru District, Karnataka',
+            scheme: 'Basava Vasati Yojana (RGRHCL Karnataka)',
+            totalGrant: 150000,
+            bankAccount: 'Karnataka Gramin Bank · A/c ****9104 (NPCI Seeded)',
+            gps: '12.3051° N, 76.2877° E',
+            currentStage: 2,
+            initialStage: 2,
+            stages: [
+              { step: 1, name: 'Ashraya Committee & GP Approval', desc: 'E-Swathu Form 11A & Vacant Plot GPS Check', amount: 0, fto: 'RGRHCL-2026-7731', date: '03 Sep 2026, 09:30 AM' },
+              { step: 2, name: '1st Tranche (Foundation Stage)', desc: 'Foundation Geo-Tag verified by PDO', amount: 50000, fto: 'FTO-RGR-260925-1192', date: '25 Sep 2026, 04:05 PM' },
+              { step: 3, name: '2nd Tranche (Lintel Level)', desc: 'Walls raised to lintel height (Geo-Tag required)', amount: 50000, fto: 'PENDING-GEO-TAG', date: 'Awaiting Lintel Photo' },
+              { step: 4, name: '3rd Tranche (Roof Sheet / RCC)', desc: 'Roof casting verification on RGRHCL App', amount: 50000, fto: 'PENDING-ROOF', date: 'Pending' },
+              { step: 5, name: 'House Warming & Completion Cert', desc: 'Beneficiary photo with completed house & toilet', amount: 0, fto: 'PENDING-FINAL', date: 'Pending' }
+            ]
+          },
+          'KA-CKM-2026-59210': {
+            id: 'KA-CKM-2026-59210',
+            name: 'Shankar Naik',
+            village: 'Mudigere Taluk, Chikkamagaluru (Hilly Zone)',
+            scheme: 'PMAY-Gramin (Hilly Area) + SBM-G Toilet',
+            totalGrant: 142000,
+            bankAccount: 'State Bank of India · A/c ****3309 (NPCI Seeded)',
+            gps: '13.1369° N, 75.6403° E',
+            currentStage: 5,
+            initialStage: 5,
+            stages: [
+              { step: 1, name: 'Gram Sabha & Sanction', desc: 'Hilly zone sanction order issued on AwaasSoft', amount: 0, fto: 'SAN-KA-2026-1120', date: '10 May 2026, 11:00 AM' },
+              { step: 2, name: '1st Installment (Sanction/Plinth)', desc: 'Retaining wall & plinth foundation verified', amount: 45000, fto: 'FTO-KA-260528-3011', date: '28 May 2026, 03:10 PM' },
+              { step: 3, name: '2nd Installment (Lintel Level)', desc: 'Lintel geo-tagged via AwaasApp', amount: 55000, fto: 'FTO-KA-260719-6540', date: '19 Jul 2026, 01:45 PM' },
+              { step: 4, name: '3rd Installment (Sloped RCC Roof)', desc: 'Roof completion geo-tagged & approved', amount: 30000, fto: 'FTO-KA-260912-9920', date: '12 Sep 2026, 05:00 PM' },
+              { step: 5, name: 'Final Completion + SBM-G ₹12k', desc: 'Completed house + IHHL toilet verified', amount: 12000, fto: 'FTO-SBM-261015-4100', date: '15 Oct 2026, 12:15 PM' }
+            ]
+          }
+        },
+        activeBeneficiaryId: 'KA-BLR-2026-84920',
+        chatHistory: [
+          {
+            sender: 'bot',
+            text: 'Namaskara! 🙏 Welcome to **Land2Life AI Sahayak**. I can help you check eligibility for **PMAY-Gramin (₹1.20L–₹1.30L)** and **Basava Vasati Yojana (₹1.50L)**, resolve **Bhoomi RTC / Pahani** mutation issues, plan your construction materials, or track your **AwaasApp** geo-tagged FTO installments. What would you like to check today?'
+          }
+        ]
+      };
 
-  <script src="./aaaaa_files/data.js.download"></script>
-  <script src="./aaaaa_files/app.js.download"></script>
+      // ==================== BILINGUAL TRANSLATIONS ====================
+      const i18n = {
+        en: {
+          nav_overview: 'Journey Overview',
+          nav_schemes: 'Scheme Finder',
+          nav_docs: 'Doc & Land Checker',
+          nav_calc: 'Cost & Gap Calculator',
+          nav_tracker: 'Application Tracker',
+          nav_ai: 'AI Sahayak',
+          heroHeading: 'Turn Your Rural Land Plot Into a Safe, Permanent Pucca Home',
+          brandSubtitle: 'From Land Ownership (Bhoomi / SVAMITVA) to a Complete Pucca Home',
+          topBadgeText: 'Zero Middlemen Initiative',
+          topBannerMsg: 'Direct DBT transfers via AwaasSoft & RGRHCL. Never pay bribes for Geo-tagging or sanction letters.'
+        },
+        kn: {
+          nav_overview: 'ಮುಖಪುಟ (Overview)',
+          nav_schemes: 'ವಸತಿ ಯೋಜನೆಗಳು (Schemes)',
+          nav_docs: 'ಭೂಮಿ ಪಹಣಿ & ದಾಖಲೆ (Docs)',
+          nav_calc: 'ಮನೆ ನಿರ್ಮಾಣ ವೆಚ್ಚ (Calculator)',
+          nav_tracker: 'ಅರ್ಜಿ ಸ್ಥಿತಿ (Tracker)',
+          nav_ai: 'AI ಸಹಾಯಕ (Sahayak)',
+          heroHeading: 'ನಿಮ್ಮ ಗ್ರಾಮೀಣ ನಿವೇಶನದಲ್ಲಿ ಸುರಕ್ಷಿತ ಮತ್ತು ಶಾಶ್ವತ ಪಕ್ಕಾ ಮನೆ ನಿರ್ಮಿಸಿ',
+          brandSubtitle: 'ಭೂಮಿ ಪಹಣಿ (RTC) ಮತ್ತು ಸ್ವಾಮಿತ್ವ ಕಾರ್ಡ್‌ನಿಂದ ಪಕ್ಕಾ ಮನೆಯವರೆಗೆ ಸಂಪೂರ್ಣ ಮಾರ್ಗದರ್ಶನ',
+          topBadgeText: 'ಮಧ್ಯವರ್ತಿ ಮುಕ್ತ ಅಭಿಯಾನ',
+          topBannerMsg: 'ಸರ್ಕಾರಿ ಅನುದಾನ ನೇರವಾಗಿ ನಿಮ್ಮ ಆಧಾರ್ ಲಿಂಕ್ ಆದ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ (DBT) ಜಮೆಯಾಗುತ್ತದೆ.'
+        }
+      };
 
+      // ==================== UTILITY HELPERS ====================
+      function formatINR(num) {
+        const n = Math.round(Number(num) || 0);
+        return '₹' + n.toLocaleString('en-IN');
+      }
 
-<span id="PING_CONTENT_PUSH_NOTIFICATION" style="display: none;"></span><span id="PING_IFRAME_FORM_DETECTION" style="display: none;"></span></body></html>
+      function showToast(message, icon) {
+        const toast = document.getElementById('appToast');
+        const toastText = document.getElementById('appToastText');
+        const toastIcon = document.getElementById('appToastIcon');
+        if (!toast || !toastText) return;
+        toastText.textContent = message;
+        toastIcon.textContent = icon || '✅';
+        toast.classList.remove('hidden');
+        if (window._toastTimer) clearTimeout(window._toastTimer);
+        window._toastTimer = setTimeout(() => {
+          toast.classList.add('hidden');
+        }, 3600);
+      }
+
+      // ==================== NAVIGATION & LANGUAGE TOGGLE ====================
+      function switchTab(tabId) {
+        state.activeTab = tabId;
+        document.querySelectorAll('.tab-view').forEach(el => {
+          el.classList.add('hidden');
+        });
+        const target = document.getElementById('view-' + tabId);
+        if (target) target.classList.remove('hidden');
+
+        document.querySelectorAll('.nav-tab').forEach(btn => {
+          if (btn.getAttribute('data-tab') === tabId) {
+            btn.classList.add('tab-active');
+            btn.classList.remove('text-stone-700', 'hover:bg-stone-200/70');
+          } else {
+            btn.classList.remove('tab-active');
+            btn.classList.add('text-stone-700', 'hover:bg-stone-200/70');
+          }
+        });
+
+        if (tabId === 'calculator') {
+          updateCalculator();
+        }
+      }
+
+      function toggleLanguage() {
+        state.lang = state.lang === 'en' ? 'kn' : 'en';
+        const dict = i18n[state.lang];
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (dict[key]) el.textContent = dict[key];
+        });
+        document.getElementById('heroHeading').textContent = dict.heroHeading;
+        document.getElementById('brandSubtitle').textContent = dict.brandSubtitle;
+        document.getElementById('topBadgeText').textContent = dict.topBadgeText;
+        document.getElementById('topBannerMsg').textContent = dict.topBannerMsg;
+        showToast(state.lang === 'kn' ? 'ಭಾಷೆ ಕನ್ನಡಕ್ಕೆ ಬದಲಾಯಿಸಲಾಗಿದೆ (Kannada labels enabled)' : 'Switched interface labels to English', '🌐');
+      }
+
+      // ==================== MODULE 1: SCHEME FINDER ====================
+      function renderSchemes() {
+        const region = document.getElementById('filterRegion').value;
+        const category = document.getElementById('filterCategory').value;
+        const income = Number(document.getElementById('filterIncome').value) || 28000;
+        const landStatus = document.getElementById('filterLandStatus').value;
+
+        document.getElementById('filterIncomeDisplay').textContent = formatINR(income) + ' / yr';
+
+        const banner = document.getElementById('schemeEligibilityBanner');
+        const bannerText = document.getElementById('schemeEligibilityText');
+
+        if (landStatus === 'pucca_owned') {
+          banner.className = 'mt-4 p-3.5 rounded-xl bg-red-50 border border-red-200 flex flex-wrap items-center justify-between gap-2 text-xs';
+          bannerText.innerHTML = '⚠️ <strong>Exclusion Criteria Triggered:</strong> Households that already own a pucca house are excluded from PMAY-G and Basava Vasati grants. However, you can still apply for <strong>PM Surya Ghar Rooftop Solar Subsidy (up to ₹78,000)</strong>.';
+        } else if (income <= 32000) {
+          banner.className = 'mt-4 p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 flex flex-wrap items-center justify-between gap-2 text-xs';
+          bannerText.innerHTML = '✅ <strong>Maximum Priority Match:</strong> With annual income of ' + formatINR(income) + ' (≤ ₹32,000 threshold), you qualify for both <strong>Basava Vasati Yojana (₹1.50L)</strong> and <strong>PMAY-Gramin (₹1.20L–₹1.30L)</strong> plus MGNREGA &amp; SBM-G convergence.';
+        } else {
+          banner.className = 'mt-4 p-3.5 rounded-xl bg-amber-50 border border-amber-200 flex flex-wrap items-center justify-between gap-2 text-xs';
+          bannerText.innerHTML = 'ℹ️ <strong>Partial Match:</strong> Income of ' + formatINR(income) + ' exceeds Karnataka Basava Vasati Yojana cut-off (₹32,000/yr), but you remain eligible for <strong>PMAY-Gramin</strong> (if SECC/Awaas+ listed), <strong>MGNREGA 95-day labor</strong>, and <strong>SBM-G ₹12,000 toilet support</strong>.';
+        }
+
+        const container = document.getElementById('schemeCardsContainer');
+        container.innerHTML = '';
+
+        let maxPrimaryGrant = 120000;
+        if (region === 'karnataka' && income <= 32000) maxPrimaryGrant = 150000;
+        else if (region === 'hilly') maxPrimaryGrant = 130000;
+
+        const totalCombined = landStatus === 'pucca_owned' ? 78000 : (maxPrimaryGrant + 12000 + 28500 + 78000);
+        document.getElementById('schemeTotalMatchedVal').textContent = formatINR(totalCombined);
+
+        state.schemes.forEach(scheme => {
+          const regionMatch = region === 'all' || scheme.regionTag === 'all' || scheme.regionTag === region || (region === 'karnataka' && scheme.regionTag === 'plain');
+          if (!regionMatch) return;
+
+          let isEligible = true;
+          let statusLabel = 'Eligible Match';
+          let statusStyle = 'bg-emerald-100 text-forest-800 border-emerald-300';
+
+          if (landStatus === 'pucca_owned' && scheme.id !== 'pm_surya_ghar') {
+            isEligible = false;
+            statusLabel = 'Ineligible (Owns Pucca House)';
+            statusStyle = 'bg-red-100 text-red-800 border-red-300';
+          } else if (income > scheme.incomeLimit) {
+            isEligible = false;
+            statusLabel = 'Income > ₹32,000 Limit';
+            statusStyle = 'bg-amber-100 text-amber-900 border-amber-300';
+          } else if (category === 'sc_st' || category === 'vulnerable') {
+            statusLabel = 'Priority Quota Eligible';
+          }
+
+          const isSelected = state.selectedSchemeId === scheme.id;
+
+          const card = document.createElement('div');
+          card.className = 'bg-white rounded-2xl p-5 border ' + (isSelected ? 'border-2 border-forest-700 ring-2 ring-emerald-500/20' : 'border-stone-200') + ' shadow-xs flex flex-col justify-between space-y-4 transition';
+
+          const bulletsHtml = scheme.highlights.map(h => `<li class="flex items-start gap-1.5"><span class="text-forest-600 font-bold">•</span><span>${h}</span></li>`).join('');
+
+          card.innerHTML = `
+            <div class="space-y-3">
+              <div class="flex items-start justify-between gap-2">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${statusStyle}">${statusLabel}</span>
+                <span class="text-[11px] font-semibold text-stone-500">${scheme.sharingRatio}</span>
+              </div>
+              <div>
+                <h3 class="text-base font-extrabold text-stone-900 leading-snug">${scheme.name}</h3>
+                <p class="text-[11px] text-stone-500 mt-0.5">${scheme.authority}</p>
+              </div>
+              <div class="p-3 rounded-xl bg-stone-50 border border-stone-200 flex items-center justify-between">
+                <div>
+                  <div class="text-[10px] uppercase font-bold text-stone-500">Financial Assistance</div>
+                  <div class="text-lg font-extrabold text-forest-700">${scheme.grantDisplay}</div>
+                </div>
+                <div class="text-right">
+                  <div class="text-[10px] uppercase font-bold text-stone-500">Min Spec</div>
+                  <div class="text-xs font-semibold text-stone-800">${scheme.minArea}</div>
+                </div>
+              </div>
+              <ul class="space-y-1.5 text-xs text-stone-600">
+                ${bulletsHtml}
+              </ul>
+            </div>
+            <div class="pt-3 border-t border-stone-100 flex items-center justify-between gap-2">
+              <a href="${scheme.sourceUrl}" target="_blank" rel="noopener noreferrer" class="text-[11px] font-semibold text-clay-600 hover:underline">
+                ${scheme.sourceLabel} ↗
+              </a>
+              <button type="button" data-select-scheme="${scheme.id}" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold transition ${isSelected ? 'bg-forest-700 text-white' : 'bg-stone-100 hover:bg-forest-700 hover:text-white text-stone-800'}">
+                ${isSelected ? '✓ Selected in Plan' : 'Apply to Cost Plan'}
+              </button>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+
+        container.querySelectorAll('[data-select-scheme]').forEach(btn => {
+          btn.addEventListener('click', function () {
+            const sId = this.getAttribute('data-select-scheme');
+            const found = state.schemes.find(s => s.id === sId);
+            if (!found) return;
+            state.selectedSchemeId = sId;
+
+            const calcSelect = document.getElementById('calcSchemeSelect');
+            if (sId === 'pmayg_plain') calcSelect.value = '120000';
+            else if (sId === 'pmayg_hilly') calcSelect.value = '130000';
+            else if (sId === 'basava_vasati') calcSelect.value = '150000';
+
+            renderSchemes();
+            updateCalculator();
+            showToast(`Applied "${found.name}" to your Cost Calculator & Plan`, '🏛️');
+          });
+        });
+      }
+
+      // ==================== MODULE 2: DOCUMENT & LAND RECORD CHECKER ====================
+      function renderDocuments() {
+        const container = document.getElementById('docChecklistContainer');
+        container.innerHTML = '';
+
+        let verifiedCount = 0;
+        state.documents.forEach(doc => {
+          if (doc.status === 'verified') verifiedCount++;
+          const isVerified = doc.status === 'verified';
+
+          const row = document.createElement('div');
+          row.className = 'p-3.5 rounded-xl border transition ' + (isVerified ? 'bg-emerald-50/40 border-emerald-200' : 'bg-amber-50/50 border-amber-300');
+          row.innerHTML = `
+            <div class="flex flex-wrap items-start justify-between gap-2">
+              <div class="flex items-start gap-2.5">
+                <span class="mt-0.5 text-base">${isVerified ? '✅' : '⚠️'}</span>
+                <div>
+                  <div class="flex flex-wrap items-center gap-2">
+                    <h4 class="text-xs sm:text-sm font-bold text-stone-900">${doc.title}</h4>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${isVerified ? 'bg-emerald-100 text-forest-800' : 'bg-amber-200 text-amber-900'}">
+                      ${isVerified ? 'Verified Ready' : 'Action Required'}
+                    </span>
+                  </div>
+                  <div class="text-[11px] text-stone-500 mt-0.5">
+                    Ref: <strong class="text-stone-700">${doc.refCode}</strong> · Source: <a href="${doc.portalUrl}" target="_blank" rel="noopener noreferrer" class="underline text-clay-600 font-medium">${doc.portal} ↗</a>
+                  </div>
+                  <p class="text-xs mt-1.5 ${isVerified ? 'text-forest-800' : 'text-amber-900 font-medium'}">
+                    ${isVerified ? doc.verifiedNote : doc.issueNote}
+                  </p>
+                </div>
+              </div>
+              <button type="button" data-toggle-doc="${doc.id}" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition whitespace-nowrap ${isVerified ? 'bg-white border border-stone-300 text-stone-600 hover:bg-stone-100' : 'bg-forest-700 text-white hover:bg-forest-800'}">
+                ${isVerified ? 'Re-Test' : 'Simulate Verification ✓'}
+              </button>
+            </div>
+          `;
+          container.appendChild(row);
+        });
+
+        container.querySelectorAll('[data-toggle-doc]').forEach(btn => {
+          btn.addEventListener('click', function () {
+            const docId = this.getAttribute('data-toggle-doc');
+            const item = state.documents.find(d => d.id === docId);
+            if (!item) return;
+            item.status = item.status === 'verified' ? 'action_needed' : 'verified';
+            if (docId === 'doc_rtc' && item.status === 'verified') {
+              document.getElementById('inputRtcName').value = document.getElementById('inputAadhaarName').value;
+              checkNameConsistency();
+            }
+            renderDocuments();
+            updateGlobalReadiness();
+            showToast(`${item.title}: ${item.status === 'verified' ? 'Marked Verified' : 'Flagged for Review'}`, '📑');
+          });
+        });
+
+        document.getElementById('navDocBadge').textContent = `${verifiedCount}/${state.documents.length}`;
+        document.getElementById('aiCtxDocs').textContent = `${verifiedCount} / ${state.documents.length} Ready`;
+      }
+
+      function checkNameConsistency() {
+        const aName = (document.getElementById('inputAadhaarName').value || '').trim().toLowerCase();
+        const rName = (document.getElementById('inputRtcName').value || '').trim().toLowerCase();
+        const badge = document.getElementById('nameMatchBadge');
+        const diag = document.getElementById('nameCheckDiagnosticText');
+        const rtcInput = document.getElementById('inputRtcName');
+
+        if (aName && rName && aName === rName) {
+          badge.className = 'px-2 py-0.5 rounded-full text-[11px] bg-emerald-100 text-forest-800 font-semibold';
+          badge.textContent = 'Exact Match Verified ✓';
+          rtcInput.className = 'w-full rounded-lg border border-emerald-400 bg-emerald-50/30 px-2.5 py-1.5 text-xs font-semibold text-stone-800';
+          diag.className = 'text-[11px] text-forest-800';
+          diag.innerHTML = '✅ <strong>Records Aligned:</strong> Owner name on Bhoomi RTC / Pahani matches Aadhaar card. Ready for Gram Panchayat housing sanction.';
+        } else {
+          badge.className = 'px-2 py-0.5 rounded-full text-[11px] bg-amber-100 text-amber-800 font-semibold';
+          badge.textContent = 'Name Mismatch Detected';
+          rtcInput.className = 'w-full rounded-lg border border-amber-400 bg-amber-50/40 px-2.5 py-1.5 text-xs font-semibold text-stone-800';
+          diag.className = 'text-[11px] text-amber-800';
+          diag.innerHTML = '⚠️ <strong>Action Needed:</strong> RTC/Pahani owner name does not match Aadhaar. Apply for <strong>Pouthi Khata (Inheritance Mutation)</strong> on Bhoomi or attach a notarized Family Tree + NOC.';
+        }
+      }
+
+      function renderLandGuide() {
+        const box = document.getElementById('landGuideStepsBox');
+        const btnBhoomi = document.getElementById('guideBtnBhoomi');
+        const btnSvamitva = document.getElementById('guideBtnSvamitva');
+
+        if (state.landGuideMode === 'bhoomi') {
+          btnBhoomi.className = 'p-2.5 rounded-xl border-2 border-forest-700 bg-emerald-50/70 text-forest-900 font-bold text-left transition';
+          btnSvamitva.className = 'p-2.5 rounded-xl border border-stone-200 bg-stone-50 text-stone-700 font-semibold text-left hover:bg-stone-100 transition';
+          box.innerHTML = `
+            <div class="p-3 rounded-xl bg-stone-50 border border-stone-200">
+              <div class="font-bold text-stone-900">Step 1: Open Bhoomi RTC Services Online</div>
+              <p class="text-stone-600 mt-0.5">Visit Karnataka's Bhoomi portal (<a href="https://www.ujjivansfb.bank.in/banking-blogs/personal-finance/bhoomi-rtc-karnataka-land-records-online" target="_blank" rel="noopener noreferrer" class="underline text-clay-600">View RTC &amp; MR guide ↗</a>) and select your <strong>District, Taluk, Hobli, Village, and Survey Number / Hissa Number</strong>.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-stone-50 border border-stone-200">
+              <div class="font-bold text-stone-900">Step 2: Check Column 9 (Khatedar Name) &amp; Column 11 (Liens)</div>
+              <p class="text-stone-600 mt-0.5">Ensure your name appears in Column 9 and coincides with your Aadhaar spelling. If the land is inherited, apply for <strong>Mutation (MR)</strong> at the Nadakacheri / Taluk office.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-stone-50 border border-stone-200">
+              <div class="font-bold text-stone-900">Step 3: Download Signed i-RTC (₹15 Official Copy)</div>
+              <p class="text-stone-600 mt-0.5">Download the digitally signed <strong>i-RTC</strong> or get it printed at your Gram Panchayat Bapuji Seva Kendra—no middleman fee required.</p>
+            </div>
+          `;
+        } else {
+          btnSvamitva.className = 'p-2.5 rounded-xl border-2 border-forest-700 bg-emerald-50/70 text-forest-900 font-bold text-left transition';
+          btnBhoomi.className = 'p-2.5 rounded-xl border border-stone-200 bg-stone-50 text-stone-700 font-semibold text-left hover:bg-stone-100 transition';
+          box.innerHTML = `
+            <div class="p-3 rounded-xl bg-stone-50 border border-stone-200">
+              <div class="font-bold text-stone-900">Step 1: Village Abadi / Gramathana Drone Mapping</div>
+              <p class="text-stone-600 mt-0.5">Under the <a href="https://web.umang.gov.in/landing/scheme/detail/pm-swamitva-yojana_pmsy.html" target="_blank" rel="noopener noreferrer" class="underline text-clay-600">SVAMITVA Scheme ↗</a>, Survey of India drones map inhabited rural (Abadi) plots that lack traditional revenue survey numbers.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-stone-50 border border-stone-200">
+              <div class="font-bold text-stone-900">Step 2: Download Property Card via DigiLocker / UMANG</div>
+              <p class="text-stone-600 mt-0.5">Log into DigiLocker or UMANG with your Aadhaar-linked mobile number to fetch your official <strong>Property Card (Title Deed)</strong> and Karnataka <strong>E-Swathu Form 9 &amp; 11A</strong>.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-stone-50 border border-stone-200">
+              <div class="font-bold text-stone-900">Step 3: Use Property Card for ₹70,000 Bank Credit</div>
+              <p class="text-stone-600 mt-0.5">SVAMITVA Property Cards are legally recognized as collateral-ready ownership proof for availing the PMAY-G ₹70,000 institutional loan at 3% interest subvention.</p>
+            </div>
+          `;
+        }
+      }
+
+      // ==================== MODULE 3: COST & FUNDING GAP CALCULATOR ====================
+      let stageChartInstance = null;
+      let fundingChartInstance = null;
+
+      function updateCalculator() {
+        const area = Number(document.getElementById('calcAreaInput').value) || 300;
+        const rate = Number(document.getElementById('calcSpecSelect').value) || 1350;
+        const baseGrant = Number(document.getElementById('calcSchemeSelect').value) || 120000;
+        const includeMgnrega = document.getElementById('chkMgnrega').checked;
+        const includeSbmg = document.getElementById('chkSbmg').checked;
+        const savings = Number(document.getElementById('calcSavingsInput').value) || 0;
+        const loan = Number(document.getElementById('calcLoanInput').value) || 0;
+
+        const sqm = (area * 0.092903).toFixed(1);
+        document.getElementById('calcAreaDisplay').textContent = `${area} sq.ft (${sqm} sq.m)`;
+        document.getElementById('calcSavingsDisplay').textContent = formatINR(savings);
+        document.getElementById('calcLoanDisplay').textContent = formatINR(loan);
+
+        const totalCost = area * rate;
+        const mgnregaVal = includeMgnrega ? 28500 : 0;
+        const sbmgVal = includeSbmg ? 12000 : 0;
+        const totalGrants = baseGrant + mgnregaVal + sbmgVal;
+        const privateFunds = savings + loan;
+        const totalAvailable = totalGrants + privateFunds;
+        const netGap = Math.max(0, totalCost - totalAvailable);
+        const surplus = Math.max(0, totalAvailable - totalCost);
+
+        // Monthly EMI calculation for 5 years (60 months) at ~6% effective rate (9% base - 3% PMAY-G interest subvention)
+        let emi = 0;
+        if (loan > 0) {
+          const r = 0.06 / 12;
+          const n = 60;
+          emi = (loan * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+        }
+
+        document.getElementById('kpiTotalCost').textContent = formatINR(totalCost);
+        document.getElementById('kpiCostPerSqft').textContent = `${area} sq.ft @ ₹${rate.toLocaleString('en-IN')}/sq.ft`;
+        document.getElementById('kpiTotalGrants').textContent = formatINR(totalGrants);
+        document.getElementById('kpiPrivateFunds').textContent = formatINR(privateFunds);
+        document.getElementById('kpiEmiReadout').textContent = loan > 0 ? `Loan EMI: ~${formatINR(emi)}/mo (5 yrs @ 3% subvention)` : 'No bank loan selected';
+
+        const gapCard = document.getElementById('kpiGapCard');
+        const gapLabel = document.getElementById('kpiGapLabel');
+        const gapVal = document.getElementById('kpiFundingGap');
+        const gapAdvice = document.getElementById('kpiGapAdvice');
+
+        if (netGap === 0) {
+          gapCard.className = 'bg-emerald-50 p-4 rounded-2xl border border-emerald-300 shadow-xs';
+          gapLabel.className = 'text-[11px] text-forest-800 font-semibold';
+          gapLabel.textContent = '100% Funded (Zero Gap)';
+          gapVal.className = 'text-lg sm:text-xl font-extrabold text-forest-700 mt-1';
+          gapVal.textContent = surplus > 0 ? `+${formatINR(surplus)} Buffer` : '₹0 Shortfall';
+          gapAdvice.className = 'text-[10px] text-forest-700 mt-0.5';
+          gapAdvice.textContent = 'Safe to start construction!';
+        } else {
+          gapCard.className = 'bg-amber-50 p-4 rounded-2xl border border-amber-300 shadow-xs';
+          gapLabel.className = 'text-[11px] text-amber-900 font-semibold';
+          gapLabel.textContent = 'Unfunded Shortfall Gap';
+          gapVal.className = 'text-lg sm:text-xl font-extrabold text-clay-600 mt-1';
+          gapVal.textContent = formatINR(netGap);
+          gapAdvice.className = 'text-[10px] text-amber-800 mt-0.5';
+          gapAdvice.textContent = rate > 1150 ? 'Tip: Switch to Stabilized Mud Block (₹1,150/sq.ft)' : 'Tip: Add ₹70k subvention loan or phase finishing';
+        }
+
+        // Material quantities
+        document.getElementById('matCementBags').textContent = `${Math.round(area * 0.42)} Bags`;
+        document.getElementById('matSteelKg').textContent = `${Math.round(area * 2.5).toLocaleString('en-IN')} kg`;
+        document.getElementById('matBricksCount').textContent = `${Math.round(area * 18).toLocaleString('en-IN')} Nos`;
+        document.getElementById('matSandCft').textContent = `${Math.round(area * 1.8).toLocaleString('en-IN')} cu.ft`;
+
+        // Update Top Summary Bar & AI Context
+        const schemeNameMap = {
+          '120000': 'PMAY-G (Plain) — ₹1,20,000',
+          '130000': 'PMAY-G (Hilly) — ₹1,30,000',
+          '150000': 'Basava Vasati (RGRHCL) — ₹1,50,000'
+        };
+        const selectedLabel = schemeNameMap[String(baseGrant)] || 'PMAY-G — ₹1,20,000';
+        document.getElementById('barSelectedScheme').textContent = selectedLabel;
+        document.getElementById('barFundingGap').textContent = netGap === 0 ? '₹0 (Fully Funded)' : formatINR(netGap);
+        document.getElementById('aiCtxScheme').textContent = selectedLabel;
+        document.getElementById('aiCtxArea').textContent = `${area} sq.ft`;
+        document.getElementById('aiCtxGap').textContent = netGap === 0 ? '₹0 (Fully Funded)' : formatINR(netGap);
+
+        updateGlobalReadiness();
+
+        // Update Charts
+        const stageCosts = [
+          Math.round(totalCost * 0.25), // Foundation & Plinth (25%)
+          Math.round(totalCost * 0.35), // Walls & Lintel (35%)
+          Math.round(totalCost * 0.25), // Roof Cast (25%)
+          Math.round(totalCost * 0.15)  // Finishing & Toilet (15%)
+        ];
+
+        const ftoReleases = [
+          Math.round(baseGrant * 0.333),
+          Math.round(baseGrant * 0.417),
+          Math.round(baseGrant * 0.25),
+          sbmgVal + mgnregaVal
+        ];
+
+        const stageCanvas = document.getElementById('stageCostChart');
+        if (stageCanvas && window.Chart) {
+          if (stageChartInstance) {
+            stageChartInstance.data.datasets[0].data = stageCosts;
+            stageChartInstance.data.datasets[1].data = ftoReleases;
+            stageChartInstance.update();
+          } else {
+            stageChartInstance = new Chart(stageCanvas, {
+              type: 'bar',
+              data: {
+                labels: ['1. Plinth (25%)', '2. Lintel (35%)', '3. Roof (25%)', '4. Finish & Toilet (15%)'],
+                datasets: [
+                  {
+                    label: 'Stage Cost (₹)',
+                    data: stageCosts,
+                    backgroundColor: '#c85a32',
+                    borderRadius: 6
+                  },
+                  {
+                    label: 'Govt Grant + Wage Release (₹)',
+                    data: ftoReleases,
+                    backgroundColor: '#236343',
+                    borderRadius: 6
+                  }
+                ]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } }
+                },
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    ticks: {
+                      font: { size: 10 },
+                      callback: function (v) { return '₹' + (v / 1000) + 'k'; }
+                    }
+                  },
+                  x: { ticks: { font: { size: 10 } } }
+                }
+              }
+            });
+          }
+        }
+
+        const mixCanvas = document.getElementById('fundingMixChart');
+        if (mixCanvas && window.Chart) {
+          const mixData = [baseGrant, mgnregaVal + sbmgVal, savings, loan, netGap];
+          if (fundingChartInstance) {
+            fundingChartInstance.data.datasets[0].data = mixData;
+            fundingChartInstance.update();
+          } else {
+            fundingChartInstance = new Chart(mixCanvas, {
+              type: 'doughnut',
+              data: {
+                labels: ['Base Housing Grant', 'MGNREGA + SBM-G', 'Family Savings', '3% Subvention Loan', 'Unfunded Gap'],
+                datasets: [{
+                  data: mixData,
+                  backgroundColor: ['#1b4f35', '#3b9b69', '#d97706', '#2563eb', '#dc2626'],
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
+                }
+              }
+            });
+          }
+        }
+      }
+
+      // ==================== MODULE 4: APPLICATION & GEO-TAG TRACKER ====================
+      function renderTracker() {
+        const ben = state.beneficiaries[state.activeBeneficiaryId];
+        if (!ben) return;
+
+        document.getElementById('barBeneficiaryName').textContent = `${ben.name} (${ben.village.split(',')[0]})`;
+
+        const creditedSoFar = ben.stages
+          .filter(s => s.step <= ben.currentStage)
+          .reduce((acc, s) => acc + s.amount, 0);
+
+        const summaryBox = document.getElementById('trackerHeaderSummary');
+        summaryBox.innerHTML = `
+          <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-200">
+            <div class="text-[10px] uppercase font-bold text-stone-500">Beneficiary &amp; AwaasSoft ID</div>
+            <div class="text-sm font-extrabold text-stone-900 mt-0.5">${ben.name}</div>
+            <div class="text-[11px] text-forest-700 font-semibold">${ben.id}</div>
+          </div>
+          <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-200">
+            <div class="text-[10px] uppercase font-bold text-stone-500">Village &amp; Geo-Tag Coordinates</div>
+            <div class="text-xs font-bold text-stone-900 mt-0.5">${ben.village}</div>
+            <div class="text-[11px] text-stone-500">GPS: ${ben.gps}</div>
+          </div>
+          <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-200">
+            <div class="text-[10px] uppercase font-bold text-stone-500">Sanctioned Scheme &amp; Bank</div>
+            <div class="text-xs font-bold text-stone-900 mt-0.5">${ben.scheme}</div>
+            <div class="text-[11px] text-emerald-700 font-medium">${ben.bankAccount}</div>
+          </div>
+          <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200">
+            <div class="text-[10px] uppercase font-bold text-forest-700">DBT Disbursed vs Sanctioned</div>
+            <div class="text-base font-extrabold text-forest-800 mt-0.5">${formatINR(creditedSoFar)} <span class="text-xs font-normal text-stone-500">/ ${formatINR(ben.totalGrant)}</span></div>
+            <div class="text-[11px] text-forest-700 font-semibold">Stage ${ben.currentStage} of 5 Active</div>
+          </div>
+        `;
+
+        // Render 5-Stage Visual Stepper
+        const timelineGrid = document.getElementById('trackerTimelineGrid');
+        timelineGrid.innerHTML = '';
+
+        ben.stages.forEach(st => {
+          const isDone = st.step <= ben.currentStage;
+          const isNext = st.step === ben.currentStage + 1;
+
+          const card = document.createElement('div');
+          card.className = 'p-3.5 rounded-xl border flex flex-col justify-between transition ' +
+            (isDone ? 'bg-emerald-50/70 border-emerald-300' : isNext ? 'bg-amber-50 border-amber-400 step-pulse' : 'bg-stone-50 border-stone-200 opacity-75');
+
+          card.innerHTML = `
+            <div>
+              <div class="flex items-center justify-between gap-1 mb-1.5">
+                <span class="w-6 h-6 rounded-full text-xs font-extrabold flex items-center justify-center ${isDone ? 'bg-forest-700 text-white' : isNext ? 'bg-clay-500 text-white' : 'bg-stone-300 text-stone-700'}">
+                  ${isDone ? '✓' : st.step}
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${isDone ? 'bg-emerald-100 text-forest-800' : isNext ? 'bg-amber-200 text-amber-900' : 'bg-stone-200 text-stone-600'}">
+                  ${isDone ? 'Completed' : isNext ? 'Next Geo-Tag' : 'Upcoming'}
+                </span>
+              </div>
+              <h4 class="text-xs font-extrabold text-stone-900">${st.name}</h4>
+              <p class="text-[11px] text-stone-600 mt-1">${st.desc}</p>
+            </div>
+            <div class="pt-2.5 mt-2.5 border-t border-stone-200/70 flex items-center justify-between text-[11px]">
+              <span class="font-bold ${isDone ? 'text-forest-800' : 'text-stone-600'}">${st.amount > 0 ? formatINR(st.amount) : 'Order Issued'}</span>
+              <span class="text-[10px] text-stone-500">${isDone ? 'Geo-Tagged 📸' : 'Pending'}</span>
+            </div>
+          `;
+          timelineGrid.appendChild(card);
+        });
+
+        // Update FTO Ledger Table
+        const tbody = document.getElementById('trackerFtoTableBody');
+        tbody.innerHTML = '';
+        ben.stages.forEach(st => {
+          const isDone = st.step <= ben.currentStage;
+          const tr = document.createElement('tr');
+          tr.className = isDone ? 'bg-white' : 'bg-stone-50/70 text-stone-500';
+          tr.innerHTML = `
+            <td class="py-2.5 px-3 font-semibold text-stone-900">Stage ${st.step}: ${st.name}</td>
+            <td class="py-2.5 px-3">${st.desc}</td>
+            <td class="py-2.5 px-3 font-mono text-[11px]">${st.fto}</td>
+            <td class="py-2.5 px-3">${isDone ? `${ben.gps} · ${st.date}` : st.date}</td>
+            <td class="py-2.5 px-3 font-bold ${isDone ? 'text-forest-700' : 'text-stone-500'}">${st.amount > 0 ? formatINR(st.amount) : '—'}</td>
+            <td class="py-2.5 px-3">
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${isDone ? 'bg-emerald-100 text-forest-800' : 'bg-amber-100 text-amber-800'}">
+                ${isDone ? (st.amount > 0 ? 'DBT Credited ✓' : 'Sanctioned ✓') : 'Awaiting AwaasApp Photo'}
+              </span>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        const geoBtn = document.getElementById('simulateGeoTagBtn');
+        const geoBtnText = document.getElementById('simulateGeoTagBtnText');
+        if (ben.currentStage >= 5) {
+          geoBtn.disabled = true;
+          geoBtn.className = 'px-3.5 py-1.5 rounded-xl bg-stone-300 text-stone-600 text-xs font-semibold cursor-not-allowed flex items-center gap-1.5';
+          geoBtnText.textContent = 'All 5 Stages Completed & Disbursed ✓';
+        } else {
+          geoBtn.disabled = false;
+          geoBtn.className = 'px-3.5 py-1.5 rounded-xl bg-clay-500 hover:bg-clay-600 text-white text-xs font-semibold shadow-xs transition flex items-center gap-1.5';
+          const nextStageObj = ben.stages[ben.currentStage];
+          geoBtnText.textContent = `Simulate AwaasApp Geo-Tag: ${nextStageObj.name}`;
+        }
+      }
+
+      function updateGlobalReadiness() {
+        const verifiedDocs = state.documents.filter(d => d.status === 'verified').length;
+        const docScore = (verifiedDocs / state.documents.length) * 60; // up to 60%
+        const calcArea = Number(document.getElementById('calcAreaInput').value) || 300;
+        const calcRate = Number(document.getElementById('calcSpecSelect').value) || 1350;
+        const baseGrant = Number(document.getElementById('calcSchemeSelect').value) || 120000;
+        const mgnregaVal = document.getElementById('chkMgnrega').checked ? 28500 : 0;
+        const sbmgVal = document.getElementById('chkSbmg').checked ? 12000 : 0;
+        const savings = Number(document.getElementById('calcSavingsInput').value) || 0;
+        const loan = Number(document.getElementById('calcLoanInput').value) || 0;
+        const totalCost = calcArea * calcRate;
+        const totalCovered = baseGrant + mgnregaVal + sbmgVal + savings + loan;
+        const finRatio = Math.min(1, totalCovered / Math.max(1, totalCost));
+        const totalReadiness = Math.round(docScore + finRatio * 40);
+
+        document.getElementById('barReadinessProgress').style.width = `${totalReadiness}%`;
+        document.getElementById('barReadinessPct').textContent = `${totalReadiness}%`;
+      }
+
+      // ==================== MODULE 5: AI SAHAYAK CHATBOT ====================
+      function renderChatMessages() {
+        const box = document.getElementById('chatMessagesBox');
+        box.innerHTML = '';
+
+        state.chatHistory.forEach(msg => {
+          const wrap = document.createElement('div');
+          wrap.className = 'flex ' + (msg.sender === 'user' ? 'justify-end' : 'justify-start');
+
+          const bubble = document.createElement('div');
+          bubble.className = msg.sender === 'user'
+            ? 'max-w-[82%] rounded-2xl rounded-br-xs bg-forest-700 text-white px-4 py-2.5 text-xs sm:text-sm shadow-2xs leading-relaxed'
+            : 'max-w-[88%] rounded-2xl rounded-bl-xs bg-white border border-stone-200 text-stone-800 px-4 py-3 text-xs sm:text-sm shadow-2xs leading-relaxed space-y-1.5';
+
+          // Format basic bold and linebreaks safely
+          const formatted = msg.text
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\n/g, '<br/>');
+
+          bubble.innerHTML = formatted;
+          wrap.appendChild(bubble);
+          box.appendChild(wrap);
+        });
+
+        box.scrollTop = box.scrollHeight;
+      }
+
+      function generateLocalSahayakResponse(query) {
+        const q = query.toLowerCase();
+
+        if (q.includes('ಕನ್ನಡ') || q.includes('ಪಹಣಿ') || q.includes('ಯೋಜನೆ')) {
+          return `**ಕರ್ನಾಟಕ ಗ್ರಾಮೀಣ ವಸತಿ ಮತ್ತು ಭೂಮಿ ಪಹಣಿ (RTC) ಮಾರ್ಗದರ್ಶನ:**\n1. **ಬಸವ ವಸತಿ ಯೋಜನೆ (RGRHCL):** ವಾರ್ಷಿಕ ಆದಾಯ ₹32,000 ಒಳಗಿರುವ BPL ಕುಟುಂಬಗಳಿಗೆ **₹1.20 ಲಕ್ಷದಿಂದ ₹1.50 ಲಕ್ಷದವರೆಗೆ** ಅನುದಾನ (ಮತ್ತು 85% ನಿರ್ಮಾಣ ಸಾಮಗ್ರಿ ಬೆಂಬಲ) ಸಿಗುತ್ತದೆ.\n2. **ಪ್ರಧಾನ ಮಂತ್ರಿ ಆವಾಸ್ ಯೋಜನೆ - ಗ್ರಾಮೀಣ (PMAY-G):** ಸಮತಟ್ಟಾದ ಪ್ರದೇಶಕ್ಕೆ **₹1,20,000** ಅನುದಾನ + ನರೇಗಾ (MGNREGA) ಅಡಿ **95 ದಿನಗಳ ಕೂಲಿ** + ಸ್ವಚ್ಛ ಭಾರತ್ (SBM-G) ಶೌಚಾಲಯಕ್ಕೆ **₹12,000**.\n3. **ಭೂಮಿ ಪಹಣಿ (RTC) ತಿದ್ದುಪಡಿ:** ಪಹಣಿಯಲ್ಲಿ ತಂದೆಯವರ ಹೆಸರಿದ್ದರೆ ನಾಡಕಚೇರಿ ಅಥವಾ ಗ್ರಾಮ ಪಂಚಾಯಿತಿಯಲ್ಲಿ ಪೌತಿ ಖಾತೆ (Mutation) ಮಾಡಿಸಿ ಆಧಾರ್ ಹೆಸರಿಗೆ ಹೊಂದಾಣಿಕೆ ಮಾಡಿ.`;
+        }
+
+        if (q.includes('rtc') || q.includes('pahani') || q.includes('bhoomi') || q.includes('father') || q.includes('mutation')) {
+          return `**How to Fix Bhoomi RTC / Pahani Name Mismatch (Without Middlemen):**\n1. **Check Current RTC:** Open the official Karnataka Bhoomi portal (*RTC Services → View RTC & MR*) and verify Column 9 (Owner Name) and Survey/Hissa number.\n2. **Apply for Pouthi Khata (Inheritance Mutation):** If the land is still in your late father's or grandfather's name, submit a Death Certificate + Family Tree (*Vamshavruksha* issued by the Village Accountant) at your Nadakacheri / Atalji Janasnehi Kendra.\n3. **Village Abadi Plot?** If your plot is inside the village settlement (*Gramathana / Abadi*), obtain **E-Swathu Form 9 & 11A** from the Gram Panchayat PDO or download your drone-surveyed **SVAMITVA Property Card** via DigiLocker.`;
+        }
+
+        if (q.includes('installment') || q.includes('geo') || q.includes('awaasapp') || q.includes('fto')) {
+          return `**PMAY-G Installments & AwaasApp Geo-Tagging Rules:**\nUnder PMAY-G (Plain Area ₹1,20,000 base grant), funds are sent via Direct Benefit Transfer (PFMS FTO) in **3 stages**:\n• **1st Installment (₹40,000):** Released upon Gram Sabha verification & sanction order after geo-tagging the vacant plot.\n• **2nd Installment (₹50,000):** Released after completing the **Foundation/Plinth and Lintel level** and uploading a time-stamped, GPS-tagged photo via **AwaasApp**.\n• **3rd Installment (₹30,000 + ₹12,000 SBM-G Toilet):** Released upon roof casting & final completion geo-tag.\n*Tip:* Never build past a stage without having the Gram Rozgar Sahayak / PDO upload that stage's AwaasApp photo first!`;
+        }
+
+        if (q.includes('basava') || q.includes('rgrhcl') || q.includes('karnataka')) {
+          return `**Basava Vasati Yojana (RGRHCL Karnataka) Eligibility & Benefits:**\n• **Subsidy Grant:** **₹1,20,000 to ₹1,50,000** (with provisions for up to 85% raw material support).\n• **Who Qualifies:** Permanent residents of Karnataka from BPL / EWS households with an **annual household income ≤ ₹32,000** who own a kutcha house or residential plot and do not own any pucca house.\n• **Documents Needed:** Aadhaar Card (NPCI seeded), Bhoomi RTC / E-Swathu Form 9 & 11A, Nadakacheri Income & Caste Certificate.\n• **Official Helpline:** RGRHCL Kaveri Bhavan, Bengaluru — **080-23118888**.`;
+        }
+
+        if (q.includes('bribe') || q.includes('middleman') || q.includes('corrupt') || q.includes('commission') || q.includes('delay')) {
+          return `**Zero-Bribe Protection & Grievance Redressal:**\n• **AwaasApp Geo-Tagging & Sanction Letters are 100% FREE.** All housing installments are transferred electronically via PFMS FTO directly to your Aadhaar-linked bank account.\n• If anyone demands money to upload geo-tagged photos or release an FTO:\n  1. Call the **RGRHCL Helpline at 080-23118888** (for Karnataka housing schemes) or **PMAY-G Toll-Free at 1800-11-6446**.\n  2. Check your exact FTO status yourself on **pmayg.dord.gov.in** or **ashraya.karnataka.gov.in** using your Beneficiary ID.\n  3. File a formal grievance on **CPGRAMS (pgportal.gov.in)** or Karnataka **Janaspandana (1902)**.`;
+        }
+
+        if (q.includes('loan') || q.includes('gap') || q.includes('cost') || q.includes('diagnose')) {
+          const verifiedDocs = state.documents.filter(d => d.status === 'verified').length;
+          const pendingDocs = state.documents.filter(d => d.status !== 'verified').map(d => d.title).join('; ');
+          const gapText = document.getElementById('aiCtxGap').textContent;
+          const areaText = document.getElementById('aiCtxArea').textContent;
+          return `**Personalized Diagnostic for Your ${areaText} Home Plan:**\n1. **Funding Gap Status (${gapText}):** Under PMAY-G guidelines, you can avail an **institutional bank loan of up to ₹70,000 at a 3% interest subvention** using your **SVAMITVA Property Card** or Bhoomi RTC as ownership record. You can also save ~₹200/sq.ft by choosing **Stabilized Mud Block + Filler Slab** construction.\n2. **Convergence Check:** Ensure your MGNREGA Job Card is entered into AwaasSoft so you receive **95 days of unskilled labor wages** during construction.\n3. **Document Readiness (${verifiedDocs}/6 Verified):** ${pendingDocs ? 'Please resolve: **' + pendingDocs + '** before submitting your final application.' : 'All 6 documents are verified and ready!'}`;
+        }
+
+        return `**Land2Life Rural Housing Guidance:**\nFor your rural home journey, remember to combine:\n1. **Base Grant:** **PMAY-G (₹1,20,000 Plain / ₹1,30,000 Hilly)** or **Basava Vasati Yojana (₹1,50,000 in Karnataka)**.\n2. **Convergence Add-Ons:** **MGNREGA 95-day labor wages** + **₹12,000 SBM-G Toilet grant** + **₹70,000 bank loan @ 3% interest subvention**.\n3. **Land Record Proof:** Verify **Bhoomi RTC (Pahani)** or **SVAMITVA Property Card** and ensure your bank account has active **NPCI Aadhaar DBT seeding**.\nAsk me specifically about *RTC mutation*, *AwaasApp stages*, *Basava Vasati rules*, or click **"Ask AI to Diagnose My Funding Gap"** on the right!`;
+      }
+
+      async function handleUserChat(userText) {
+        if (!userText.trim()) return;
+        state.chatHistory.push({ sender: 'user', text: userText.trim() });
+        renderChatMessages();
+
+        let replyText = '';
+        if (state.geminiApiKey) {
+          try {
+            const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(state.geminiApiKey)}`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                contents: [{
+                  parts: [{
+                    text: `You are Land2Life AI Sahayak, a warm, concise rural housing assistant in India/Karnataka. Use verified facts: PMAY-G gives ₹1,20,000 (plain) / ₹1,30,000 (hilly), min 25 sq.m, 95 days MGNREGA labor, ₹12,000 SBM-G toilet, up to ₹70,000 loan at 3% interest subvention. Basava Vasati Yojana (RGRHCL Karnataka) gives ₹1.20L-₹1.50L for BPL income <= ₹32,000/yr (Helpline 080-23118888). Land records use Bhoomi RTC/Pahani and SVAMITVA Property Cards. Keep answer under 120 words.\n\nUser Question: ${userText}`
+                  }]
+                }]
+              })
+            });
+            const data = await resp.json();
+            replyText = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+          } catch (e) {
+            replyText = '';
+          }
+        }
+
+        if (!replyText) {
+          replyText = generateLocalSahayakResponse(userText);
+        }
+
+        state.chatHistory.push({ sender: 'bot', text: replyText });
+        renderChatMessages();
+
+        if (state.voiceReadout && 'speechSynthesis' in window) {
+          try {
+            window.speechSynthesis.cancel();
+            const cleanSpeech = replyText.replace(/\*\*/g, '').replace(/•/g, '');
+            const utter = new SpeechSynthesisUtterance(cleanSpeech);
+            utter.lang = /[\u0C80-\u0CFF]/.test(cleanSpeech) ? 'kn-IN' : 'en-IN';
+            window.speechSynthesis.speak(utter);
+          } catch (e) {
+            // Ignore speech synthesis errors in restricted environments
+          }
+        }
+      }
+
+      // ==================== EVENT LISTENERS & INIT ====================
+      function initApp() {
+        // Tab buttons
+        document.querySelectorAll('.nav-tab').forEach(btn => {
+          btn.addEventListener('click', function () {
+            switchTab(this.getAttribute('data-tab'));
+          });
+        });
+
+        // Quick jump buttons on overview
+        document.querySelectorAll('[data-goto]').forEach(btn => {
+          btn.addEventListener('click', function () {
+            switchTab(this.getAttribute('data-goto'));
+          });
+        });
+
+        // Language toggle
+        document.getElementById('langToggleBtn').addEventListener('click', toggleLanguage);
+
+        // Scheme Finder filters
+        ['filterRegion', 'filterCategory', 'filterIncome', 'filterLandStatus'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.addEventListener('input', renderSchemes);
+        });
+
+        document.getElementById('resetSchemeFiltersBtn').addEventListener('click', function () {
+          document.getElementById('filterRegion').value = 'karnataka';
+          document.getElementById('filterCategory').value = 'all';
+          document.getElementById('filterIncome').value = '28000';
+          document.getElementById('filterLandStatus').value = 'kutcha_land';
+          renderSchemes();
+          showToast('Scheme filters reset to default BPL rural profile', '🔍');
+        });
+
+        // Document Checker events
+        ['inputAadhaarName', 'inputRtcName', 'inputSurveyNo'].forEach(id => {
+          document.getElementById(id).addEventListener('input', checkNameConsistency);
+        });
+
+        document.getElementById('simulateFixMutationBtn').addEventListener('click', function () {
+          const aadhaarName = document.getElementById('inputAadhaarName').value;
+          document.getElementById('inputRtcName').value = aadhaarName;
+          state.documents.forEach(d => {
+            if (d.id === 'doc_rtc' || d.id === 'doc_mutation') d.status = 'verified';
+          });
+          checkNameConsistency();
+          renderDocuments();
+          updateGlobalReadiness();
+          showToast('Simulated Pouthi Khata Mutation & Form 11A Verification Complete!', '✅');
+        });
+
+        document.getElementById('runBatchVerifyBtn').addEventListener('click', function () {
+          const aadhaarName = document.getElementById('inputAadhaarName').value;
+          document.getElementById('inputRtcName').value = aadhaarName;
+          state.documents.forEach(d => { d.status = 'verified'; });
+          checkNameConsistency();
+          renderDocuments();
+          updateGlobalReadiness();
+          showToast('All 6 Land & Identity Documents Verified Ready (100%)!', '⚡');
+        });
+
+        document.getElementById('guideBtnBhoomi').addEventListener('click', function () {
+          state.landGuideMode = 'bhoomi';
+          renderLandGuide();
+        });
+        document.getElementById('guideBtnSvamitva').addEventListener('click', function () {
+          state.landGuideMode = 'svamitva';
+          renderLandGuide();
+        });
+
+        // Calculator inputs
+        ['calcAreaInput', 'calcSpecSelect', 'calcSchemeSelect', 'chkMgnrega', 'chkSbmg', 'calcSavingsInput', 'calcLoanInput'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.addEventListener('input', updateCalculator);
+          if (el) el.addEventListener('change', updateCalculator);
+        });
+
+        // Application Tracker events
+        document.getElementById('trackerBeneficiarySelect').addEventListener('change', function () {
+          state.activeBeneficiaryId = this.value;
+          renderTracker();
+          showToast(`Loaded application tracker for ${state.beneficiaries[this.value].name}`, '📍');
+        });
+
+        document.getElementById('simulateGeoTagBtn').addEventListener('click', function () {
+          const ben = state.beneficiaries[state.activeBeneficiaryId];
+          if (!ben || ben.currentStage >= 5) return;
+          ben.currentStage += 1;
+          const st = ben.stages[ben.currentStage - 1];
+          st.fto = `FTO-KA-261118-${Math.floor(1000 + Math.random() * 9000)}`;
+          st.date = '18 Nov 2026, 02:55 PM (AwaasApp Verified)';
+          renderTracker();
+          showToast(`AwaasApp Geo-Tag Verified! Stage ${st.step} (${st.name}) FTO Released.`, '📸');
+        });
+
+        document.getElementById('resetTrackerCaseBtn').addEventListener('click', function () {
+          const ben = state.beneficiaries[state.activeBeneficiaryId];
+          if (!ben) return;
+          ben.currentStage = ben.initialStage;
+          renderTracker();
+          showToast('Reset beneficiary stage to initial sample state', '↩️');
+        });
+
+        // AI Sahayak events
+        document.getElementById('chatForm').addEventListener('submit', function (e) {
+          e.preventDefault();
+          const input = document.getElementById('chatInput');
+          const text = input.value;
+          input.value = '';
+          handleUserChat(text);
+        });
+
+        document.querySelectorAll('.chat-chip').forEach(chip => {
+          chip.addEventListener('click', function () {
+            const prompt = this.getAttribute('data-prompt');
+            handleUserChat(prompt);
+          });
+        });
+
+        document.getElementById('askAiDiagnosePlanBtn').addEventListener('click', function () {
+          handleUserChat('Please diagnose my current construction funding gap and pending documents.');
+        });
+
+        document.getElementById('clearChatBtn').addEventListener('click', function () {
+          state.chatHistory = [state.chatHistory[0]];
+          renderChatMessages();
+        });
+
+        document.getElementById('toggleVoiceReadoutBtn').addEventListener('click', function () {
+          state.voiceReadout = !state.voiceReadout;
+          document.getElementById('voiceStatusLabel').textContent = state.voiceReadout ? 'On' : 'Off';
+          showToast(`Voice Read-Aloud ${state.voiceReadout ? 'Enabled' : 'Disabled'}`, '🔊');
+        });
+
+        // Optional Gemini API Modal
+        const modal = document.getElementById('aiConfigModal');
+        document.getElementById('openAiConfigBtn').addEventListener('click', () => modal.classList.remove('hidden'));
+        document.getElementById('closeAiConfigBtn').addEventListener('click', () => modal.classList.add('hidden'));
+        document.getElementById('saveApiKeyBtn').addEventListener('click', function () {
+          const key = document.getElementById('geminiApiKeyInput').value.trim();
+          state.geminiApiKey = key;
+          document.getElementById('aiModeBadge').textContent = key ? 'Gemini API Connected' : 'Built-in Grounded Engine Active';
+          modal.classList.add('hidden');
+          showToast(key ? 'Gemini API Key saved for live AI Sahayak responses' : 'Using built-in offline AI engine', '🤖');
+        });
+        document.getElementById('clearApiKeyBtn').addEventListener('click', function () {
+          state.geminiApiKey = '';
+          document.getElementById('geminiApiKeyInput').value = '';
+          document.getElementById('aiModeBadge').textContent = 'Built-in Grounded Engine Active';
+          modal.classList.add('hidden');
+          showToast('Switched to built-in offline AI engine', '🤖');
+        });
+
+        // Initial Renders
+        renderSchemes();
+        renderDocuments();
+        renderLandGuide();
+        updateCalculator();
+        renderTracker();
+        renderChatMessages();
+      }
+
+      window.addEventListener('DOMContentLoaded', initApp);
+    })();
+  </script>
+</body>
+</html>
